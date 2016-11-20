@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   def authorize_admin_manager
     return unless !current_user.admin? || !current_user.manager?
       redirect_to :back, alert: 'Admins only!'
-    end
   end
 
 end

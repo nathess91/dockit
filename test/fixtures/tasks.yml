@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyString
+  is_high_priority: false
+  date_due: 2016-11-19 22:41:43
+  user: one
+
+two:
+  text: MyString
+  is_high_priority: false
+  date_due: 2016-11-19 22:41:43
+  user: two
