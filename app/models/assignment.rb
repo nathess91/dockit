@@ -1,5 +1,7 @@
 class Assignment < ApplicationRecord
   belongs_to :user
+  has_many :assignment_contacts
+  has_many :assignment_notes
 
   enum loss_category: [:water, :burglary_theft, :vandalism, :small_fire, :large_fire, :impact, :remodel, :hail, :vehicle]
   enum estimator_experience: [:good, :bad, :questionable]
