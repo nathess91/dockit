@@ -1,7 +1,7 @@
 class AssignmentNotesController < ApplicationController
 
   def index
-    render :json => Assignment_Note.all
+    render :json => AssignmentNote.all
   end
 
   def show
@@ -10,6 +10,12 @@ class AssignmentNotesController < ApplicationController
   end
 
   def create
+    # AssignmentNote.create({
+    #   user_id: current_user.id,
+    #   assignment_id: assignment.id,
+    #   text: assignment_notes.text
+    # })
+
     assignment = Assignment.find(params[:assignment_id])
     assignment_note = assignment.assignment_notes.new(assignment_note_params)
 
@@ -19,7 +25,7 @@ class AssignmentNotesController < ApplicationController
 
   def update
     assignment = Assignment.find(params[:assignment_id])
-    assignment_note = Assignment_Note.find(params[:id])
+    assignment_note = AssignmentNote.find(params[:id])
     assignment_note.update_attributes(assignment_note_params)
 
     if assignment_note
@@ -32,7 +38,7 @@ class AssignmentNotesController < ApplicationController
 
   def destroy
     assignment = Assignment.find(params[:assignment_id])
-    assignment_note = Assignment_Note.find(params[:id]).destroy
+    assignment_note = AssignmentNote.find(params[:id]).destroy
 
     if assignment_note
       head 200

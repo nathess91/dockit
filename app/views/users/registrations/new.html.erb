@@ -1,29 +1,67 @@
-<h2>Sign up</h2>
+<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+  <div class="panel panel-info" >
+          <div class="panel-heading">
+              <div class="panel-title text-center">Sign Up</div>
+              <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+          </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+          <div style="padding-top:30px" class="panel-body" >
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+              <div style="display:none" id="signup-alert" class="alert alert-danger col-sm-12"></div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+              <div id="signupform" class="form-horizontal" role="form">
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                  <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+                  <div style="margin-bottom: 25px">
+                    <%= f.select :role, User.roles.map { |key, value| [key.humanize, key] } %>
+                  </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+                  <div class="row">
+                    <div style="margin-bottom: 25px" class="col-xs-12">
+                                <%= f.text_field :first_name, autofocus: true, class: "form-control", placeholder: "First Name" %>
+                    </div>
 
-<%= render "users/shared/links" %>
+                    <div style="margin-bottom: 25px" class="col-xs-12">
+                                <%= f.text_field :last_name, class: "form-control", placeholder: "Last Name" %>
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="col-xs-12">
+                      <%= f.email_field :email, class: "form-control", placeholder: "Email" %>
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="col-xs-12">
+                                <%= f.text_field :username, class: "form-control", placeholder: "Username" %>
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="col-xs-12">
+                                <%= f.telephone_field :phone, class: "form-control", placeholder: "Phone Number" %>
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="col-xs-12">
+                      <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password (6 characters minimum)" %>
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="col-xs-12">
+                      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "Confirm Password" %>
+                    </div>
+                  </div>
+
+
+                      <div style="margin-top:10px" class="form-group">
+                          <!-- Button -->
+
+                          <div class="col-sm-12 controls actions">
+                            <%= f.submit "SIGN UP", class: "btn btn-success pull-right" %>
+                          </div>
+                      </div>
+                <% end %>
+
+
+                </div>
+
+
+
+              </div>
+          </div>
+</div>
