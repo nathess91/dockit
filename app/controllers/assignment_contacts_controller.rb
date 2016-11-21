@@ -1,0 +1,2 @@
+class AssignmentContactsController < ApplicationController
+end
