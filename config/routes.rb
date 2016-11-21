@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :tasks
+  resources :tasks, :assignment_notes
 
   get '/home' => "tasks#index"
 
