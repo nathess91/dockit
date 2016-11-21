@@ -1,13 +1,11 @@
 class PostsController < ApplicationController
 
-  before_filter :authorize_admin_manager, only: :create
-
   def index
-    render :json => Post.all, status: 200
+    render :json => Post.all
   end
 
   def show
-    post = Post.find(params[:id])
+    render :json => post = Post.find(params[:id])
   end
 
   def create
