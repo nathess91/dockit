@@ -10,7 +10,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161120064143) do
+ActiveRecord::Schema.define(version: 20161121175526) do
+
+  create_table "assignment_companies", force: :cascade do |t|
+    t.integer  "category"
+    t.string   "name"
+    t.integer  "assignment_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["assignment_id"], name: "index_assignment_companies_on_assignment_id"
+  end
+
+  create_table "assignment_contacts", force: :cascade do |t|
+    t.integer  "role"
+    t.string   "name"
+    t.string   "phone"
+    t.string   "email"
+    t.integer  "assignment_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["assignment_id"], name: "index_assignment_contacts_on_assignment_id"
+  end
+
+  create_table "assignment_notes", force: :cascade do |t|
+    t.string   "text"
+    t.integer  "user_id"
+    t.integer  "assignment_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["assignment_id"], name: "index_assignment_notes_on_assignment_id"
+    t.index ["user_id"], name: "index_assignment_notes_on_user_id"
+  end
+
+  create_table "assignments", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "date_assigned"
+    t.datetime "original_insp_date"
+    t.datetime "return_insp_date"
+    t.string   "job_number"
+    t.integer  "loss_category"
+    t.string   "loss_description"
+    t.string   "mitigation_status"
+    t.string   "abatement_status"
+    t.string   "claim_number"
+    t.string   "estimate_status"
+    t.datetime "target_start_date"
+    t.datetime "target_end_date"
+    t.datetime "actual_start_date"
+    t.datetime "actual_end_date"
+    t.boolean  "is_on_xa"
+    t.integer  "estimator_experience"
+    t.float    "estimate_total"
+    t.integer  "assignment_stage"
+    t.integer  "lost_sales_related"
+    t.integer  "lost_other"
+    t.boolean  "is_contract_signed"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "user_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
@@ -50,7 +112,6 @@ ActiveRecord::Schema.define(version: 20161120064143) do
     t.string   "username"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "auth_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

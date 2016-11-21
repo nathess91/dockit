@@ -1,0 +1,26 @@
+<div class="small-container">
+	<h1>Sign In</h1>
+</div>
+
+<div class="small-container margin-top-20">
+	<div class="well row col-xs-4">
+    <form ng-submit="loginCtrl.loginUser($event);">
+
+      <div class="margin-top-20 input-group col-xs-12">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input ng-model="loginCtrl.user.username" type="text" class="form-control" placeholder="Username" aria-describedby="glyphicons glyphicons-user" />
+			</div>
+<br>
+			<div class="margin-top-20 input-group col-xs-12">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+        <input ng-model="loginCtrl.user.password" type="password" class="form-control" placeholder="Password" />
+			</div>
+<br>
+			<div class="margin-top-20 txt-center">
+				<button type="submit" class="btn btn-primary btn-block">Log In</button>
+			</div>
+    </form>
+    <br>
+    <a href="#/users/sign_up">CREATE AN ACCOUNT</a>
+	</div>
+</div>
