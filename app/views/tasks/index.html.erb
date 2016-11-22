@@ -1,1 +1,51 @@
-<h1>HOMEPAGE COMING SOON</h1>
+<br>
+<h1>Welcome to your Dock, <%= current_user.first_name %></h1>
+<br>
+<br>
+<div class="row">
+  <div class="col-xs-10 col-md-6 pull-left">
+    <h3>To-Do List</h3>
+    <ul class="list-group">
+      <% if current_user.tasks.count == 0 %>
+        <h5>No tasks...</h5>
+      <% else %>
+        <% current_user.tasks.each do |task| %>
+          <li class="list-group-item">
+            <% unless !task.is_high_priority == true %>
+              <span class="tag tag-danger tag-pill float-xs-right">!</span>
+            <% end %>
+            <%= task.text %>
+            <% end %>
+          </li>
+      </ul>
+      <% end %>
+      <br>
+      <%= link_to "New Task", new_task_path, class: "btn btn-primary text-right" %>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-10 col-md-6 pull-right">
+      <h3>Assignments</h3>
+      <div class="row">
+        <div class="col-md-1">!</div>
+
+        <div class="col-md-1">!</div>
+
+        <div class="col-md-1">!</div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-1">!</div>
+        <div class="col-md-1">!</div>
+        <div class="col-md-1">!</div>
+      </div>
+    </div>
+
+    <div class="col-xs-8 col-md-2 pull-right">
+        <h3>Resources</h3>
+    </div>
+    <div class="col-xs-8 col-md-4 pull-right">
+      <h3>Bulletin Board</h3>
+      <span style="font-size: 5.5em;" class="glyphicon glyphicon-comment"></span>
+    </div>
+</div>
