@@ -12,4 +12,11 @@
  *
  *= require_tree .
  *= require_self
+ *= require tasks
  */
+
+ .dock-it {
+   font-family: 'Syncopate', sans-serif;
+   color: black !important;
+   font-size: 4em !important;
+ }

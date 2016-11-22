@@ -1,0 +1,35 @@
+<div class="modal fade" id="new-task-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">New Task</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for (@task = Task.new), method: :post do |f| %>
+
+              <label for="text">Text</label>
+              <%= f.text_area :text, class: "form-control", placeholder: "Write something here...", style: "resize:none;" %>
+              <br>
+              <label for="is-high-priority">Priority</label>
+                <br>
+                <%= f.radio_button :is_high_priority, true, :value => true%>
+                <%= f.label :is_high_priority, "High", value: true %>
+                <%= f.radio_button :is_high_priority, false, :value => false, style: "margin-left:10px;" %>
+                <%= f.label :is_high_priority, "Low", value: false %>
+                <br>
+                <br>
+              <label for="date-due">Date Due</label>
+                <%= f.date_field :date_due, class: "form-control" %>
+
+                <br>
+            <%= f.submit "Create New Task", class: "btn btn-success btn-block"  %>
+
+          <% end %>
+
+    </div>
+  </div>
+</div>
+</div>

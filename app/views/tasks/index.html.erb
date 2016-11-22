@@ -3,7 +3,7 @@
 <br>
 <br>
 <div class="row">
-  <div class="col-xs-10 col-md-6 pull-left">
+  <div style="padding-top:0px;" class="well col-xs-10 col-md-6 pull-left">
     <h3>To-Do List</h3>
     <ul class="list-group">
       <% if current_user.tasks.count == 0 %>
@@ -12,18 +12,17 @@
         <% current_user.tasks.each do |task| %>
           <li class="list-group-item">
             <% unless !task.is_high_priority == true %>
-              <span class="tag tag-danger tag-pill float-xs-right">!</span>
+              <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
             <% end %>
+            <input style="margin-right:5px;" type="checkbox">
             <%= task.text %>
             <% end %>
           </li>
       </ul>
       <% end %>
-      <br>
-      <%= link_to "New Task", new_task_path, class: "btn btn-primary text-right" %>
+      <%= link_to "New Task", new_task_path, :id => 'new-task', class: "btn btn-primary pull-right", "data-toggle" => "modal", 'data-target' => '#new-task-modal' %>
   </div>
 
-  <div class="row">
     <div class="col-xs-10 col-md-6 pull-right">
       <h3>Assignments</h3>
       <div class="row">
@@ -40,7 +39,9 @@
         <div class="col-md-1">!</div>
       </div>
     </div>
+  </div>
 
+<div class="row">
     <div class="col-xs-8 col-md-2 pull-right">
         <h3>Resources</h3>
     </div>
@@ -49,3 +50,6 @@
       <span style="font-size: 5.5em;" class="glyphicon glyphicon-comment"></span>
     </div>
 </div>
+
+<!-- NEW TASK MODAL -->
+<%= render "partials/new_task_modal" %>

@@ -15,6 +15,10 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).on('turbolinks:load', function () {
-
-});
+// $(document).on('turbolinks:load', function () {
+//
+//   $('#new-task').on('submit', function() {
+//     $('#new-task-modal').modal('hide');
+//   }):
+//
+// });
