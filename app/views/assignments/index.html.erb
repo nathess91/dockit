@@ -77,7 +77,15 @@
               </h3>
             </div>
             <div class="panel-body">
-              Panel content
+              <% notes = get_assignment_notes(assignment.id) %>
+                <% if notes.count == 0 %>
+                  <p>No notes...</p>
+                <% else %>
+                  <% notes.each do |note| %>
+                    <b><%= note.created_at.strftime("%m.%d.%y") %></b>
+                    <%= note.text %>
+                  <% end %>
+                <% end %>
             </div>
           </div>
           <% end %>
@@ -180,5 +188,8 @@
 		</div>
 
 	</div>
+
+  <!-- NEW ASSIGNMENT_NOTE MODAL -->
+  <%= render "partials/new_assignment_note_modal" %>
 
 </div>

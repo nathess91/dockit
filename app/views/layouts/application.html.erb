@@ -47,9 +47,9 @@
                     <li><a href="#">Full Form</a></li>
                   </ul>
                 </li>
-                <li><%= link_to "New Assignment Note", new_assignment_note_path, "data-togle" => "modal", "data-target" => "#new-assignment-note-modal" %></li>
+                <% end %>
+                <li><%= link_to "New Assignment Note", new_assignment_note_path, "data-toggle" => "modal", 'data-target' => '#new-assignment-note-modal' %></li>
               </ul>
-            <% end %>
 
             <ul class="nav navbar-nav navbar-right">
               <%= link_to "Sign Out", destroy_user_session_path, class: "btn btn-default navbar-btn", :method => :delete %>
@@ -64,6 +64,9 @@
 
       <!-- NEW ASSIGNMENT MODAL -->
       <%= render "partials/new_assignment_modal" %>
+      <!-- NEW ASSIGNMENT_NOTE MODAL -->
+      <%= render "partials/new_assignment_note_modal" %>
+
       <nav class="navbar navbar-default navbar-bottom">
         <div class="container text-center">
         &copy; <%= Time.now.year %> | Natalia Hess

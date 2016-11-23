@@ -1,12 +1,15 @@
 class AssignmentNotesController < ApplicationController
 
   def index
-    render :json => AssignmentNote.all
+    @assignment_notes = current_user.assignments.find(params[:assignment_id]).assignment_notes
   end
 
   def show
-    assignment = Assignment.find(params[:assignment_id])
-    render :json => assignment.assignment_notes.find(params[:id])
+    @assignment_note = current_user.assignments.find(params[:assignment_id]).assignment_notes.find(params[:id])
+  end
+
+  def new
+    @assignment_note = AssignmentNote.new
   end
 
   def create
@@ -16,23 +19,23 @@ class AssignmentNotesController < ApplicationController
     #   text: assignment_notes.text
     # })
 
-    assignment = Assignment.find(params[:assignment_id])
-    assignment_note = assignment.assignment_notes.new(assignment_note_params)
+    @assignment_note = AssignmentNote.new(assignment_note_params)
 
-    assignment_note.user_id = current_user.id
-    assignment_note.save
+    @assignment_note.user_id = current_user.id
+    @assignment_note.save
+
+    if @assignment_note.save
+      redirect_to '/assignments'
+    else
+      render :new
+    end
+
   end
 
   def update
     assignment = Assignment.find(params[:assignment_id])
     assignment_note = AssignmentNote.find(params[:id])
     assignment_note.update_attributes(assignment_note_params)
-
-    if assignment_note
-      head 200
-    else
-      render :json => {error: "Can't update assignment note"}, status: 400
-    end
 
   end
 
@@ -51,7 +54,7 @@ class AssignmentNotesController < ApplicationController
   private
 
   def assignment_note_params
-    params.require(:assignment_note).permit(:text)
+    params.require(:assignment_note).permit(:text, :assignment_id, :user_id)
   end
 
 end
