@@ -23,6 +23,9 @@
                 <%= f.date_field :date_assigned, class: "form-control" %>
               </div>
 
+              <!-- HIDDEN ASSIGNMENT STAGE DEFAULT TO 'ASSIGNED' -->
+              <%= f.hidden_field :assignment_stage, :value => 'assigned' %>
+
             </div>
 
                 <br>

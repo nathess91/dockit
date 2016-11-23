@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require data-confirm-modal
 
 $(document).on('turbolinks:load', function () {
 
@@ -34,6 +35,5 @@ $(document).on('turbolinks:load', function () {
   }, function(){
     $(this).removeClass('animated');
   });
-
 
 });
