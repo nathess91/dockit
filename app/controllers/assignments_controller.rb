@@ -16,7 +16,7 @@ class AssignmentsController < ApplicationController
     @assignment = current_user.assignments.create(assignment_params)
 
     if @assignment.valid?
-      redirect_to '/home'
+      redirect_to '/assignments'
     else
       render :new
     end
