@@ -11,12 +11,20 @@
         <h5>No tasks...</h5>
       <% else %>
         <% @tasks.take(8).each do |task| %>
-          <li class="list-group-item">
+          <li class="task list-group-item">
             <% unless !task.is_high_priority == true %>
               <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
             <% end %>
-            <input style="margin-right:5px;" class="task-check" type="checkbox">
-            <%= task.text %>
+
+
+
+
+            <%= link_to task_path(task.id), data: {confirm: "Delete: " + "'" + task.text + "'" + "?"}, method: :delete  do %>
+            <span class="pull-left btn btn-default btn-md" style="margin-right:5px; padding:8px;">
+            </span>
+            <% end %>
+
+            <%= link_to task.text, edit_task_path(task), 'data-toggle' => 'modal', 'data-target' => '#edit-task-modal' %>
             <% end %>
           </li>
       </ul>
@@ -42,7 +50,7 @@
         <div class="col-md-1">!</div>
         <div class="col-md-1">!</div>
       </div>
-      <%= link_to "Quick Add", new_assignment_path, class: "btn btn-primary pull-right", "data-toggle" => "modal", 'data-target' => '#new-assignment-modal' %>
+
     </div>
 
 
@@ -62,7 +70,7 @@
     </div>
     <div style="padding-top:0px; width:201px; margin-left:20px; color:inherit;" class="well col-xs-8 col-sm-6 pull-right">
       <h3>Bulletin Board</h3>
-      <img id="paper-plane" class="shake" src="http://i.imgur.com/3PHrS3B.png" width="140px">
+      <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="140px" style="margin:10px;">
       <br>
       <br>
       <span style="width:100%;" class="btn btn-primary">View Messages</span>
@@ -72,7 +80,8 @@
 
 <!-- NEW TASK MODAL -->
 <%= render "partials/new_task_modal" %>
-<!-- NEW ASSIGNMENT MODAL -->
-<%= render "partials/new_assignment_modal" %>
+
 <!-- VIEW ALL TASKS MODAL -->
 <%= render "partials/view_tasks_modal" %>
+<!-- EDIT TASK MODAL -->
+<%= render "partials/edit_task_modal" %>
