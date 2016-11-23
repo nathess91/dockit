@@ -1,15 +1,26 @@
 class AssignmentsController < ApplicationController
 
   def index
+    @assignments = current_user.assignments
   end
 
   def show
+    @assignment = current_user.assignments.find(params[:id])
+  end
+
+  def new
+    @assignment = Assignment.new
   end
 
   def create
-    assignment = User.find(params[:user_id]).assignments.new(assignment_params)
-    assignment.user_id = current_user.id
-    assignment.save
+    @assignment = current_user.assignments.create(assignment_params)
+
+    if @assignment.valid?
+      redirect_to '/assignments'
+    else
+      render :new
+    end
+
   end
 
   private

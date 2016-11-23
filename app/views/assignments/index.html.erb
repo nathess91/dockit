@@ -1,0 +1,184 @@
+<div class="container">
+
+  <h1><%= current_user.first_name %>'s Assignments</h1>
+<br>
+    <!-- <% if @assignments.count == 0 %>
+      <h5>No assignments...</h5>
+    <% else %>
+      <% @assignments.each do |assignment| %>
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= assignment.name %></h3>
+          </div>
+          <div class="panel-body">
+            Panel content
+          </div>
+        </div>
+        <% end %>
+    <% end %> -->
+
+</div>
+
+<div id="assignment-tabs" class="container">
+  <!-- ASSIGNMENT STAGE TABS -->
+  <ul class="nav nav-tabs">
+		<li class="active">
+      <a href="#1" data-toggle="tab">Current Assignments</a>
+		</li>
+		<li><a href="#2" data-toggle="tab">Awaiting Customer Response</a>
+		</li>
+		<li><a href="#3" data-toggle="tab">Jobs In Progress</a>
+		</li>
+    <li><a href="#4" data-toggle="tab">Assignments Not Sold</a>
+		</li>
+    <li><a href="#5" data-toggle="tab">Completed Jobs</a>
+		</li>
+    <li><a href="#6" data-toggle="tab">Closed Jobs</a>
+		</li>
+	</ul>
+
+
+
+
+  <!-- TAB CONTENT -->
+	<div class="tab-content">
+
+    <!-- ASSIGNED -->
+    <div class="tab-pane active" id="1">
+      <br>
+      <% if @assignments.count == 0 %>
+        <h5>No assignments...</h5>
+      <% else %>
+        <% @assignments.where(assignment_stage: 'assigned').each do |assignment| %>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <% if assignment.loss_category == 'water' %>
+                  <span id="water-glyph" class="glyphicon glyphicon-tint"></span>
+                <% elsif assignment.loss_category == 'burglary_theft' %>
+                  <span id="burglary-theft-glyph" class="glyphicon glyphicon-piggy-bank"></span>
+                <% elsif assignment.loss_category == 'vandalism' %>
+                  <span id="vandalism-glyph" class="glyphicon glyphicon-erase"></span>
+                <% elsif assignment.loss_category == 'small_fire' %>
+                  <span id="small-fire-glyph" class="glyphicon glyphicon-fire"></span>
+                <% elsif assignment.loss_category == 'large_fire' %>
+                  <span id="large-fire-glyph" class="glyphicon glyphicon-fire"></span>
+                  <span id="water-loss" class="glyphicon glyphicon-fire"></span>
+                <% elsif assignment.loss_category == 'impact' %>
+                  <span id="impact-glyph" class="glyphicon glyphicon-flash"></span>
+                <% elsif assignment.loss_category == 'remodel' %>
+                  <span id="remodel-glyph" class="glyphicon glyphicon-wrench"></span>
+                <% elsif assignment.loss_category == 'hail' %>
+                  <span id="hail-glyph" class="glyphicon glyphicon-cloud-download"></span>
+                <% elsif assignment.loss_category == 'vehicle' %>
+                  <span id="vehicle-glyph" class="glyphicon glyphicon-dashboard"></span>
+                <% end %>
+                <%= assignment.name %>
+              </h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
+          <% end %>
+      <% end %>
+		</div>
+
+    <!-- APPROVED -->
+		<div class="tab-pane" id="2">
+      <br>
+      <% if @assignments.count == 0 %>
+        <h5>No assignments...</h5>
+      <% else %>
+        <% @assignments.where(assignment_stage: 'approved').each do |assignment| %>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title"><%= assignment.name %></h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
+          <% end %>
+      <% end %>
+		</div>
+
+    <!-- IN_PROGRESS -->
+    <div class="tab-pane" id="3">
+      <br>
+      <% if @assignments.count == 0 %>
+        <h5>No assignments...</h5>
+      <% else %>
+        <% @assignments.where(assignment_stage: 'in_progress').each do |assignment| %>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title"><%= assignment.name %></h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
+          <% end %>
+      <% end %>
+		</div>
+
+    <!-- NOT_SOLD -->
+    <div class="tab-pane" id="4">
+      <br>
+      <% if @assignments.count == 0 %>
+        <h5>No assignments...</h5>
+      <% else %>
+        <% @assignments.where(assignment_stage: 'not_sold').each do |assignment| %>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title"><%= assignment.name %></h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
+          <% end %>
+      <% end %>
+		</div>
+
+    <!-- COMPLETED -->
+    <div class="tab-pane" id="5">
+      <br>
+      <% if @assignments.count == 0 %>
+        <h5>No assignments...</h5>
+      <% else %>
+        <% @assignments.where(assignment_stage: 'completed').each do |assignment| %>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title"><%= assignment.name %></h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
+          <% end %>
+      <% end %>
+		</div>
+
+    <!-- CLOSED -->
+    <div class="tab-pane" id="6">
+      <br>
+      <% if @assignments.count == 0 %>
+        <h5>No assignments...</h5>
+      <% else %>
+        <% @assignments.where(assignment_stage: 'closed').each do |assignment| %>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title"><%= assignment.name %></h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
+          <% end %>
+      <% end %>
+		</div>
+
+	</div>
+
+</div>

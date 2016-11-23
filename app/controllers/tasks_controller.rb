@@ -1,7 +1,11 @@
 class TasksController < ApplicationController
 
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks.order(is_high_priority: :desc, created_at: :desc)
+  end
+
+  def show
+    @task = current_user.tasks.find(params[:id])
   end
 
   def new
@@ -19,14 +23,26 @@ class TasksController < ApplicationController
 
   end
 
+  def edit
+    @task = current_user.tasks.find(params[:id])
+	end
+
   def update
-    @task = current_user.tasks.find(params[:id]).update_attributes(task_params)
-    @task.save
+    @task = current_user.tasks.find(params[:id])
+    if @task.update(task_params)
+      redirect_to '/home'
+    else
+      render :new
+    end
   end
 
   def destroy
-    @task = current_user.tasks.find(params[:id])
-    @task.destroy
+    @task = Task.find(params[:id])
+    if @task.destroy
+      redirect_to '/home'
+    else
+      redirect_to :back
+    end
   end
 
   private

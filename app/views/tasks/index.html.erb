@@ -1,36 +1,48 @@
+<div class="container">
 <br>
 <h1>Welcome to your Dock, <%= current_user.first_name %></h1>
 <br>
 <br>
-<div class="row">
-  <div style="padding-top:0px;" class="well col-xs-10 col-md-6 pull-left">
+
+  <div style="padding-top:0px;" class="well col-xs-6 col-md-6 pull-left">
     <h3>To-Do List</h3>
     <ul class="list-group">
-      <% if current_user.tasks.count == 0 %>
+      <% if @tasks.count == 0 %>
         <h5>No tasks...</h5>
       <% else %>
-        <% current_user.tasks.each do |task| %>
-          <li class="list-group-item">
+        <% @tasks.take(8).each do |task| %>
+          <li class="task list-group-item">
             <% unless !task.is_high_priority == true %>
               <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
             <% end %>
-            <input style="margin-right:5px;" type="checkbox">
-            <%= task.text %>
+
+
+
+
+            <%= link_to task_path(task.id), data: {confirm: "Delete: " + "'" + task.text + "'" + "?"}, method: :delete  do %>
+            <span class="pull-left btn btn-default btn-md" style="margin-right:5px; padding:8px;">
+            </span>
+            <% end %>
+
+            <%= link_to task.text, edit_task_path(task), 'data-toggle' => 'modal', 'data-target' => '#edit-task-modal' %>
             <% end %>
           </li>
       </ul>
+      <button type="button" id="view-tasks" class="btn btn-default pull-left" data-toggle="modal" data-target="#view-tasks-modal">View All Tasks</button>
       <% end %>
       <%= link_to "New Task", new_task_path, :id => 'new-task', class: "btn btn-primary pull-right", "data-toggle" => "modal", 'data-target' => '#new-task-modal' %>
   </div>
 
-    <div class="col-xs-10 col-md-6 pull-right">
+    <div style="padding-top:0px;" class="well col-xs-10 col-md-5 pull-right">
       <h3>Assignments</h3>
       <div class="row">
-        <div class="col-md-1">!</div>
+        <div class="col-md-1">
 
-        <div class="col-md-1">!</div>
-
-        <div class="col-md-1">!</div>
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-1">
+        </div>
 
       </div>
       <div class="row">
@@ -38,18 +50,38 @@
         <div class="col-md-1">!</div>
         <div class="col-md-1">!</div>
       </div>
-    </div>
-  </div>
 
-<div class="row">
-    <div class="col-xs-8 col-md-2 pull-right">
+    </div>
+
+
+<div class="row pull-right" style="margin-right:2px;">
+    <div style="padding-top:0px; width:250px;" class="well col-xs-6 col-sm-3 pull-left">
         <h3>Resources</h3>
+        <a href="https://apps.xactware.com/apps/xnportal/welcome.jsp">XactAnalysis</a>
+        <br>
+        <a href="https://secure.innovationproperty.com/secure/login.aspx">Innovation</a>
+        <br>
+        <a href="https://buildertrend.com/">BuilderTrend</a>
+        <br>
+        <a href="https://rms-ngs.net/rms/module/user/login.aspx">RMS</a>
+        <br>
+        <a href="https://secure.na1.echosign.com/public/login">AdobeSign</a>
+        <br>
     </div>
-    <div class="col-xs-8 col-md-4 pull-right">
+    <div style="padding-top:0px; width:201px; margin-left:20px; color:inherit;" class="well col-xs-8 col-sm-6 pull-right">
       <h3>Bulletin Board</h3>
-      <span style="font-size: 5.5em;" class="glyphicon glyphicon-comment"></span>
+      <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="140px" style="margin:10px;">
+      <br>
+      <br>
+      <span style="width:100%;" class="btn btn-primary">View Messages</span>
     </div>
+</div>
 </div>
 
 <!-- NEW TASK MODAL -->
 <%= render "partials/new_task_modal" %>
+
+<!-- VIEW ALL TASKS MODAL -->
+<%= render "partials/view_tasks_modal" %>
+<!-- EDIT TASK MODAL -->
+<%= render "partials/edit_task_modal" %>

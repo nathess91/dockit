@@ -1,0 +1,27 @@
+<div class="modal fade" id="view-tasks-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">All Tasks</h4>
+      </div>
+      <div class="modal-body">
+
+        <ul class="list-group">
+            <% @tasks.each do |task| %>
+              <li class="list-group-item">
+                <% unless !task.is_high_priority == true %>
+                  <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
+                <% end %>
+                <input style="margin-right:5px;" class="task-check" type="checkbox">
+                <%= task.text %>
+            <% end %>
+              </li>
+          </ul>
+
+    </div>
+  </div>
+</div>
+</div>
