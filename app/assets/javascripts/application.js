@@ -15,10 +15,25 @@
 //= require turbolinks
 //= require_tree .
 
-// $(document).on('turbolinks:load', function () {
-//
-//   $('#new-task').on('submit', function() {
-//     $('#new-task-modal').modal('hide');
-//   }):
-//
-// });
+$(document).on('turbolinks:load', function () {
+
+
+  $(".task-check").click(function() {
+    alert("Mark this task as done?");
+  });
+
+  $('#paper-plane').mouseover(function(){
+    $(this).stop().effect('shake', {distance:3}, 200);
+  });
+
+  $('#paper-plane').hover(function(){
+    if(!$(this).hasClass('animated')){
+        $(this).addClass('animated');
+        $(this).stop().effect('shake', {distance:3}, 200);
+    }
+  }, function(){
+    $(this).removeClass('animated');
+  });
+
+
+});

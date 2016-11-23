@@ -1,0 +1,20 @@
+<div class="container">
+
+  <h1><%= current_user.first_name %>'s Assignments</h1>
+
+    <% if @assignments.count == 0 %>
+      <h5>No assignments...</h5>
+    <% else %>
+      <% @assignments.each do |assignment| %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= assignment.name %></h3>
+          </div>
+          <div class="panel-body">
+            Panel content
+          </div>
+        </div>
+        <% end %>
+    <% end %>
+
+</div>

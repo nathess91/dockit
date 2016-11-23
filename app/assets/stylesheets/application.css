@@ -20,3 +20,11 @@
    color: black !important;
    font-size: 4em !important;
  }
+
+ #navbar-brand {
+   font-size: 2em !important;
+ }
+
+ a {
+   text-decoration: none !important;
+ }
