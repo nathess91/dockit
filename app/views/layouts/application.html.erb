@@ -44,7 +44,7 @@
                   <ul class="dropdown-menu">
                     <li style="margin-top:3px;"><%= link_to "Quick Add", new_assignment_path, "data-toggle" => "modal", 'data-target' => '#new-assignment-modal' %></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">Full Form</a></li>
+                    <li><%= link_to "Full Form", new_assignment_path, "data-toggle" => "modal", 'data-target' => '#new-assignment-full-modal' %></li>
                   </ul>
                 </li>
                 <% end %>
@@ -59,6 +59,15 @@
       </nav>
     <% end %>
 
+    <div class="container">
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+    </div>
+
 
       <%= yield %>
 
@@ -67,10 +76,10 @@
       <!-- NEW ASSIGNMENT_NOTE MODAL -->
       <%= render "partials/new_assignment_note_modal" %>
 
-      <nav class="navbar navbar-default navbar-bottom">
+      <!-- <nav class="navbar navbar-default fixed-bottom">
         <div class="container text-center">
         &copy; <%= Time.now.year %> | Natalia Hess
         </div>
-      </nav>
+      </nav> -->
   </body>
 </html>

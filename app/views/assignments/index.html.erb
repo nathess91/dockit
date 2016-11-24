@@ -51,8 +51,8 @@
       <% else %>
         <% @assignments.where(assignment_stage: 'assigned').each do |assignment| %>
           <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title pull-left" style="margin-top:0.5em;">
                 <% if assignment.loss_category == 'water' %>
                   <span id="water-glyph" class="glyphicon glyphicon-tint"></span>
                 <% elsif assignment.loss_category == 'burglary_theft' %>
@@ -65,17 +65,20 @@
                   <span id="large-fire-glyph" class="glyphicon glyphicon-fire"></span>
                   <span id="water-loss" class="glyphicon glyphicon-fire"></span>
                 <% elsif assignment.loss_category == 'impact' %>
-                  <span id="impact-glyph" class="glyphicon glyphicon-flash"></span>
+                  <span id="impact-glyph" class="glyphicon glyphicon-tree-conifer"></span>
                 <% elsif assignment.loss_category == 'remodel' %>
                   <span id="remodel-glyph" class="glyphicon glyphicon-wrench"></span>
                 <% elsif assignment.loss_category == 'hail' %>
                   <span id="hail-glyph" class="glyphicon glyphicon-cloud-download"></span>
                 <% elsif assignment.loss_category == 'vehicle' %>
-                  <span id="vehicle-glyph" class="glyphicon glyphicon-dashboard"></span>
+                  <span id="vehicle-glyph" class="glyphicon glyphicon-road"></span>
                 <% end %>
-                <%= assignment.name %>
+                <span style="font-size:20px;"><b><%= assignment.name %></b></span> #<%= assignment.job_number %>
               </h3>
+              <%= link_to "Add Note", new_assignment_note_path(assignment_id: assignment.id), class: "btn btn-default btn-sm pull-right", "data-toggle" => "modal", 'data-target' => '#new-note-on-assignment-modal' %>
             </div>
+
+            <!-- ASSIGNMENT CARD BODY -->
             <div class="panel-body">
               <% notes = get_assignment_notes(assignment.id) %>
                 <% if notes.count == 0 %>
@@ -86,8 +89,45 @@
                     <%= note.text %>
                   <% end %>
                 <% end %>
+
+                <!-- CLAIM INFO COLLAPSE -->
+                <h5 class="mb-0">
+                  <a href="#claim-info" data-toggle="collapse">
+                    Claim
+                  </a>
+                </h5>
+                <div id="claim-info" class="collapse">
+                  <p>Original Inspection Date</p>
+                  <%= assignment.original_insp_date %>
+                  <p>Return Inspection Date</p>
+                  <%= assignment.return_insp_date %>
+                  <p>Address</p>
+                  <%= assignment.address %>
+                </div>
+                <!-- END CLAIM INFO COLLAPSE -->
+
+                <!-- APPOINTMENT INFO COLLAPSE -->
+                      <h5 class="mb-0">
+                        <a href="#appointment-info" data-toggle="collapse">
+                          Appointment
+                        </a>
+                      </h5>
+                      <div id="appointment-info" class="collapse">
+                        <p>Original Inspection Date</p>
+                        <%= assignment.original_insp_date %>
+                        <p>Return Inspection Date</p>
+                        <%= assignment.return_insp_date %>
+                        <p>Address</p>
+                        <%= assignment.address %>
+                      </div>
+                <!-- END APPOINTMENT INFO COLLAPSE -->
+
+
+
+
             </div>
-          </div>
+
+          </div> <!-- END ASSIGNMENT CARD -->
           <% end %>
       <% end %>
 		</div>
