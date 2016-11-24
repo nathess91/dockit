@@ -1,4 +1,5 @@
 class AssignmentNotesController < ApplicationController
+  before_filter :authenticate_user!
 
   def index
     @assignment_notes = current_user.assignments.find(params[:assignment_id]).assignment_notes
@@ -10,6 +11,7 @@ class AssignmentNotesController < ApplicationController
 
   def new
     @assignment_note = AssignmentNote.new
+    @assignment = Assignment.find(params[:assignment_id])
   end
 
   def create
@@ -27,7 +29,8 @@ class AssignmentNotesController < ApplicationController
     if @assignment_note.save
       redirect_to '/assignments'
     else
-      render :new
+      flash[:error] = @assignment_note.errors.full_messages.join(". ")
+      redirect_to :back
     end
 
   end
