@@ -19,8 +19,108 @@
 
               <!-- DATE ASSIGNED -->
               <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="date_assigned">Date Assigned</label>
+                <label for="date-assigned">Date Assigned</label>
                 <%= f.date_field :date_assigned, class: "form-control" %>
+              </div>
+
+              <!-- LOSS CATEGORY -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="loss-category">Loss Type</label>
+                <br>
+                <%= f.select :loss_category, Assignment.loss_categories.map { |key, value| [key.humanize, key] } %>
+              </div>
+
+              <!-- HIDDEN ASSIGNMENT STAGE DEFAULT TO 'ASSIGNED' -->
+              <%= f.hidden_field :assignment_stage, :value => 'assigned' %>
+
+            </div>
+
+                <br>
+            <%= f.submit "Create New Assignment", class: "btn btn-success btn-block"  %>
+
+          <% end %>
+
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- NEW ASSIGNMENT FULL FORM -->
+<div class="modal fade" id="new-assignment-full-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">New Assignment</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for (@assignment = Assignment.new), method: :post do |f| %>
+
+            <div class="row">
+              <!-- ASSIGNMENT NAME -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="assignment-name">Assignment Name</label>
+                <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "Example: Lawson" %>
+              </div>
+
+              <!-- DATE ASSIGNED -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="date-assigned">Date Assigned</label>
+                <%= f.date_field :date_assigned, class: "form-control" %>
+              </div>
+
+              <!-- LOSS CATEGORY -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="loss-category">Loss Type</label>
+                <br>
+                <%= f.select :loss_category, Assignment.loss_categories.map { |key, value| [key.humanize, key] } %>
+              </div>
+
+              <!-- ORIGINAL INSPECTION DATE -->
+
+              <!-- JOB NUMBER -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="job-number">Job Number</label>
+                <%= f.text_field :job_number, class: "form-control", placeholder: "Example: EBCA-101-4-16-R" %>
+              </div>
+
+              <!-- LOSS DESCRIPTION -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="loss-description">Loss Description</label>
+                <%= f.text_area :loss_description, class: "form-control", placeholder: "Example: Supply line behind toilet leaked due to wear and tear", style: "resize:none;" %>
+              </div>
+
+              <!-- MITIGATION STATUS -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="mitigation-status">Mitigation Status</label>
+                <%= f.text_area :mitigation_status, class: "form-control", placeholder: "Example: ServPro is completing the mitigation. David is the project manager, his number is (555) 555-5555", style: "resize:none;" %>
+              </div>
+
+              <!-- ABATEMENT STATUS -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="abatement-status">Abatement Status</label>
+                <%= f.text_area :abatement_status, class: "form-control", placeholder: "Example: ERI gave us a bid and they can likely start on Monday", style: "resize:none;" %>
+              </div>
+
+              <!-- CLAIM NUMBER -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="claim-number">Claim Number</label>
+                <%= f.text_field :mitigation_status, class: "form-control", placeholder: "Example: 1001-16-548" %>
+              </div>
+
+              <!-- ADDRESS -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="address">Site Address</label>
+                <%= f.text_area :address, class: "form-control", placeholder: "Example: 123 Fake Street Fresno, CA", style: "resize:none;" %>
+              </div>
+
+              <!-- YEAR BUILT -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="year-built">Year Built</label>
+                <%= f.text_field :year_built, class: "form-control", placeholder: "Example: 1975" %>
               </div>
 
               <!-- HIDDEN ASSIGNMENT STAGE DEFAULT TO 'ASSIGNED' -->
