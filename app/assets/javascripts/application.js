@@ -19,10 +19,6 @@
 $(document).on('turbolinks:load', function () {
 
 
-  $(".task-check").click(function() {
-    alert("Mark this task as done?");
-  });
-
   $('#paper-plane').mouseover(function(){
     $(this).stop().effect('shake', {distance:3}, 200);
   });
@@ -35,5 +31,19 @@ $(document).on('turbolinks:load', function () {
   }, function(){
     $(this).removeClass('animated');
   });
+
+  $("div[id^='appointment-info']").attr('id', function(i) {
+      return "appointment-info" + ++i;
+   });
+   $("a[href^='#appointment-info']").attr('href', function(i) {
+       return "#appointment-info" + ++i;
+    });
+
+    $("div[id^='claim-info']").attr('id', function(i) {
+        return "claim-info" + ++i;
+     });
+     $("a[href^='#claim-info']").attr('href', function(i) {
+         return "#claim-info" + ++i;
+      });
 
 });
