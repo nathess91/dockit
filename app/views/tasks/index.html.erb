@@ -20,12 +20,12 @@
 
 
             <%= link_to task_path(task.id), data: {confirm: "Delete: " + "'" + task.text + "'" + "?"}, method: :delete  do %>
-            <span class="pull-left btn btn-default btn-md" style="margin-right:5px; padding:8px;">
-            </span>
+              <span class="pull-left btn btn-default btn-md" style="margin-right:5px; padding:8px;">
+              </span>
             <% end %>
 
-            <%= link_to task.text, edit_task_path(task), 'data-toggle' => 'modal', 'data-target' => '#edit-task-modal' %>
-            <% end %>
+            <%= link_to task.text, task_path(task.id), 'data-toggle' => 'modal', 'data-target' => '#edit-task-modal', method: :put %>
+        <% end %>
           </li>
       </ul>
       <button type="button" id="view-tasks" class="btn btn-default pull-left" data-toggle="modal" data-target="#view-tasks-modal">View All Tasks</button>

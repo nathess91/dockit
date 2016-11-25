@@ -8,4 +8,8 @@ module ApplicationHelper
     return AssignmentContact.where(assignment_id: assignment_id)
   end
 
+  def get_assignment_company(assignment_id)
+    return AssignmentCompany.where(assignment_id: assignment_id)
+  end
+
 end

@@ -97,12 +97,32 @@
                   </a>
                 </h5>
                 <div id="claim-info" class="collapse">
-                  <p>Original Inspection Date</p>
-                  <%= assignment.original_insp_date %>
-                  <p>Return Inspection Date</p>
-                  <%= assignment.return_insp_date %>
-                  <p>Address</p>
-                  <%= assignment.address %>
+                  <p>Date Assigned:
+                  <% if assignment.date_assigned.present? %>
+                    <%= assignment.date_assigned.strftime("%m.%d.%y") %>
+                  <% end %>
+                  </p>
+                  <p>Claim Number: <%= assignment.claim_number %></p>
+
+                  <p>Loss Details: <%= assignment.loss_description %></p>
+
+                  <p>Adjuster Contact</p>
+                  <% contact = get_assignment_contact(assignment.id) %>
+                  <% contact.where(role: 'adjuster').each do |c| %>
+                    <span class="glyphicon glyphicon-user"></span> <%= c.name %>
+                    <br>
+                    <span class="glyphicon glyphicon-earphone"></span> <%= c.phone %>
+                    <br>
+                    <span class="glyphicon glyphicon-envelope"></span> <%= c.email %>
+                  <% end %>
+                  <br>
+                  <br>
+                  <p>Insurance Company</p>
+                  <% company = get_assignment_company(assignment.id) %>
+                  <% company.where(category: 'insurance').each do |co| %>
+                    <%= co.name %>
+                  <% end %>
+
                 </div>
                 <!-- END CLAIM INFO COLLAPSE -->
 
@@ -122,7 +142,45 @@
                       </div>
                 <!-- END APPOINTMENT INFO COLLAPSE -->
 
+                <!-- CONTACT INFO COLLAPSE -->
+                      <h5 class="mb-0">
+                        <a href="#contact-info" data-toggle="collapse">
+                          Contact
+                        </a>
+                      </h5>
+                      <div id="contact-info" class="collapse">
+                        <% contact = get_assignment_contact(assignment.id) %>
+                        <% contact.where(role: 'location_contact').each do |co| %>
+                          <span class="glyphicon glyphicon-user"></span> <%= co.name %>
+                          <br>
+                          <span class="glyphicon glyphicon-earphone"></span> <%= co.phone %>
+                          <br>
+                          <span class="glyphicon glyphicon-envelope"></span> <%= co.email %>
+                        <% end %>
+                      </div>
+                <!-- END CONTACT INFO COLLAPSE -->
 
+                <!-- PRE-RECON INFO COLLAPSE -->
+                      <h5 class="mb-0">
+                        <a href="#prerecon-info" data-toggle="collapse">
+                          Pre-Recon
+                        </a>
+                      </h5>
+                      <div id="prerecon-info" class="collapse">
+                        Mitigation Status: <%= assignment.mitigation_status %>
+                        <br>
+                        Abatement Status: <%= assignment.abatement_status %>
+                        <br>
+                        <% contact = get_assignment_contact(assignment.id) %>
+                        <% contact.where(role: 'project_manager').each do |co| %>
+                          <span class="glyphicon glyphicon-user"></span> <%= co.name %>
+                          <br>
+                          <span class="glyphicon glyphicon-earphone"></span> <%= co.phone %>
+                          <br>
+                          <span class="glyphicon glyphicon-envelope"></span> <%= co.email %>
+                        <% end %>
+                      </div>
+                <!-- PRE-RECON INFO COLLAPSE -->
 
 
             </div>

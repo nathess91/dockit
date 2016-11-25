@@ -8,7 +8,7 @@
         <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
       </div>
       <div class="modal-body">
-        <%= form_for @task, url: edit_task_path(:id), method: :patch do |f| %>
+        <%= form_for @task, method: :put do |f| %>
 
               <label for="text">Text</label>
               <%= f.text_area :text, class: "form-control", style: "resize:none;" %>
@@ -27,7 +27,9 @@
                 <br>
             <%= f.submit "Update Task", class: "btn btn-success btn-block"  %>
 
-          <% end %>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+
+        <% end %>
 
     </div>
   </div>

@@ -24,15 +24,15 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = current_user.tasks.find(params[:id])
+    @task = Task.find(params[:id])
 	end
 
   def update
-    @task = current_user.tasks.find(params[:id])
-    if @task.update(task_params)
+    @task = Task.find(params[:id])
+    if @task.update_attributes(task_params)
       redirect_to '/home'
     else
-      render :new
+      redirect_to :back
     end
   end
 
