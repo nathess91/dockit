@@ -19,8 +19,10 @@ end
     registrations: 'users/registrations'
   }
 
-  resources :tasks, :assignment_notes, :assignments, :assignment_contacts, :assignment_companies
+  resources :tasks, :assignment_notes, :assignments, :assignment_contacts, :assignment_companies, :posts
 
   get '/home' => "tasks#index"
+
+  get '/bulletins' => "posts#index"
 
 end

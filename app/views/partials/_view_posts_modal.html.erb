@@ -1,0 +1,55 @@
+<!-- VIEW ALL POSTS -->
+<div class="modal fade" id="view-posts-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Bulletin Board</h4>
+      </div>
+      <div class="modal-body">
+        <% if Post.count == 0 %>
+          <h5>No posts...</h5>
+        <% else %>
+
+            <% Post.all.order(is_read: :asc, created_at: :desc).each do |post| %>
+              <% if post.is_read == true %>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Subject: <%= post.title %></h3>
+                  </div>
+                  <div class="panel-body">
+                    <%= post.content %>
+                  </div>
+                </div>
+              <% else %>
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Subject: <%= post.title %></h3>
+                  </div>
+                  <div class="panel-body">
+                    <%= post.content %>
+                    <br>
+                    <br>
+                    <span class="pull-left">Posted by <%= post.user.first_name %> <%= post.user.last_name %> on <%= post.created_at.localtime.strftime("%m.%d.%y") %> at <%= post.created_at.localtime.strftime("%l:%M %P") %></span>
+                    <br>
+                    <%= form_for post do |f| %>
+                      <%= f.hidden_field :is_read, :value => true %>
+                      <%= f.submit "Mark as Read", class: "btn btn-default btn-xs pull-right" %>
+                    <% end %>
+                    <% if current_user.admin? && post.user_id == current_user.id %>
+                      <%= link_to "Delete Post", post_path(post.id), data: {confirm: "Delete: " + "'" + post.title + "'" + "?"}, method: :delete %>
+                      <%= link_to "Edit Post", post_path(post.id), method: :put %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

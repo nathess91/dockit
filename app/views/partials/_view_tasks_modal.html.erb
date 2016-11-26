@@ -1,3 +1,4 @@
+<!-- VIEW ALL TASKS MODAL -->
 <div class="modal fade" id="view-tasks-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -15,8 +16,11 @@
                 <% unless !task.is_high_priority == true %>
                   <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
                 <% end %>
-                <input style="margin-right:5px;" class="task-check" type="checkbox">
-                <%= task.text %>
+                <%= link_to task_path(task.id), data: {confirm: "Delete: " + "'" + task.text + "'" + "?"}, method: :delete  do %>
+                  <span class="pull-left btn btn-default btn-md" style="margin-right:5px; padding:8px;">
+                  </span>
+                <% end %>
+                <%= link_to task.text, task_path(task.id), 'data-toggle' => 'modal', 'data-target' => '#edit-task-modal', method: :put %>
             <% end %>
               </li>
           </ul>

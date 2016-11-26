@@ -18,7 +18,7 @@ class TasksController < ApplicationController
     if @task.valid?
       redirect_to '/home'
     else
-      render :new
+      redirect_to :back
     end
 
   end

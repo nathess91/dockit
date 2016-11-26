@@ -73,7 +73,8 @@
       <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="80vw" style="margin-left:2.5vw; margin-top:1.5vh;">
       <br>
       <br>
-      <span style="width:100%;" class="btn btn-primary">View Messages</span>
+      <!-- <button type="button" id="view-posts" class="btn btn-primary" data-toggle="modal" data-target="#view-posts-modal" style="width:100%">View Messages</button> -->
+      <%= link_to "View Messages", posts_path, class: "btn btn-primary", 'data-toggle' => 'modal', 'data-target' => '#view-posts-modal', style: "width:100%" %>
     </div>
 </div>
 </div>
@@ -86,3 +87,5 @@
 <%= render "partials/view_tasks_modal" %>
 <!-- EDIT TASK MODAL -->
 <%= render "partials/edit_task_modal" %>
+<!-- VIEW ALL POSTS -->
+<%= render "partials/view_posts_modal" %>
