@@ -10,8 +10,8 @@
       <div class="modal-body">
         <%= form_for (@task = Task.new), method: :post do |f| %>
 
-              <label for="text">Text</label>
-              <%= f.text_area :text, class: "form-control", placeholder: "Write something here...", style: "resize:none;" %>
+              <label for="text">Task</label>
+              <%= f.text_area :text, class: "form-control", placeholder: "Write something here...", style: "resize:none;", autofocus: true %>
               <br>
               <label for="is-high-priority">Priority</label>
                 <br>

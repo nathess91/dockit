@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
 
   def index
-    @tasks = current_user.tasks.order(is_high_priority: :desc, created_at: :desc)
+    @tasks = current_user.tasks.order(is_high_priority: :desc)
   end
 
   def show

@@ -13,10 +13,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    if current_user.admin?
-      @post = current_user.posts.create(post_params)
-      if @post.valid? && current_user.admin?
-        redirect_to '/bulletins'
+    if current_user.admin? || current_user.manager?
+      @post = Post.create(post_params)
+      if @post.valid?
+        render "partials/view_posts_modal"
       else
         flash[:error] = @post.errors.full_messages.join(". ")
         redirect_to :back
@@ -35,7 +35,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
-      redirect_to '/bulletins'
+      render "partials/view_posts_modal"
     else
       flash[:error] = @post.errors.full_messages
       redirect_to :back
@@ -46,7 +46,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post.destroy
       flash[:success] = "Post deleted successfully"
-      redirect_to '/bulletins'
+      render "partials/view_posts_modal"
     else
       flash[:error] = @post.errors.full_messages.join(". ")
       redirect_to :back

@@ -23,7 +23,7 @@ class AssignmentNotesController < ApplicationController
 
     @assignment_note = AssignmentNote.new(assignment_note_params)
 
-    @assignment_note.user_id = current_user.id
+    @assignment_note.user_id = current_user.id || current_user.manager?
     @assignment_note.save
 
     if @assignment_note.save

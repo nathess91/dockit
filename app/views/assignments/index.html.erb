@@ -1,6 +1,10 @@
 <div class="container">
+  <% if current_user.admin? %>
+    <h1>All Assignments</h1>
+  <% else %>
+    <h1><%= current_user.first_name %>'s Assignments</h1>
+  <% end %>
 
-  <h1><%= current_user.first_name %>'s Assignments</h1>
 <br>
     <!-- <% if @assignments.count == 0 %>
       <h5>No assignments...</h5>
@@ -21,7 +25,7 @@
 
 <div id="assignment-tabs" class="container">
   <!-- ASSIGNMENT STAGE TABS -->
-  <ul class="nav nav-tabs">
+  <ul id="tabs" class="nav nav-tabs">
 		<li class="active">
       <a href="#1" data-toggle="tab">Current Assignments</a>
 		</li>
@@ -41,7 +45,7 @@
 
 
   <!-- TAB CONTENT -->
-	<div class="tab-content">
+	<div id="myTabContent" class="tab-content">
 
     <!-- ASSIGNED -->
     <div class="tab-pane active" id="1">
@@ -73,7 +77,7 @@
                 <% elsif assignment.loss_category == 'vehicle' %>
                   <span id="vehicle-glyph" class="glyphicon glyphicon-road"></span>
                 <% end %>
-                <span style="font-size:20px;"><b><%= assignment.name %></b></span> #<%= assignment.job_number %>
+                <span style="font-size:20px;margin:10px;color:black;"><b><%= assignment.name %></b></span> #<%= assignment.job_number %>
               </h3>
               <%= link_to "Add Note", new_assignment_note_path(assignment_id: assignment.id), class: "btn btn-default btn-sm pull-right", "data-toggle" => "modal", 'data-target' => '#new-note-on-assignment-modal' %>
             </div>
@@ -85,7 +89,7 @@
                   <p>No notes...</p>
                 <% else %>
                   <% notes.each do |note| %>
-                    <b><%= note.created_at.strftime("%m.%d.%y") %></b>
+                    <b><%= note.created_at.localtime.strftime("%m.%d.%y") %></b>
                     <%= note.text %>
                   <% end %>
                 <% end %>

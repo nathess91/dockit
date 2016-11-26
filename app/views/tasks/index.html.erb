@@ -33,27 +33,42 @@
       <%= link_to "New Task", new_task_path, :id => 'new-task', class: "btn btn-primary pull-right", "data-toggle" => "modal", 'data-target' => '#new-task-modal' %>
   </div>
 
-    <div style="padding-top:0px;" class="container well col-xs-12 col-md-5 pull-right">
+    <!-- ASSIGNMENT ICONS -->
+    <div style="padding-top:0px;" class="container well col-xs-12 col-md-5 pull-right" id="icons">
       <h3>Assignments</h3>
-      <div class="row">
-        <div class="col-md-1">
-
-        </div>
-        <div class="col-md-1">
-        </div>
-        <div class="col-md-1">
+      <br>
+      <div class="row" style="margin-left:2vw;">
+        <div id="assigned-icon" class="col-md-4 clearfix">
+          <a href="/assignments#1"><img src="http://i.imgur.com/UC8sFM9.png" width="60em"></a>
         </div>
 
+        <div id="pending-icon" class="col-md-4 clearfix">
+          <a href="/assignments#2"><img src="http://i.imgur.com/t3O1FM5.png" width="60em"></a>
+        </div>
+
+        <div id="inprogress-icon" class="col-md-4 clearfix">
+          <a href="/assignments#3"><img src="http://i.imgur.com/7na1sgB.png" width="60em"></a>
+        </div>
       </div>
-      <div class="row">
-        <div class="col-md-1">!</div>
-        <div class="col-md-1">!</div>
-        <div class="col-md-1">!</div>
+      <br>
+
+      <div class="row" style="margin-left:2vw;">
+        <div id="notsold-icon" class="col-md-4 clearfix">
+          <a href="/assignments#4"><img src="http://i.imgur.com/2OVnspZ.png" width="60em"></a>
+        </div>
+
+        <div id="completed-icon" class="col-md-4 clearfix">
+          <a href="/assignments#5"><img src="http://i.imgur.com/ohrPQas.png" width="60em"></a>
+        </div>
+
+        <div id="closed-icon" class="col-md-4 clearfix">
+          <a href="/assignments#6"><img src="http://i.imgur.com/EkNxtiy.png" width="60em"></a>
+        </div>
       </div>
 
     </div>
 
-
+<!-- RESOURCES -->
 <div class="row pull-right" style="margin-right:2px;">
     <div style="padding-top:0px; width:250px;" class="well col-xs-12 col-sm-3 pull-left">
         <h3>Resources</h3>
@@ -73,8 +88,14 @@
       <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="80vw" style="margin-left:2.5vw; margin-top:1.5vh;">
       <br>
       <br>
-      <!-- <button type="button" id="view-posts" class="btn btn-primary" data-toggle="modal" data-target="#view-posts-modal" style="width:100%">View Messages</button> -->
-      <%= link_to "View Messages", posts_path, class: "btn btn-primary", 'data-toggle' => 'modal', 'data-target' => '#view-posts-modal', style: "width:100%" %>
+      <% if current_user.admin? %>
+        <%= link_to "View Messages", posts_path, class: "btn btn-primary btn-sm text-center", 'data-toggle' => 'modal', 'data-target' => '#view-posts-modal', style: "width:100%" %>
+        <br>
+        <br>
+        <%= link_to "New Message", new_post_path, class: "btn btn-success btn-sm text-center", 'data-toggle' => 'modal', 'data-target' => '#new-post-modal', style: "width:100%" %>
+      <% else %>
+        <%= link_to "View Messages", posts_path, class: "btn btn-primary", 'data-toggle' => 'modal', 'data-target' => '#view-posts-modal', style: "width:100%" %>
+      <% end %>
     </div>
 </div>
 </div>
@@ -89,3 +110,5 @@
 <%= render "partials/edit_task_modal" %>
 <!-- VIEW ALL POSTS -->
 <%= render "partials/view_posts_modal" %>
+<!-- NEW POST MODAL -->
+<%= render "partials/new_post_modal" %>

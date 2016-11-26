@@ -29,10 +29,12 @@
                     <h3 class="panel-title">Subject: <%= post.title %></h3>
                   </div>
                   <div class="panel-body">
+                    <i><%= post.created_at.localtime.strftime("%m.%d.%y") %></i>
+                    <br>
                     <%= post.content %>
                     <br>
                     <br>
-                    <span class="pull-left">Posted by <%= post.user.first_name %> <%= post.user.last_name %> on <%= post.created_at.localtime.strftime("%m.%d.%y") %> at <%= post.created_at.localtime.strftime("%l:%M %P") %></span>
+                    <span class="pull-left"><%= post.user.first_name %> <%= post.user.last_name %> at <%= post.created_at.localtime.strftime("%l:%M %P") %></span>
                     <br>
                     <%= form_for post do |f| %>
                       <%= f.hidden_field :is_read, :value => true %>

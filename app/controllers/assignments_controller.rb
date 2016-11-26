@@ -1,7 +1,11 @@
 class AssignmentsController < ApplicationController
 
   def index
-    @assignments = current_user.assignments
+    if current_user.admin?
+      @assignments = Assignment.all
+    else
+      @assignments = current_user.assignments
+    end
   end
 
   def show
