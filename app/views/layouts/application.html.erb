@@ -38,7 +38,7 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <% unless controller_name == "tasks" %>
+
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">New Assignment <span class="caret"></span></a>
                   <ul class="dropdown-menu">
@@ -47,8 +47,9 @@
                     <li><%= link_to "Full Form", new_assignment_path, "data-toggle" => "modal", 'data-target' => '#new-assignment-full-modal' %></li>
                   </ul>
                 </li>
-                <% end %>
+
                 <li><%= link_to "New Assignment Note", new_assignment_note_path, "data-toggle" => "modal", 'data-target' => '#new-assignment-note-modal' %></li>
+                <li><%= link_to "New Assignment Contact", new_assignment_contact_path, "data-toggle" => "modal", 'data-target' => '#new-assignment-contact-modal' %></li>
               </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -68,6 +69,10 @@
       <% end %>
     </div>
 
+      <!-- FLASH MESSAGES -->
+      <%= render "partials/flash_messages/error_flash" %>
+      <%= render "partials/flash_messages/success_flash" %>
+
 
       <%= yield %>
 
@@ -75,10 +80,12 @@
       <%= render "partials/new_assignment_modal" %>
       <!-- NEW ASSIGNMENT_NOTE MODAL -->
       <%= render "partials/new_assignment_note_modal" %>
+      <!-- NEW ASSIGNMENT_NOTE MODAL -->
+      <%= render "partials/new_assignment_contact_modal" %>
 
-      <!-- <nav class="navbar navbar-default fixed-bottom">
-        <div class="container text-center">
-        &copy; <%= Time.now.year %> | Natalia Hess
+      <!-- <nav class="navbar navbar-default fixed-bottom" style="margin-bottom:0;">
+        <div class="container text-center" style="padding-top:2vh;">
+        &copy; <%= Time.now.year %> | Company Information
         </div>
       </nav> -->
   </body>
