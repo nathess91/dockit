@@ -60,6 +60,12 @@ $(document).on('turbolinks:load', function () {
     return "#prerecon-info" + ++i;
   });
 
+  dataConfirmModal.setDefaults({
+  title: 'DockIt',
+  commit: 'Confirm',
+  cancel: 'Cancel'
+  });
+
 });
 
 

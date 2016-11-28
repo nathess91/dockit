@@ -1,5 +1,6 @@
 <div class="container">
 <br>
+<h5 class="pull-right"><%= Time.now.strftime("%A, %B %d, %Y") %></h5>
 <h1><%= greet %> <%= current_user.first_name %></h1>
 <br>
 <br>
@@ -10,21 +11,18 @@
       <% if @tasks.count == 0 %>
         <h5>No tasks...</h5>
       <% else %>
-        <% @tasks.take(8).each do |task| %>
+        <% @tasks.take(7).each do |task| %>
           <li class="task list-group-item">
             <% unless !task.is_high_priority == true %>
               <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
             <% end %>
 
+            <%= task.text %>
 
-
-
-            <%= link_to task_path(task.id), data: {confirm: "Delete: " + "'" + task.text + "'" + "?"}, method: :delete  do %>
+            <%= link_to task_path(task.id), data: {confirm: "'" + task.text + "'" + " is complete"}, method: :delete  do %>
               <span class="pull-left btn btn-default btn-md" style="margin-right:5px; padding:8px;">
               </span>
             <% end %>
-
-            <%= link_to task.text, task_path(task.id), 'data-toggle' => 'modal', 'data-target' => '#edit-task-modal', method: :put %>
         <% end %>
           </li>
       </ul>
@@ -38,30 +36,30 @@
       <h3>Assignments</h3>
       <br>
       <div class="row" style="margin-left:2vw;">
-        <div id="assigned-icon" class="col-md-4 clearfix">
+        <div id="assigned-icon" class="col-xs-4 col-md-4 clearfix">
           <a href="/assignments#1"><img src="http://i.imgur.com/UC8sFM9.png" width="60em"></a>
         </div>
 
-        <div id="pending-icon" class="col-md-4 clearfix">
+        <div id="pending-icon" class="col-xs-4 col-md-4 clearfix">
           <a href="/assignments#2"><img src="http://i.imgur.com/t3O1FM5.png" width="60em"></a>
         </div>
 
-        <div id="inprogress-icon" class="col-md-4 clearfix">
+        <div id="inprogress-icon" class="col-xs-4 col-md-4 clearfix">
           <a href="/assignments#3"><img src="http://i.imgur.com/7na1sgB.png" width="60em"></a>
         </div>
       </div>
       <br>
 
       <div class="row" style="margin-left:2vw;">
-        <div id="notsold-icon" class="col-md-4 clearfix">
+        <div id="notsold-icon" class="col-xs-4 col-md-4 clearfix">
           <a href="/assignments#4"><img src="http://i.imgur.com/2OVnspZ.png" width="60em"></a>
         </div>
 
-        <div id="completed-icon" class="col-md-4 clearfix">
+        <div id="completed-icon" class="col-xs-4 col-md-4 clearfix">
           <a href="/assignments#5"><img src="http://i.imgur.com/ohrPQas.png" width="60em"></a>
         </div>
 
-        <div id="closed-icon" class="col-md-4 clearfix">
+        <div id="closed-icon" class="col-xs-4 col-md-4 clearfix">
           <a href="/assignments#6"><img src="http://i.imgur.com/EkNxtiy.png" width="60em"></a>
         </div>
       </div>
@@ -106,8 +104,6 @@
 <%= render "partials/new_assignment_note_modal" %>
 <!-- VIEW ALL TASKS MODAL -->
 <%= render "partials/view_tasks_modal" %>
-<!-- EDIT TASK MODAL -->
-<%= render "partials/edit_task_modal" %>
 <!-- VIEW ALL POSTS -->
 <%= render "partials/view_posts_modal" %>
 <!-- NEW POST MODAL -->

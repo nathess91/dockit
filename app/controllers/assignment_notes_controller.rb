@@ -1,7 +1,7 @@
 class AssignmentNotesController < ApplicationController
-  before_filter :authenticate_user!
 
   def index
+    @assignment = current_user.assignments.find(params[:assignment_id])
     @assignment_notes = current_user.assignments.find(params[:assignment_id]).assignment_notes
   end
 
@@ -20,7 +20,7 @@ class AssignmentNotesController < ApplicationController
     #   assignment_id: assignment.id,
     #   text: assignment_notes.text
     # })
-
+    # @assignment = Assignment.find(params[:id])
     @assignment_note = AssignmentNote.new(assignment_note_params)
 
     @assignment_note.user_id = current_user.id || current_user.manager?

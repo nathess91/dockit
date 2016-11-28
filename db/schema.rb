@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124043641) do
+ActiveRecord::Schema.define(version: 20161128010527) do
 
   create_table "assignment_companies", force: :cascade do |t|
     t.integer  "category"
@@ -27,8 +27,10 @@ ActiveRecord::Schema.define(version: 20161124043641) do
     t.string   "phone"
     t.string   "email"
     t.integer  "assignment_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "company_category"
+    t.string   "company_name"
     t.index ["assignment_id"], name: "index_assignment_contacts_on_assignment_id"
   end
 
