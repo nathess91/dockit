@@ -14,15 +14,18 @@ class AssignmentsController < ApplicationController
 
   def new
     @assignment = Assignment.new
+    @assignment_note = AssignmentNote.new
   end
 
   def create
     @assignment = current_user.assignments.create(assignment_params)
 
     if @assignment.valid?
+      flash[:success] = "New assignment created successfully"
       redirect_to '/assignments'
     else
-      render :new
+      flash[:error] = @assignment.errors.full_messages.join(". ")
+      redirect_to :back
     end
 
   end
@@ -34,15 +37,23 @@ class AssignmentsController < ApplicationController
   def update
     @assignment = Assignment.find(params[:id])
     if @assignment.update_attributes(assignment_params)
+      flash[:success] = "Assignment updated successfully"
       redirect_to '/assignments'
     else
-      render :new
+      flash[:error] = @assignment.errors.full_messages.join(". ")
+      redirect_to :back
     end
   end
 
   def destroy
     @assignment = current_user.assignments.find(params[:id])
-    @assignment.destroy
+    if @assignment.destroy
+      flash[:success] = "Assignment deleted successfully"
+      redirect_to '/assignments'
+    else
+      flash[:error] = @assignment.errors.full_messages.join(". ")
+      redirect_to '/assignments'
+    end
   end
 
   private

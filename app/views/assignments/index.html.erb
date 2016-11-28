@@ -26,9 +26,8 @@
 <div id="assignment-tabs" class="container">
   <!-- ASSIGNMENT STAGE TABS -->
   <ul id="tabs" class="nav nav-tabs">
-		<li class="active">
-      <a href="#1" data-toggle="tab">Current Assignments</a>
-		</li>
+    <li class="active"><a href="#1" data-toggle="tab">Current Assignments</a>
+    </li>
 		<li><a href="#2" data-toggle="tab">Awaiting Customer Response</a>
 		</li>
 		<li><a href="#3" data-toggle="tab">Jobs In Progress</a>
@@ -79,7 +78,11 @@
                 <% end %>
                 <span style="font-size:20px;margin:10px;color:black;"><b><%= assignment.name %></b></span> #<%= assignment.job_number %>
               </h3>
-              <%= link_to "Add Note", new_assignment_note_path(assignment_id: assignment.id), class: "btn btn-default btn-sm pull-right", "data-toggle" => "modal", 'data-target' => '#new-note-on-assignment-modal' %>
+              <!-- <%= link_to "Add Note", assignment_notes_path, class: "btn btn-default btn-sm pull-right", "data-toggle" => "modal", 'data-target' => '#new-note-on-assignment-modal', method: :post %> -->
+              <%= link_to edit_assignment_path(assignment.id) do %>
+                <span class="pull-right glyphicon glyphicon-pencil btn-sm">
+                </span>
+              <% end %>
             </div>
 
             <!-- ASSIGNMENT CARD BODY -->
@@ -88,49 +91,52 @@
                 <% if notes.count == 0 %>
                   <p>No notes...</p>
                 <% else %>
-                  <% notes.each do |note| %>
+                  <% notes.order(created_at: :desc).each do |note| %>
                     <b><%= note.created_at.localtime.strftime("%m.%d.%y") %></b>
                     <%= note.text %>
                   <% end %>
                 <% end %>
-
+                <br>
+                <br>
                 <!-- CLAIM INFO COLLAPSE -->
-                <h5 class="mb-0">
-                  <a href="#claim-info" data-toggle="collapse">
-                    Claim
-                  </a>
-                </h5>
-                <div id="claim-info" class="collapse">
-                  <p>Date Assigned:
-                  <% if assignment.date_assigned.present? %>
-                    <%= assignment.date_assigned.strftime("%m.%d.%y") %>
-                  <% end %>
-                  </p>
-                  <p>Claim Number: <%= assignment.claim_number %></p>
+                <div class="col-md-3">
+                  <h5 class="mb-0">
+                    <a href="#claim-info" data-toggle="collapse">
+                      Claim
+                    </a>
+                  </h5>
+                  <div id="claim-info" class="collapse">
+                    <p>Date Assigned:
+                    <% if assignment.date_assigned.present? %>
+                      <%= assignment.date_assigned.strftime("%m.%d.%y") %>
+                    <% end %>
+                    </p>
+                    <p>Claim Number: <%= assignment.claim_number %></p>
 
-                  <p>Loss Details: <%= assignment.loss_description %></p>
+                    <p>Loss Details: <%= assignment.loss_description %></p>
 
-                  <p>Adjuster Contact</p>
-                  <% contact = get_assignment_contact(assignment.id) %>
-                  <% contact.where(role: 'adjuster').each do |c| %>
-                    <span class="glyphicon glyphicon-user"></span> <%= c.name %>
+                    <p>Adjuster Contact</p>
+                    <% contact = get_assignment_contact(assignment.id) %>
+                    <% contact.where(role: 'adjuster').each do |c| %>
+                      <span class="glyphicon glyphicon-user"></span> <%= c.name %>
+                      <br>
+                      <span class="glyphicon glyphicon-earphone"></span> <%= c.phone %>
+                      <br>
+                      <span class="glyphicon glyphicon-envelope"></span> <%= c.email %>
+                    <% end %>
                     <br>
-                    <span class="glyphicon glyphicon-earphone"></span> <%= c.phone %>
                     <br>
-                    <span class="glyphicon glyphicon-envelope"></span> <%= c.email %>
-                  <% end %>
-                  <br>
-                  <br>
-                  <p>Insurance Company</p>
-                  <% company = get_assignment_company(assignment.id) %>
-                  <% company.where(category: 'insurance').each do |co| %>
-                    <%= co.name %>
-                  <% end %>
-
-                </div>
+                    <p>Insurance Company</p>
+                    <% company = get_assignment_company(assignment.id) %>
+                    <% company.where(category: 'insurance').each do |co| %>
+                      <%= co.name %>
+                    <% end %>
+                  </div>
+              </div>
                 <!-- END CLAIM INFO COLLAPSE -->
 
                 <!-- APPOINTMENT INFO COLLAPSE -->
+                    <div class="col-md-3">
                       <h5 class="mb-0">
                         <a href="#appointment-info" data-toggle="collapse">
                           Appointment
@@ -144,27 +150,46 @@
                         <p>Address</p>
                         <%= assignment.address %>
                       </div>
+                    </div>
                 <!-- END APPOINTMENT INFO COLLAPSE -->
 
                 <!-- CONTACT INFO COLLAPSE -->
+                <div class="col-md-3">
                       <h5 class="mb-0">
                         <a href="#contact-info" data-toggle="collapse">
-                          Contact
+                          Contacts
                         </a>
                       </h5>
                       <div id="contact-info" class="collapse">
                         <% contact = get_assignment_contact(assignment.id) %>
-                        <% contact.where(role: 'location_contact').each do |co| %>
+                        <% contact.each do |co| %>
+                          <% unless co.role == "project_manager" || co.role == "reconstruction_pm" %>
+                            <%= co.role.capitalize %>
+                          <% end %>
+                          <% if co.role == "project_manager" %>
+                          Project Manager
+                          <% elsif co.role == "reconstruction_pm" %>
+                          Reconstruction Project Manager
+                          <% end %>
+
+                          <br>
                           <span class="glyphicon glyphicon-user"></span> <%= co.name %>
                           <br>
                           <span class="glyphicon glyphicon-earphone"></span> <%= co.phone %>
                           <br>
                           <span class="glyphicon glyphicon-envelope"></span> <%= co.email %>
+                          <br>
+                          <br>
                         <% end %>
+
+
+
                       </div>
+                    </div>
                 <!-- END CONTACT INFO COLLAPSE -->
 
                 <!-- PRE-RECON INFO COLLAPSE -->
+                    <div class="col-md-3">
                       <h5 class="mb-0">
                         <a href="#prerecon-info" data-toggle="collapse">
                           Pre-Recon
@@ -175,15 +200,9 @@
                         <br>
                         Abatement Status: <%= assignment.abatement_status %>
                         <br>
-                        <% contact = get_assignment_contact(assignment.id) %>
-                        <% contact.where(role: 'project_manager').each do |co| %>
-                          <span class="glyphicon glyphicon-user"></span> <%= co.name %>
-                          <br>
-                          <span class="glyphicon glyphicon-earphone"></span> <%= co.phone %>
-                          <br>
-                          <span class="glyphicon glyphicon-envelope"></span> <%= co.email %>
-                        <% end %>
+
                       </div>
+                    </div>
                 <!-- PRE-RECON INFO COLLAPSE -->
 
 
