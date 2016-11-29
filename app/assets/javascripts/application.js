@@ -82,6 +82,20 @@ $(document).on('turbolinks:load', function () {
     return "#allNotes" + ++i;
   });
 
+  $("div[id^='workflow-status']").attr('id', function(i) {
+    return "workflow-status" + ++i;
+  });
+  $("a[href^='#workflow-status']").attr('href', function(i) {
+    return "#workflow-status" + ++i;
+  });
+
+  $("div[id^='not-sold']").attr('id', function(i) {
+    return "not-sold" + ++i;
+  });
+  $("a[href^='#not-sold']").attr('href', function(i) {
+    return "#not-sold" + ++i;
+  });
+
   dataConfirmModal.setDefaults({
   title: 'DockIt',
   commit: 'Confirm',

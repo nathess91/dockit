@@ -16,7 +16,7 @@
               <div style="margin-bottom: 25px" class="col-xs-12">
                 <label for="assignment-name">Assignment Name</label>
                 <br>
-                <%= f.collection_select(:assignment_id, current_user.assignments.order(name: :asc), :id, :name, :prompt => "---", :include_blank => true) %>
+                <%= f.collection_select(:assignment_id, Assignment.all.order(name: :asc), :id, :name, :prompt => "---", :include_blank => true) %>
               </div>
 
               <!-- CONTACT TYPE -->

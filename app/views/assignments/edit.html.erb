@@ -32,14 +32,14 @@
               <div style="margin-bottom: 25px" class="col-xs-12">
                 <label for="original-insp-date">Original Inspection Date</label>
                 <br>
-                <%= f.datetime_select :original_insp_date, class: "form-control", order: [:month, :day, :year] %>
+                <%= f.datetime_select :original_insp_date, class: "form-control", order: [:month, :day, :year], :include_blank => true %>
               </div>
 
               <!-- RETURN INSPECTION DATE -->
               <div style="margin-bottom: 25px" class="col-xs-12">
                 <label for="return-insp-date">Return Inspection Date</label>
                 <br>
-                <%= f.datetime_select :return_insp_date, class: "form-control", order: [:month, :day, :year] %>
+                <%= f.datetime_select :return_insp_date, class: "form-control", order: [:month, :day, :year], :include_blank => true %>
               </div>
 
               <!-- LOSS CATEGORY -->

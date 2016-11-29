@@ -37,3 +37,7 @@
 .uppercase {
   text-transform: uppercase !important;
 }
+
+#admin-new-message {
+  margin-top: 1.9vh;
+}

@@ -31,7 +31,7 @@ class AssignmentsController < ApplicationController
   end
 
   def edit
-    @assignment = current_user.assignments.find(params[:id])
+    @assignment = Assignment.find(params[:id])
   end
 
   def update

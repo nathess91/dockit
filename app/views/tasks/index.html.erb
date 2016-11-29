@@ -11,7 +11,7 @@
       <% if @tasks.count == 0 %>
         <h5>No tasks...</h5>
       <% else %>
-        <% @tasks.take(7).each do |task| %>
+        <% @tasks.take(8).each do |task| %>
           <li class="task list-group-item">
             <% unless !task.is_high_priority == true %>
               <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
@@ -70,6 +70,7 @@
 <div class="row pull-right" style="margin-right:2px;">
     <div style="padding-top:0px; width:250px;" class="well col-xs-12 col-sm-3 pull-left">
         <h3>Resources</h3>
+        <br>
         <a href="https://apps.xactware.com/apps/xnportal/welcome.jsp">XactAnalysis</a>
         <br>
         <a href="https://secure.innovationproperty.com/secure/login.aspx">Innovation</a>
@@ -80,17 +81,23 @@
         <br>
         <a href="https://secure.na1.echosign.com/public/login">AdobeSign</a>
         <br>
+        <br>
     </div>
     <div style="padding-top:0px; width:201px; margin-left:20px; color:inherit;" class="well col-xs-12 col-sm-6 pull-right">
       <h3>Bulletin Board</h3>
-      <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="80vw" style="margin-left:2.5vw; margin-top:1.5vh;">
+      <% if current_user.admin? %>
+        <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="60vw" style="margin-left:3.2vw; margin-top:1.5vh;">
+      <% else %>
+        <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="80vw" style="margin-left:2.5vw; margin-top:1.5vh;">
+      <% end %>
       <br>
       <br>
       <% if current_user.admin? %>
-        <%= link_to "View Messages", posts_path, class: "btn btn-primary btn-sm text-center", 'data-toggle' => 'modal', 'data-target' => '#view-posts-modal', style: "width:100%" %>
+      <span style="">
+        <%= link_to "View Messages", posts_path, class: "btn btn-primary btn-xs text-center", 'data-toggle' => 'modal', 'data-target' => '#view-posts-modal', style: "width:100%" %>
+      </span>
         <br>
-        <br>
-        <%= link_to "New Message", new_post_path, class: "btn btn-success btn-sm text-center", 'data-toggle' => 'modal', 'data-target' => '#new-post-modal', style: "width:100%" %>
+        <%= link_to "New Message", new_post_path, class: "btn btn-success btn-xs text-center", 'data-toggle' => 'modal', 'data-target' => '#new-post-modal', style: "width:100%", id: "admin-new-message" %>
       <% else %>
         <%= link_to "View Messages", posts_path, class: "btn btn-primary", 'data-toggle' => 'modal', 'data-target' => '#view-posts-modal', style: "width:100%" %>
       <% end %>
