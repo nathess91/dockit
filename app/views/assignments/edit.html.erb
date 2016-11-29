@@ -9,20 +9,17 @@
         <%= form_for @assignment do |f| %>
 
             <div class="row">
+              <!-- ASSIGNMENT NAME -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="assignment-name">Assignment Name</label>
+                <%= f.text_field :name, class: "form-control input-lg", placeholder: "Example: Lawson" %>
+              </div>
+
               <!-- ASSIGNMENT STAGE -->
               <div style="margin-bottom: 25px" class="col-xs-12">
                 <label for="loss-category">Assignment Stage</label>
                 <br>
                 <%= f.select :assignment_stage, Assignment.assignment_stages.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true %>
-                <% if params[:assignment_stage] == "closed" %>
-                  <%= render "partials/checklist" %>
-                <% end %>
-              </div>
-
-              <!-- ASSIGNMENT NAME -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="assignment-name">Assignment Name</label>
-                <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "Example: Lawson" %>
               </div>
 
               <!-- DATE ASSIGNED -->
@@ -32,9 +29,10 @@
               </div>
 
               <!-- ORIGINAL INSPECTION DATE -->
-              <div style="margin-bottom: 25px" class="col-xs-2">
+              <div style="margin-bottom: 25px" class="col-xs-12">
                 <label for="original-insp-date">Original Inspection Date</label>
-                <%= f.datetime_select :original_insp_date, class: "form-control" %>
+                <br>
+                <%= f.datetime_select :original_insp_date, class: "form-control", order: [:month, :day, :year] %>
               </div>
 
               <!-- RETURN INSPECTION DATE -->

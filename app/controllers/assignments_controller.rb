@@ -36,6 +36,7 @@ class AssignmentsController < ApplicationController
 
   def update
     @assignment = Assignment.find(params[:id])
+
     if @assignment.update_attributes(assignment_params)
       flash[:success] = "Assignment updated successfully"
       redirect_to '/assignments'

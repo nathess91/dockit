@@ -33,13 +33,6 @@ $(document).on('turbolinks:load', function () {
     $(this).removeClass('animated');
   });
 
-  $("div[id^='appointment-info']").attr('id', function(i) {
-    return "appointment-info" + ++i;
-  });
-   $("a[href^='#appointment-info']").attr('href', function(i) {
-    return "#appointment-info" + ++i;
-  });
-
   $("div[id^='claim-info']").attr('id', function(i) {
     return "claim-info" + ++i;
   });
