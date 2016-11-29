@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require_tree .
 //= require data-confirm-modal
+//= require bootstrap-select
 
 $(document).on('turbolinks:load', function () {
 
@@ -58,6 +59,34 @@ $(document).on('turbolinks:load', function () {
   });
   $("a[href^='#prerecon-info']").attr('href', function(i) {
     return "#prerecon-info" + ++i;
+  });
+
+  $("div[id^='loss-details']").attr('id', function(i) {
+    return "loss-details" + ++i;
+  });
+  $("a[href^='#loss-details']").attr('href', function(i) {
+    return "#loss-details" + ++i;
+  });
+
+  $("div[id^='mitigation-status']").attr('id', function(i) {
+    return "mitigation-status" + ++i;
+  });
+  $("a[href^='#mitigation-status']").attr('href', function(i) {
+    return "#mitigation-status" + ++i;
+  });
+
+  $("div[id^='abatement-status']").attr('id', function(i) {
+    return "abatement-status" + ++i;
+  });
+  $("a[href^='#abatement-status']").attr('href', function(i) {
+    return "#abatement-status" + ++i;
+  });
+
+  $("div[id^='allNotes']").attr('id', function(i) {
+    return "allNotes" + ++i;
+  });
+  $("a[href^='#allNotes']").attr('href', function(i) {
+    return "#allNotes" + ++i;
   });
 
   dataConfirmModal.setDefaults({

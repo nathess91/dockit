@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  *= require tasks
+ *= require bootstrap-select
  */
 
  .dock-it {
@@ -28,3 +29,7 @@
  a {
    text-decoration: none !important;
  }
+
+.dock-it-font {
+  font-family: 'Syncopate', sans-serif;
+}

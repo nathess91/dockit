@@ -32,24 +32,18 @@
 
               <!-- HIDDEN FIELDS -->
               <%= f.hidden_field :assignment_stage, :value => 'assigned' %>
-              <%= f.hidden_field :original_insp_date, :value => 'Add date' %>
-              <%= f.hidden_field :return_insp_date, :value => 'Add date' %>
-              <%= f.hidden_field :job_number, :value => 'Add job number' %>
+              <!-- <%= f.hidden_field :job_number, :value => 'Add job number' %>
               <%= f.hidden_field :loss_description, :value => 'Add description' %>
               <%= f.hidden_field :mitigation_status, :value => 'Add mitigation status' %>
               <%= f.hidden_field :abatement_status, :value => 'Add abatement status' %>
               <%= f.hidden_field :claim_number, :value => 'Add claim number' %>
               <%= f.hidden_field :estimate_status, :value => 'Add estimate status' %>
-              <%= f.hidden_field :target_start_date, :value => 'Add date' %>
-              <%= f.hidden_field :target_end_date, :value => 'Add date' %>
-              <%= f.hidden_field :actual_start_date, :value => 'Add date' %>
-              <%= f.hidden_field :actual_end_date, :value => 'Add date' %>
               <%= f.hidden_field :is_on_xa, :value => false %>
               <%= f.hidden_field :estimate_total, :value => 0 %>
               <%= f.hidden_field :actual_start_date, :value => 'Add date' %>
               <%= f.hidden_field :is_contract_signed, :value => false %>
               <%= f.hidden_field :address, :value => 'Add address' %>
-              <%= f.hidden_field :year_built, :value => 0000 %>
+              <%= f.hidden_field :year_built, :value => 0000 %> -->
 
 
             </div>
@@ -98,7 +92,6 @@
                 <%= f.select :loss_category, Assignment.loss_categories.map { |key, value| [key.humanize, key] }, required: true, :prompt => "---", :include_blank => true  %>
               </div>
 
-
               <!-- JOB NUMBER -->
               <div style="margin-bottom: 25px" class="col-xs-12">
                 <label for="job-number">Job Number</label>
@@ -141,13 +134,61 @@
                 <%= f.text_field :year_built, class: "form-control", placeholder: "Example: 1975" %>
               </div>
 
+              <!-- ASSIGNMENT CONTACT BUTTON COLLAPSE -->
+              <div class="col-xs-12">
+                <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseContact1" aria-expanded="false" aria-controls="collapseContact1">
+                  Add Primary Contact
+                </button>
+                <br>
+                <br>
+              </div>
+              <br>
+              <div class="collapse clearfix" id="collapseContact1">
+                <div class="clearfix">
+                  <div style="margin-bottom: 25px" class="col-xs-12">
+                    <label for="contact-name">Name</label>
+                    <%= f.text_field :contact_name, class: "form-control" %>
+                  </div>
+
+                  <div style="margin-bottom: 25px" class="col-xs-12">
+                    <label for="contact-role">Contact Title</label>
+                    <br>
+                    <%= f.select :contact_role, Assignment.contact_roles.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true, required: true  %>
+                  </div>
+
+                  <div style="margin-bottom: 25px" class="col-xs-12">
+                    <label for="contact-phone">Phone Number</label>
+                    <%= f.text_field :contact_phone, class: "form-control" %>
+                  </div>
+
+                  <div style="margin-bottom: 25px" class="col-xs-12">
+                    <label for="contact-email">Email</label>
+                    <%= f.text_field :contact_email, class: "form-control" %>
+                  </div>
+
+                  <div style="margin-bottom: 25px" class="col-xs-12">
+                    <label for="company-name">Company Name</label>
+                    <%= f.text_field :company_name, class: "form-control" %>
+                  </div>
+
+                  <div style="margin-bottom: 25px" class="col-xs-12">
+                    <label for="company-category">Company Type</label>
+                    <br>
+                    <%= f.select :company_category, Assignment.company_categories.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true  %>
+                  </div>
+                </div>
+              </div>
+              <!-- END ASSIGNMENT CONTACT BUTTON COLLAPSE -->
+
+
               <!-- HIDDEN ASSIGNMENT STAGE DEFAULT TO 'ASSIGNED' -->
               <%= f.hidden_field :assignment_stage, :value => 'assigned' %>
 
             </div>
 
-                <br>
+
             <%= f.submit "Create New Assignment", class: "btn btn-success btn-block"  %>
+
 
           <% end %>
 

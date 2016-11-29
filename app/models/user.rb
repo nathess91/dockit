@@ -4,7 +4,6 @@ class User < ApplicationRecord
   has_many :posts
   has_many :assignments
   has_many :assignment_notes
-  has_many :assignment_companies
   has_many :assignment_contacts
   has_many :tasks
 

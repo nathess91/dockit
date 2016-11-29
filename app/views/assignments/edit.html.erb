@@ -14,6 +14,9 @@
                 <label for="loss-category">Assignment Stage</label>
                 <br>
                 <%= f.select :assignment_stage, Assignment.assignment_stages.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true %>
+                <% if params[:assignment_stage] == "closed" %>
+                  <%= render "partials/checklist" %>
+                <% end %>
               </div>
 
               <!-- ASSIGNMENT NAME -->
@@ -26,6 +29,18 @@
               <div style="margin-bottom: 25px" class="col-xs-12">
                 <label for="date-assigned">Date Assigned</label>
                 <%= f.date_field :date_assigned, class: "form-control" %>
+              </div>
+
+              <!-- ORIGINAL INSPECTION DATE -->
+              <div style="margin-bottom: 25px" class="col-xs-2">
+                <label for="original-insp-date">Original Inspection Date</label>
+                <%= f.datetime_select :original_insp_date, class: "form-control" %>
+              </div>
+
+              <!-- RETURN INSPECTION DATE -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="return-insp-date">Return Inspection Date</label>
+                <%= f.date_field :return_insp_date, class: "form-control" %>
               </div>
 
               <!-- LOSS CATEGORY -->

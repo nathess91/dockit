@@ -1,0 +1,31 @@
+<!-- ADD ASSIGNMENT_NOTE DIRECTLY ON ASSIGNMENT -->
+<div class="container">
+
+        <%= form_for @assignment_note do |f| %>
+
+            <div class="row">
+              <div class="container small-container col-xs-12">
+                <div class="alert alert-warning">
+                  <p><b>NOTICE:</b> All assignment notes are permanent and cannot be deleted</p>
+                </div>
+              </div>
+              <!-- ASSIGNMENT_NOTE TEXT -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="note-text">Note</label>
+                <%= f.text_area :text, class: "form-control", placeholder: "Write something here...", style: "resize:none;" %>
+              </div>
+
+
+              <!-- <div style="margin-bottom: 25px" class="col-xs-12">
+                <%= f.collection_select(:assignment_id, Assignment.all, :id, :name) %>
+              </div> -->
+
+              <!-- <%= f.hidden_field :assignment_id, :value => @assignment_note.assignment_id %> -->
+
+            </div>
+
+                <br>
+            <%= f.submit "Create Note", class: "btn btn-success"  %>
+
+          <% end %>
+</div>

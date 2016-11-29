@@ -2,24 +2,10 @@
   <% if current_user.admin? %>
     <h1>All Assignments</h1>
   <% else %>
-    <h1><%= current_user.first_name %>'s Assignments</h1>
+    <h1 class="dock-it-font"><%= current_user.first_name %>'s Assignments</h1>
   <% end %>
 
 <br>
-    <!-- <% if @assignments.count == 0 %>
-      <h5>No assignments...</h5>
-    <% else %>
-      <% @assignments.each do |assignment| %>
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <h3 class="panel-title"><%= assignment.name %></h3>
-          </div>
-          <div class="panel-body">
-            Panel content
-          </div>
-        </div>
-        <% end %>
-    <% end %> -->
 
 </div>
 
@@ -55,7 +41,7 @@
         <% @assignments.where(assignment_stage: 'assigned').each do |assignment| %>
           <div class="panel panel-info">
             <div class="panel-heading clearfix">
-              <h3 class="panel-title pull-left" style="margin-top:0.5em;">
+              <h3 class="panel-title pull-left" style="margin-top:0.4em;">
                 <% if assignment.loss_category == 'water' %>
                   <span id="water-glyph" class="glyphicon glyphicon-tint"></span>
                 <% elsif assignment.loss_category == 'burglary_theft' %>
@@ -76,9 +62,10 @@
                 <% elsif assignment.loss_category == 'vehicle' %>
                   <span id="vehicle-glyph" class="glyphicon glyphicon-road"></span>
                 <% end %>
-                <span style="font-size:20px;margin:10px;color:black;"><b><%= assignment.name %></b></span> #<%= assignment.job_number %>
+                <span style="font-size:20px;margin:10px;color:black;"><b><%= assignment.name.upcase %></b></span> #<%= assignment.job_number %>
               </h3>
-              <!-- <%= link_to "Add Note", assignment_notes_path, class: "btn btn-default btn-sm pull-right", "data-toggle" => "modal", 'data-target' => '#new-note-on-assignment-modal', method: :post %> -->
+              <%= link_to "Add Note", assignment_notes_path, class: "btn btn-default btn-sm pull-right", method: :post %>
+
               <%= link_to edit_assignment_path(assignment.id) do %>
                 <span class="pull-right glyphicon glyphicon-pencil btn-sm">
                 </span>
@@ -87,125 +74,218 @@
 
             <!-- ASSIGNMENT CARD BODY -->
             <div class="panel-body">
-              <% notes = get_assignment_notes(assignment.id) %>
-                <% if notes.count == 0 %>
-                  <p>No notes...</p>
-                <% else %>
-                  <% notes.order(created_at: :desc).each do |note| %>
-                    <b><%= note.created_at.localtime.strftime("%m.%d.%y") %></b>
-                    <%= note.text %>
-                  <% end %>
-                <% end %>
-                <br>
-                <br>
-                <!-- CLAIM INFO COLLAPSE -->
-                <div class="col-md-3">
-                  <h5 class="mb-0">
-                    <a href="#claim-info" data-toggle="collapse">
-                      Claim
+              <!-- ASSIGNMENT NOTES -->
+              <div class="row">
+              <div class="col-md-6">
+                <% notes = get_assignment_notes(assignment.id) %>
+                  <% if notes.count == 0 %>
+                    <p>No notes...</p>
+                  <% else %>
+
+                    <!-- MOST RECENT ASSIGNMENT_NOTE -->
+                    <b><%= notes.last.created_at.localtime.strftime("%m.%d.%y") %></b>
+                    <%= notes.last.text %>
+
+                    <!-- ALL NOTES -->
+                    <a class="glyphicon glyphicon-chevron-down" role="button" data-toggle="collapse" href="#allNotes" aria-expanded="false" aria-controls="allNotes">
+
                     </a>
-                  </h5>
-                  <div id="claim-info" class="collapse">
-                    <p>Date Assigned:
-                    <% if assignment.date_assigned.present? %>
-                      <%= assignment.date_assigned.strftime("%m.%d.%y") %>
-                    <% end %>
-                    </p>
-                    <p>Claim Number: <%= assignment.claim_number %></p>
+                    <div class="collapse" id="allNotes">
+                      <% notes.order(created_at: :desc)[1..-2].each do |note| %>
+                        <b><%= note.created_at.localtime.strftime("%m.%d.%y") %></b>
+                        <%= note.text %>
+                      <% end %>
+                    </div>
 
-                    <p>Loss Details: <%= assignment.loss_description %></p>
-
-                    <p>Adjuster Contact</p>
-                    <% contact = get_assignment_contact(assignment.id) %>
-                    <% contact.where(role: 'adjuster').each do |c| %>
-                      <span class="glyphicon glyphicon-user"></span> <%= c.name %>
-                      <br>
-                      <span class="glyphicon glyphicon-earphone"></span> <%= c.phone %>
-                      <br>
-                      <span class="glyphicon glyphicon-envelope"></span> <%= c.email %>
-                    <% end %>
-                    <br>
-                    <br>
-                    <p>Insurance Company</p>
-                    <% company = get_assignment_company(assignment.id) %>
-                    <% company.where(category: 'insurance').each do |co| %>
-                      <%= co.name %>
-                    <% end %>
-                  </div>
+                  <% end %>
               </div>
+              <!-- CLAIM INFO -->
+              <div class="col-md-6">
+                <!-- CLAIM INFO COLLAPSE -->
+                <h5 style="margin-top:0">
+                  <a href="#claim-info" data-toggle="collapse">
+                    Claim
+                  </a>
+                </h5>
+                <div id="claim-info" class="collapse">
+                  <p><b>Date Assigned:</b>
+                  <% if assignment.date_assigned.present? %>
+                    <%= assignment.date_assigned.strftime("%m.%d.%y") %>
+                  <% end %>
+                  </p>
+                  <% if assignment.claim_number.present? %>
+                    <p><b>Claim Number:</b> <%= assignment.claim_number %></p>
+                  <% else %>
+                    <p><b>Claim Number:</b> No claim number</p>
+                  <% end %>
+
+                  <!-- LOSS DETAILS COLLAPSE -->
+                    <h5 class="mb-0">
+                      <a href="#loss-details" data-toggle="collapse">
+                        <b>Loss Details</b>
+                      </a>
+                    </h5>
+                    <div id="loss-details" class="collapse">
+                      <% if assignment.loss_description.present? %>
+                        <%= assignment.loss_description %>
+                      <% else %>
+                        No description
+                      <% end %>
+                    </div>
+                  <!-- END LOSS DETAILS COLLAPSE -->
+
+
+                  <% if assignment.company_category == 'insurance' %>
+                  <p>Insurance Company</p>
+                    <%= assignment.company_name %>
+                  <% end %>
+                </div>
                 <!-- END CLAIM INFO COLLAPSE -->
 
+                    </div>
+                <!-- END CLAIM INFO COLLAPSE -->
+              </div>
+                <br>
+                <br>
+                <hr>
+                <div class="row" style="margin-top:0;">
+                <div class="col-md-4">
+                  <!-- PRE-RECON INFO COLLAPSE -->
+                        <h5 class="mb-0">
+                          <a href="#prerecon-info" data-toggle="collapse">
+                            Pre-Recon
+                          </a>
+                        </h5>
+                        <div id="prerecon-info" class="collapse">
+                          <b>Year Built:</b> <%= assignment.year_built %>
+                          <br>
+                          <!-- MITIGATION STATUS COLLAPSE -->
+                            <h5 class="mb-0">
+                              <a href="#mitigation-status" data-toggle="collapse">
+                                <b>Mitigation Status</b>
+                              </a>
+                            </h5>
+                            <div id="mitigation-status" class="collapse">
+                              <%= assignment.mitigation_status %>
+                            </div>
+                          <!-- END MITIGATION STATUS COLLAPSE -->
+
+                          <!-- MITIGATION STATUS COLLAPSE -->
+                            <h5 class="mb-0">
+                              <a href="#abatement-status" data-toggle="collapse">
+                                <b>Abatement Status</b>
+                              </a>
+                            </h5>
+                            <div id="abatement-status" class="collapse">
+                              <%= assignment.abatement_status %>
+                            </div>
+                          <!-- END MITIGATION STATUS COLLAPSE -->
+
+
+                        </div>
+                        <!-- END PRE-RECON COLLAPSE -->
+
+              </div>
+
                 <!-- APPOINTMENT INFO COLLAPSE -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                       <h5 class="mb-0">
                         <a href="#appointment-info" data-toggle="collapse">
                           Appointment
                         </a>
                       </h5>
                       <div id="appointment-info" class="collapse">
-                        <p>Original Inspection Date</p>
-                        <%= assignment.original_insp_date %>
-                        <p>Return Inspection Date</p>
-                        <%= assignment.return_insp_date %>
-                        <p>Address</p>
-                        <%= assignment.address %>
+                        <% if assignment.original_insp_date.present? %>
+                          <p><b>Original Inspection Date:</b> <%= assignment.original_insp_date.strftime("%m.%d.%y") %></p>
+                        <% else %>
+                          <p><b>Original Inspection Date:</b>
+                            <br>
+                              <div class="alert alert-warning">
+                                <p><b>NOTICE:</b> Please set inspection date</p>
+                              </div>
+                          </p>
+                        <% end %>
+
+                        <% if assignment.return_insp_date.present? %>
+                          <p><b>Return Inspection Date:</b> <%= assignment.return_insp_date.strftime("%m.%d.%y") %></p>
+                        <% else %>
+                          <p><b>Return Inspection Date:</b>
+                            <br>
+                              <div class="alert alert-warning">
+                                <p><b>NOTICE:</b> Please set return inspection date</p>
+                              </div>
+                          </p>
+                        <% end %>
+
+                        <% if assignment.address.present? %>
+                        <p><b>Address</b>
+                        <br>
+                        <%= assignment.address %></p>
+                        <% end %>
                       </div>
                     </div>
                 <!-- END APPOINTMENT INFO COLLAPSE -->
 
                 <!-- CONTACT INFO COLLAPSE -->
-                <div class="col-md-3">
+                <div class="col-md-4">
                       <h5 class="mb-0">
                         <a href="#contact-info" data-toggle="collapse">
                           Contacts
                         </a>
                       </h5>
                       <div id="contact-info" class="collapse">
-                        <% contact = get_assignment_contact(assignment.id) %>
-                        <% contact.each do |co| %>
-                          <% unless co.role == "project_manager" || co.role == "reconstruction_pm" %>
-                            <%= co.role.capitalize %>
-                          <% end %>
-                          <% if co.role == "project_manager" %>
-                          Project Manager
-                          <% elsif co.role == "reconstruction_pm" %>
-                          Reconstruction Project Manager
+                        <% if assignment.contact_role.present? %>
+                          <% unless assignment.contact_role == "reconstruction_pm" || assignment.contact_role == "project_manager" %>
+                            <b><%= assignment.contact_role.capitalize %></b>
                           <% end %>
 
+                          <% if assignment.contact_role == "reconstruction_pm" %>
+                            <b>Reconstruction Project Manager</b>
+                          <% end %>
+                          <% if assignment.contact_role == "project_manager" %>
+                            <b>Project Manager</b>
+                          <% end %>
                           <br>
-                          <span class="glyphicon glyphicon-user"></span> <%= co.name %>
+                          <span class="glyphicon glyphicon-user"></span> <%= assignment.contact_name %> <%= assignment.company_name %>
                           <br>
-                          <span class="glyphicon glyphicon-earphone"></span> <%= co.phone %>
+                          <span class="glyphicon glyphicon-earphone"></span> <%= assignment.contact_phone %>
                           <br>
-                          <span class="glyphicon glyphicon-envelope"></span> <%= co.email %>
+                          <span class="glyphicon glyphicon-envelope"></span> <%= assignment.contact_email %>
                           <br>
                           <br>
                         <% end %>
 
+                        <% contacts = get_assignment_contacts(assignment.id) %>
+                        <% if contacts.count == 0 %>
 
+                        <% else %>
+                          <% contacts.each do |contact| %>
 
+                            <% unless contact.role == "reconstruction_pm" || contact.role == "project_manager" %>
+                              <b><%= contact.role.capitalize %></b>
+                            <% end %>
+
+                            <% if contact.role == "reconstruction_pm" %>
+                              <b>Reconstruction Project Manager</b>
+                            <% elsif contact.role == "project_manager" %>
+                              <b>Project Manager</b>
+                            <% end %>
+
+                            <br>
+                            <span class="glyphicon glyphicon-user"></span> <%= contact.name %> <%= contact.company_name %>
+                            <br>
+                            <span class="glyphicon glyphicon-earphone"></span> <%= contact.phone %>
+                            <br>
+                            <span class="glyphicon glyphicon-envelope"></span> <%= contact.email %>
+                            <br>
+                            <br>
+
+                          <% end %> <!-- END LOOP FOR CONTACTS -->
+                        <% end %>
                       </div>
                     </div>
                 <!-- END CONTACT INFO COLLAPSE -->
-
-                <!-- PRE-RECON INFO COLLAPSE -->
-                    <div class="col-md-3">
-                      <h5 class="mb-0">
-                        <a href="#prerecon-info" data-toggle="collapse">
-                          Pre-Recon
-                        </a>
-                      </h5>
-                      <div id="prerecon-info" class="collapse">
-                        Mitigation Status: <%= assignment.mitigation_status %>
-                        <br>
-                        Abatement Status: <%= assignment.abatement_status %>
-                        <br>
-
-                      </div>
-                    </div>
-                <!-- PRE-RECON INFO COLLAPSE -->
-
-
+              </div>
             </div>
 
           </div> <!-- END ASSIGNMENT CARD -->
@@ -310,7 +390,6 @@
 
 	</div>
 
-  <!-- NEW ASSIGNMENT_NOTE MODAL -->
-  <%= render "partials/new_assignment_note_modal" %>
+
 
 </div>

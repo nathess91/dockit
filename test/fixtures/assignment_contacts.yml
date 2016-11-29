@@ -5,11 +5,9 @@ one:
   name: MyString
   phone: MyString
   email: MyString
-  assignment: one
 
 two:
   role: 1
   name: MyString
   phone: MyString
   email: MyString
-  assignment: two

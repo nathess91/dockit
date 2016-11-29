@@ -65,7 +65,9 @@ class AssignmentsController < ApplicationController
         :abatement_status, :claim_number, :estimate_status, :target_start_date,
         :target_end_date, :actual_start_date, :actual_end_date, :is_on_xa,
         :estimator_experience, :estimate_total, :assignment_stage, :lost_sales_related,
-        :lost_other, :is_contract_signed, :year_built, :address, :assignment_id, :user_id)
+        :lost_other, :is_contract_signed, :year_built, :address, :assignment_id, :user_id,
+        :contact_role, :contact_name, :contact_phone, :contact_email, :company_category,
+        :company_name)
   end
 
 end
