@@ -64,12 +64,8 @@
                 <% end %>
                 <span style="font-size:20px;margin:10px;color:black;"><b><%= assignment.name.upcase %></b></span> #<%= assignment.job_number %>
               </h3>
-              <%= link_to "Add Note", assignment_notes_path, class: "btn btn-default btn-sm pull-right", method: :post %>
+              <%= link_to "Edit", edit_assignment_path(assignment.id), class: "btn btn-default btn-sm pull-right" %>
 
-              <%= link_to edit_assignment_path(assignment.id) do %>
-                <span class="pull-right glyphicon glyphicon-pencil btn-sm">
-                </span>
-              <% end %>
             </div>
 
             <!-- ASSIGNMENT CARD BODY -->
@@ -112,9 +108,13 @@
                   <% if assignment.original_insp_date.present? %>
                     <h5 class="mb-0"><b>Original Inspection</b>
                     </h5>
-                      <span class="glyphicon glyphicon-calendar"></span> <%= assignment.original_insp_date.strftime("%m.%d.%y") %>
+                      <a href="#original-inspection-date" data-toggle="collapse">
+                        <span class="glyphicon glyphicon-calendar"></span> <%= assignment.original_insp_date.strftime("%m.%d.%y") %>
+                      </a>
                       <br>
-                      <span class="glyphicon glyphicon-time"></span> <%= assignment.original_insp_date.strftime("%l:%M %P") %>
+                      <div id="original-inspection-date" class="collapse">
+                        <span class="glyphicon glyphicon-time"></span> <%= assignment.original_insp_date.strftime("%l:%M %P") %>
+                      </div>
                   <% else %>
                     <h5><b>Original Inspection Date:</b></h5>
 
@@ -184,9 +184,13 @@
                           <!-- RETURN INSPECTION DATE -->
                           <% if assignment.return_insp_date.present? %>
                             <h5 class="mb-0"><b>Return Inspection</b></h5>
-                            <span class="glyphicon glyphicon-calendar"></span> <%= assignment.return_insp_date.strftime("%m.%d.%y") %>
+                            <a href="#return-inspection-date" data-toggle="collapse">
+                              <span class="glyphicon glyphicon-calendar"></span> <%= assignment.return_insp_date.strftime("%m.%d.%y") %>
+                            </a>
                             <br>
-                            <span class="glyphicon glyphicon-time"></span> <%= assignment.return_insp_date.strftime("%l:%M %P") %>
+                            <div id="return-inspection-date" class="collapse">
+                              <span class="glyphicon glyphicon-time"></span> <%= assignment.return_insp_date.strftime("%l:%M %P") %>
+                            </div>
                           <% else %>
                             <h5 class="mb-0"><b>Return Inspection</b></h5>
                               <i>N/A</i>
@@ -257,7 +261,7 @@
                       <div id="contact-info" class="collapse">
                         <% contacts = get_assignment_contacts(assignment.id) %>
                         <% if contacts.count == 0 %>
-
+                          <i>No assignment contacts...</i>
                         <% else %>
                           <% contacts.each do |contact| %>
 

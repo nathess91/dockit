@@ -33,3 +33,7 @@
 .dock-it-font {
   font-family: 'Syncopate', sans-serif;
 }
+
+.uppercase {
+  text-transform: uppercase !important;
+}
