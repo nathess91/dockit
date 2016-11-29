@@ -1,4 +1,4 @@
-<img src="http://i.imgur.com/d6DCPtp.png="100">
+<img src="http://i.imgur.com/d6DCPtp.png" width="300">
 
 **DockIt** is a CRM created for the reconstruction and remodeling industry. Its primary function is to organize an estimator's assignments and any associated required tasks as they move through the full reconstruction cycle.
 
@@ -11,7 +11,7 @@ After realizing that their company's current technological applications nurtured
 
 The main dock features **4** essential organizing tools that can be used to ensure job responsibilities are taken care of in a timely manner. 
 
-<img src="http://i.imgur.com/4gZaPF1.png="400">
+<img src="http://i.imgur.com/4gZaPF1.png" width="600">
 
 
 ###To-Do List
@@ -42,11 +42,11 @@ The bulletin board was created considering the client's difficulty having import
 
 ##Assignments 
 
-<img src="http://i.imgur.com/cgMiqT8.png width="400">
+<img src="http://i.imgur.com/cgMiqT8.png" width="600">
 
 Estimators can organize current assignments with all relevant details regarding the claim, pre-reconstructon work, different contacts involved, site information, customer contact notes, etc. The assignment will move through different stages in the sales or job process depending on what events occur within the assignment. 
 
-<img src="http://i.imgur.com/C2rJQJH.png width="400">
+<img src="http://i.imgur.com/C2rJQJH.png" width="600">
 
 A new field, "Workflow Status," appears on the "Jobs in Progress" page and allow the estimator to input relevant job start and end dates. 
 
@@ -72,14 +72,14 @@ A new field, "Workflow Status," appears on the "Jobs in Progress" page and allow
 ## Wireframes
 
 #### Dock Page
-<img src="http://i.imgur.com/VW4WZPj.png width="400">
+<img src="http://i.imgur.com/VW4WZPj.png" width="400">
 
 #### Assignments Page
-<img src="http://i.imgur.com/mEQMToB.png width="400">
+<img src="http://i.imgur.com/mEQMToB.png" width="400">
 
 ## ERD
 
-<img src="http://i.imgur.com/QNpLoij.png width="400">
+<img src="http://i.imgur.com/QNpLoij.png" width="600">
 
 ##Links
 
