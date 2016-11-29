@@ -11,10 +11,8 @@ module TasksHelper
       p "Good morning,"
     elsif noon.upto(five_pm).include?(current_time)
       p  "Good afternoon,"
-    elsif five_pm.upto(eight_pm).include?(current_time)
+    elsif five_pm.upto(midnight + 1.day).include?(current_time)
       p "Good evening,"
-    elsif eight_pm.upto(midnight + 1.day).include?(current_time)
-      p "Good night,"
     end
 
   end

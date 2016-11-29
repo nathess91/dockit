@@ -1,29 +1,63 @@
 class PostsController < ApplicationController
 
   def index
-    render :json => Post.all
+    @posts = Post.all
   end
 
   def show
-    render :json => post = Post.find(params[:id])
+    @post = Post.find(params[:id])
+  end
+
+  def new
+    @post = Post.new
   end
 
   def create
-    post = User.find(params[:user_id]).posts.new(post_params)
-
-    if post.valid? && post.user_id = current_user.id
-      post.save
-      render :json => post, status: 201
+    if current_user.admin? || current_user.manager?
+      @post = current_user.posts.create(post_params)
+      if @post.valid?
+        flash[:success] = "New post created successfully"
+        redirect_to :back
+      else
+        flash[:error] = @post.errors.full_messages.join(". ")
+        redirect_to :back
+      end
     else
-      render :json => {error: "Post validation failed"}, status: 400
+      flash[:notice] = "You are not authorized to create a post"
+      redirect_to :back
     end
 
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update_attributes(post_params)
+      redirect_to :back
+    else
+      flash[:error] = @post.errors.full_messages
+      redirect_to :back
+    end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    if @post.destroy
+      flash[:success] = "Post deleted successfully"
+      redirect_to :back
+    else
+      flash[:error] = @post.errors.full_messages.join(". ")
+      redirect_to :back
+    end
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :is_read, :user_id, :post_id)
   end
 
 end

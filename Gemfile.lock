@@ -40,6 +40,7 @@ GEM
       tzinfo (~> 1.1)
     arel (7.1.4)
     bcrypt (3.1.11)
+    bootstrap-select-rails (1.6.3)
     builder (3.2.2)
     byebug (9.0.6)
     coffee-rails (4.2.1)
@@ -169,6 +170,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-select-rails
   byebug
   coffee-rails (~> 4.2)
   data-confirm-modal

@@ -1,6 +1,7 @@
 <div class="container">
 <br>
-<h1><%= greet %> <%= current_user.first_name %></h1>
+<h5 class="pull-right"><%= Time.now.strftime("%A, %B %d, %Y") %></h5>
+<h1 class="dock-it-font"><%= greet %> <%= current_user.first_name %></h1>
 <br>
 <br>
 
@@ -16,16 +17,13 @@
               <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
             <% end %>
 
+            <%= task.text %>
 
-
-
-            <%= link_to task_path(task.id), data: {confirm: "Delete: " + "'" + task.text + "'" + "?"}, method: :delete  do %>
-            <span class="pull-left btn btn-default btn-md" style="margin-right:5px; padding:8px;">
-            </span>
+            <%= link_to task_path(task.id), data: {confirm: "'" + task.text + "'" + " is complete"}, method: :delete  do %>
+              <span class="pull-left btn btn-default btn-md" style="margin-right:5px; padding:8px;">
+              </span>
             <% end %>
-
-            <%= link_to task.text, edit_task_path(task), 'data-toggle' => 'modal', 'data-target' => '#edit-task-modal' %>
-            <% end %>
+        <% end %>
           </li>
       </ul>
       <button type="button" id="view-tasks" class="btn btn-default pull-left" data-toggle="modal" data-target="#view-tasks-modal">View All Tasks</button>
@@ -33,30 +31,46 @@
       <%= link_to "New Task", new_task_path, :id => 'new-task', class: "btn btn-primary pull-right", "data-toggle" => "modal", 'data-target' => '#new-task-modal' %>
   </div>
 
-    <div style="padding-top:0px;" class="container well col-xs-12 col-md-5 pull-right">
+    <!-- ASSIGNMENT ICONS -->
+    <div style="padding-top:0px;" class="container well col-xs-12 col-md-5 pull-right" id="icons">
       <h3>Assignments</h3>
-      <div class="row">
-        <div class="col-md-1">
-
-        </div>
-        <div class="col-md-1">
-        </div>
-        <div class="col-md-1">
+      <br>
+      <div class="row" style="margin-left:2vw;">
+        <div id="assigned-icon" class="col-xs-4 col-md-4 clearfix">
+          <a href="/assignments#1"><img src="http://i.imgur.com/UC8sFM9.png" width="60em"></a>
         </div>
 
+        <div id="pending-icon" class="col-xs-4 col-md-4 clearfix">
+          <a href="/assignments#2"><img src="http://i.imgur.com/t3O1FM5.png" width="60em"></a>
+        </div>
+
+        <div id="inprogress-icon" class="col-xs-4 col-md-4 clearfix">
+          <a href="/assignments#3"><img src="http://i.imgur.com/7na1sgB.png" width="60em"></a>
+        </div>
       </div>
-      <div class="row">
-        <div class="col-md-1">!</div>
-        <div class="col-md-1">!</div>
-        <div class="col-md-1">!</div>
+      <br>
+
+      <div class="row" style="margin-left:2vw;">
+        <div id="notsold-icon" class="col-xs-4 col-md-4 clearfix">
+          <a href="/assignments#4"><img src="http://i.imgur.com/2OVnspZ.png" width="60em"></a>
+        </div>
+
+        <div id="completed-icon" class="col-xs-4 col-md-4 clearfix">
+          <a href="/assignments#5"><img src="http://i.imgur.com/ohrPQas.png" width="60em"></a>
+        </div>
+
+        <div id="closed-icon" class="col-xs-4 col-md-4 clearfix">
+          <a href="/assignments#6"><img src="http://i.imgur.com/EkNxtiy.png" width="60em"></a>
+        </div>
       </div>
 
     </div>
 
-
+<!-- RESOURCES -->
 <div class="row pull-right" style="margin-right:2px;">
     <div style="padding-top:0px; width:250px;" class="well col-xs-12 col-sm-3 pull-left">
         <h3>Resources</h3>
+        <br>
         <a href="https://apps.xactware.com/apps/xnportal/welcome.jsp">XactAnalysis</a>
         <br>
         <a href="https://secure.innovationproperty.com/secure/login.aspx">Innovation</a>
@@ -67,21 +81,37 @@
         <br>
         <a href="https://secure.na1.echosign.com/public/login">AdobeSign</a>
         <br>
+        <br>
     </div>
     <div style="padding-top:0px; width:201px; margin-left:20px; color:inherit;" class="well col-xs-12 col-sm-6 pull-right">
       <h3>Bulletin Board</h3>
-      <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="140px" style="margin:10px;">
+      <% if current_user.admin? %>
+        <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="60vw" style="margin-left:3.2vw; margin-top:1.5vh;">
+      <% else %>
+        <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="80vw" style="margin-left:2.5vw; margin-top:1.5vh;">
+      <% end %>
       <br>
       <br>
-      <span style="width:100%;" class="btn btn-primary">View Messages</span>
+      <% if current_user.admin? %>
+      <span style="">
+        <%= link_to "View Messages", posts_path, class: "btn btn-primary btn-xs text-center", 'data-toggle' => 'modal', 'data-target' => '#view-posts-modal', style: "width:100%" %>
+      </span>
+        <br>
+        <%= link_to "New Message", new_post_path, class: "btn btn-success btn-xs text-center", 'data-toggle' => 'modal', 'data-target' => '#new-post-modal', style: "width:100%", id: "admin-new-message" %>
+      <% else %>
+        <%= link_to "View Messages", posts_path, class: "btn btn-primary", 'data-toggle' => 'modal', 'data-target' => '#view-posts-modal', style: "width:100%" %>
+      <% end %>
     </div>
 </div>
 </div>
 
 <!-- NEW TASK MODAL -->
 <%= render "partials/new_task_modal" %>
-
+<!-- NEW ASSIGNMENT_NOTE MODAL -->
+<%= render "partials/new_assignment_note_modal" %>
 <!-- VIEW ALL TASKS MODAL -->
 <%= render "partials/view_tasks_modal" %>
-<!-- EDIT TASK MODAL -->
-<%= render "partials/edit_task_modal" %>
+<!-- VIEW ALL POSTS -->
+<%= render "partials/view_posts_modal" %>
+<!-- NEW POST MODAL -->
+<%= render "partials/new_post_modal" %>

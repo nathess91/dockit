@@ -1,14 +1,15 @@
 class TasksController < ApplicationController
 
   def index
-    @tasks = current_user.tasks.order(is_high_priority: :desc, created_at: :desc)
+    @tasks = current_user.tasks.order(is_high_priority: :desc)
   end
 
   def show
-    @task = current_user.tasks.find(params[:id])
+    @task = Task.find(params[:id])
   end
 
   def new
+    @user = current_user
     @task = Task.new
   end
 
@@ -18,29 +19,33 @@ class TasksController < ApplicationController
     if @task.valid?
       redirect_to '/home'
     else
-      render :new
+      redirect_to :back
     end
 
   end
 
   def edit
-    @task = current_user.tasks.find(params[:id])
+    @user = current_user
+    @task = Task.find(params[:id])
 	end
 
   def update
-    @task = current_user.tasks.find(params[:id])
+    @user = current_user
+    @task = Task.find(params[:id])
     if @task.update(task_params)
       redirect_to '/home'
     else
-      render :new
+      redirect_to :back
     end
   end
 
   def destroy
     @task = Task.find(params[:id])
     if @task.destroy
+      flash[:success] = "Task deleted successfully"
       redirect_to '/home'
     else
+      flash[:error] = @task.errors.full_messages.join(". ")
       redirect_to :back
     end
   end
@@ -48,7 +53,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:text, :is_high_priority, :date_due)
+    params.require(:task).permit(:text, :is_high_priority, :date_due, :user_id)
   end
 
 end

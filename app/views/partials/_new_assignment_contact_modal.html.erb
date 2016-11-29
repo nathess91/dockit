@@ -1,0 +1,62 @@
+<!-- NEW ASSIGNMENT CONTACT MODAL -->
+<div class="modal fade" id="new-assignment-contact-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">New Assignment Contact</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for (@assignment_contact = AssignmentContact.new), method: :post do |f| %>
+
+            <div class="row">
+              <!-- ASSIGNMENT NAME -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="assignment-name">Assignment Name</label>
+                <br>
+                <%= f.collection_select(:assignment_id, Assignment.all.order(name: :asc), :id, :name, :prompt => "---", :include_blank => true) %>
+              </div>
+
+              <!-- CONTACT TYPE -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="contact-type">Contact Type</label>
+                <br>
+                <%= f.select :role, AssignmentContact.roles.map { |key, value| [key.humanize, key] }, required: true, :prompt => "---", :include_blank => true %>
+              </div>
+
+              <!-- CONTACT NAME -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="contact-name">Name</label>
+                <br>
+                <%= f.text_field :name, class: "form-control" %>
+              </div>
+
+              <!-- CONTACT PHONE -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="contact-phone">Phone Number</label>
+                <br>
+                <%= f.text_field :phone, class: "form-control" %>
+              </div>
+
+              <!-- CONTACT EMAIL  -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="contact-email">Email</label>
+                <br>
+                <%= f.text_field :email, class: "form-control" %>
+              </div>
+
+
+
+            </div>
+
+                <br>
+            <%= f.submit "Add Contact", class: "btn btn-success btn-block"  %>
+
+          <% end %>
+
+    </div>
+  </div>
+</div>
+</div>
