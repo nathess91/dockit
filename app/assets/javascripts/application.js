@@ -33,6 +33,20 @@ $(document).on('turbolinks:load', function () {
     $(this).removeClass('animated');
   });
 
+  $("div[id^='original-inspection-date']").attr('id', function(i) {
+    return "original-inspection-date" + ++i;
+  });
+  $("a[href^='#original-inspection-date']").attr('href', function(i) {
+    return "#original-inspection-date" + ++i;
+  });
+
+  $("div[id^='return-inspection-date']").attr('id', function(i) {
+    return "return-inspection-date" + ++i;
+  });
+  $("a[href^='#return-inspection-date']").attr('href', function(i) {
+    return "#return-inspection-date" + ++i;
+  });
+
   $("div[id^='claim-info']").attr('id', function(i) {
     return "claim-info" + ++i;
   });
@@ -59,20 +73,6 @@ $(document).on('turbolinks:load', function () {
   });
   $("a[href^='#loss-details']").attr('href', function(i) {
     return "#loss-details" + ++i;
-  });
-
-  $("div[id^='mitigation-status']").attr('id', function(i) {
-    return "mitigation-status" + ++i;
-  });
-  $("a[href^='#mitigation-status']").attr('href', function(i) {
-    return "#mitigation-status" + ++i;
-  });
-
-  $("div[id^='abatement-status']").attr('id', function(i) {
-    return "abatement-status" + ++i;
-  });
-  $("a[href^='#abatement-status']").attr('href', function(i) {
-    return "#abatement-status" + ++i;
   });
 
   $("div[id^='allNotes']").attr('id', function(i) {
