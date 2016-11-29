@@ -92,6 +92,15 @@
                 <%= f.select :loss_category, Assignment.loss_categories.map { |key, value| [key.humanize, key] }, required: true, :prompt => "---", :include_blank => true  %>
               </div>
 
+
+              <!-- INSURANCE COMPANY NAME -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="company-name">Insurance Company Name</label>
+                <%= f.text_field :company_name, class: "form-control", placeholder: "Example: USAA" %>
+              </div>
+
+              <%= f.hidden_field :company_category, :value => 'insurance' %>
+
               <!-- JOB NUMBER -->
               <div style="margin-bottom: 25px" class="col-xs-12">
                 <label for="job-number">Job Number</label>
@@ -158,7 +167,7 @@
 
                   <div style="margin-bottom: 25px" class="col-xs-12">
                     <label for="contact-phone">Phone Number</label>
-                    <%= f.text_field :contact_phone, class: "form-control" %>
+                    <%= f.phone_field :contact_phone, class: "form-control" %>
                   </div>
 
                   <div style="margin-bottom: 25px" class="col-xs-12">
@@ -166,16 +175,6 @@
                     <%= f.text_field :contact_email, class: "form-control" %>
                   </div>
 
-                  <div style="margin-bottom: 25px" class="col-xs-12">
-                    <label for="company-name">Company Name</label>
-                    <%= f.text_field :company_name, class: "form-control" %>
-                  </div>
-
-                  <div style="margin-bottom: 25px" class="col-xs-12">
-                    <label for="company-category">Company Type</label>
-                    <br>
-                    <%= f.select :company_category, Assignment.company_categories.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true  %>
-                  </div>
                 </div>
               </div>
               <!-- END ASSIGNMENT CONTACT BUTTON COLLAPSE -->
