@@ -22,6 +22,15 @@
    font-size: 4em !important;
  }
 
+ #to-do-list {
+   padding-top: 0px;
+   height: 60vh;
+ }
+
+ #list-area {
+   height: 45.5vh;
+ }
+
  #navbar-brand {
    font-size: 2em !important;
  }
@@ -40,4 +49,23 @@
 
 #admin-new-message {
   margin-top: 1.9vh;
+}
+
+.folder {
+  text-align: center;
+}
+
+@media only screen and (max-width: 500px) {
+  #to-do-list {
+    height: 72vh !important;
+  }
+  #list-area {
+    height: 53vh;
+  }
+  #resources {
+
+  }
+  #bulletin {
+
+  }
 }

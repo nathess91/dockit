@@ -6,8 +6,18 @@
   margin-right: 10px !important;
 }
 
-#icons a:hover {
+// #icons a:hover {
+//   border: 1px solid black;
+//   // padding: 20px;
+//   // margin: 0;
+// }
+
+#assigned-icon, #pending-icon, #inprogress-icon, #notsold-icon, #completed-icon, #closed-icon {
+  padding: 1em;
+}
+
+#assigned-icon:hover, #pending-icon:hover,
+#inprogress-icon:hover, #notsold-icon:hover,
+#completed-icon:hover, #closed-icon:hover {
   border: 1px solid black;
-  padding: 20px;
-  margin: 0;
 }

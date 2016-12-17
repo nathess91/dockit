@@ -5,9 +5,9 @@
 <br>
 <br>
 
-  <div style="padding-top:0px;height:49.5vh" class="well col-xs-12 col-md-6 pull-left">
+  <div id="to-do-list" class="well col-xs-12 col-md-6 pull-left">
     <h3>To-Do List</h3>
-    <ul style="height:35.5vh" class="list-group">
+    <ul id="list-area" class="list-group">
       <% if @tasks.count == 0 %>
         <h5>No tasks...</h5>
       <% else %>
@@ -23,8 +23,8 @@
               <span class="pull-left btn btn-default btn-md" style="margin-right:5px; padding:8px;">
               </span>
             <% end %>
-        <% end %>
           </li>
+          <% end %>
       </ul>
       <% end %>
 
@@ -33,35 +33,53 @@
   </div>
 
     <!-- ASSIGNMENT ICONS -->
-    <div style="padding-top:0px;" class="container well col-xs-12 col-md-5 pull-right" id="icons">
+    <div style="padding-top:0px;" class="container well col-xs-12 col-md-5 pull-right">
       <h3>Assignments</h3>
       <br>
-      <div class="row" style="margin-left:2vw;">
-        <div id="assigned-icon" class="col-xs-4 col-md-4 clearfix">
-          <a href="/assignments#1"><img src="http://i.imgur.com/UC8sFM9.png" width="60em"></a>
+      <div class="row center-block clearfix">
+        <div id="assigned-icon" class="folder col-xs-4 col-md-4">
+          <a href="/assignments#1"><img src="http://i.imgur.com/UC8sFM9.png" width="60em">
+          <br>
+          <p>Current</p>
+          </a>
         </div>
 
-        <div id="pending-icon" class="col-xs-4 col-md-4 clearfix">
-          <a href="/assignments#2"><img src="http://i.imgur.com/t3O1FM5.png" width="60em"></a>
+        <div id="pending-icon" class="folder col-xs-4 col-md-4">
+          <a href="/assignments#2"><img src="http://i.imgur.com/t3O1FM5.png" width="60em">
+          <br>
+          <p>Pending</p>
+          </a>
         </div>
 
-        <div id="inprogress-icon" class="col-xs-4 col-md-4 clearfix">
-          <a href="/assignments#3"><img src="http://i.imgur.com/7na1sgB.png" width="60em"></a>
+        <div id="inprogress-icon" class="folder col-xs-4 col-md-4">
+          <a href="/assignments#3"><img src="http://i.imgur.com/7na1sgB.png" width="60em">
+          <br>
+          <p>Jobs In Progress</p>
+          </a>
         </div>
       </div>
-      <br>
 
-      <div class="row" style="margin-left:2vw;">
-        <div id="notsold-icon" class="col-xs-4 col-md-4 clearfix">
-          <a href="/assignments#4"><img src="http://i.imgur.com/2OVnspZ.png" width="60em"></a>
+
+      <div class="row center-block clearfix">
+        <div id="notsold-icon" class="folder col-xs-4 col-md-4">
+          <a href="/assignments#4"><img src="http://i.imgur.com/2OVnspZ.png" width="60em">
+          <br>
+          <p>Not Sold</p>
+          </a>
         </div>
 
-        <div id="completed-icon" class="col-xs-4 col-md-4 clearfix">
-          <a href="/assignments#5"><img src="http://i.imgur.com/ohrPQas.png" width="60em"></a>
+        <div id="completed-icon" class="folder col-xs-4 col-md-4">
+          <a href="/assignments#5"><img src="http://i.imgur.com/ohrPQas.png" width="60em">
+          <br>
+          <p>Completed Jobs</p>
+          </a>
         </div>
 
-        <div id="closed-icon" class="col-xs-4 col-md-4 clearfix">
-          <a href="/assignments#6"><img src="http://i.imgur.com/EkNxtiy.png" width="60em"></a>
+        <div id="closed-icon" class="folder col-xs-4 col-md-4">
+          <a href="/assignments#6"><img src="http://i.imgur.com/EkNxtiy.png" width="60em">
+          <br>
+          <p>Closed Jobs</p>
+          </a>
         </div>
       </div>
 
@@ -69,7 +87,7 @@
 
 <!-- RESOURCES -->
 <div class="row pull-right" style="margin-right:2px;">
-    <div style="padding-top:0px; width:250px;" class="well col-xs-12 col-sm-3 pull-left">
+    <div id="resources" style="padding-top:0px; width:250px;" class="well col-xs-12 pull-left">
         <h3>Resources</h3>
         <br>
         <a href="https://apps.xactware.com/apps/xnportal/welcome.jsp">XactAnalysis</a>
@@ -84,7 +102,7 @@
         <br>
         <br>
     </div>
-    <div style="padding-top:0px; width:201px; margin-left:20px; color:inherit;" class="well col-xs-12 col-sm-6 pull-right">
+    <div id="bulletin" style="padding-top:0px; width:201px; margin-left:20px; color:inherit;" class="well col-xs-12 col-sm-6 pull-right">
       <h3>Bulletin Board</h3>
       <% if current_user.admin? %>
         <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="60vw" style="margin-left:3.2vw; margin-top:1.5vh;">
@@ -103,7 +121,7 @@
         <%= link_to "View Messages", posts_path, class: "btn btn-primary", 'data-toggle' => 'modal', 'data-target' => '#view-posts-modal', style: "width:100%" %>
       <% end %>
     </div>
-</div>
+  </div>
 </div>
 
 <!-- NEW TASK MODAL -->
