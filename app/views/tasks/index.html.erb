@@ -5,9 +5,9 @@
 <br>
 <br>
 
-  <div style="padding-top:0px;" class="well col-xs-12 col-md-6 pull-left">
+  <div style="padding-top:0px;height:49.5vh" class="well col-xs-12 col-md-6 pull-left">
     <h3>To-Do List</h3>
-    <ul class="list-group">
+    <ul style="height:35.5vh" class="list-group">
       <% if @tasks.count == 0 %>
         <h5>No tasks...</h5>
       <% else %>
@@ -26,8 +26,9 @@
         <% end %>
           </li>
       </ul>
-      <button type="button" id="view-tasks" class="btn btn-default pull-left" data-toggle="modal" data-target="#view-tasks-modal">View All Tasks</button>
       <% end %>
+
+      <button type="button" id="view-tasks" class="btn btn-default pull-left" data-toggle="modal" data-target="#view-tasks-modal">View All Tasks</button>
       <%= link_to "New Task", new_task_path, :id => 'new-task', class: "btn btn-primary pull-right", "data-toggle" => "modal", 'data-target' => '#new-task-modal' %>
   </div>
 
