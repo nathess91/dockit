@@ -19,20 +19,6 @@
 
 $(document).on('turbolinks:load', function () {
 
-
-  $('#paper-plane').mouseover(function(){
-    $(this).stop().effect('shake', {distance:3}, 200);
-  });
-
-  $('#paper-plane').hover(function(){
-    if(!$(this).hasClass('animated')){
-        $(this).addClass('animated');
-        $(this).stop().effect('shake', {distance:3}, 200);
-    }
-  }, function(){
-    $(this).removeClass('animated');
-  });
-
   $("div[id^='original-inspection-date']").attr('id', function(i) {
     return "original-inspection-date" + ++i;
   });
