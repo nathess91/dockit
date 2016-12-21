@@ -1,0 +1,39 @@
+<!-- QUICK ADD ASSIGMENT_NOTE -->
+<div class="modal fade" id="new-assignment-note-modal-<%= assignment.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">New Assignment Note</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for(AssignmentNote.new) do |f| %>
+            <%= f.hidden_field :assignment_id, value: assignment.id %>
+            <div class="row">
+              <div class="container small-container col-xs-12">
+                <div class="alert alert-warning">
+                  <p><b>NOTICE:</b> All assignment notes are permanent and cannot be deleted</p>
+                </div>
+              </div>
+
+              <!-- ASSIGNMENT_NOTE TEXT -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="note-text">Note</label>
+                <%= f.text_area :text, class: "form-control", placeholder: "Write something here...", style: "resize:none;" %>
+              </div>
+
+
+
+            </div>
+
+                <br>
+            <%= f.submit "Create Note", class: "btn btn-success btn-block"  %>
+
+          <% end %>
+
+    </div>
+  </div>
+</div>
+</div>

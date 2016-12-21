@@ -55,6 +55,17 @@
   text-align: center;
 }
 
+.new-assignment-note-pencil {
+  padding: 0 !important;
+  padding-right: 0.5em !important;
+  border: none !important;
+}
+
+.new-assignment-note-pencil:hover {
+  background: none !important;
+  color: #337ab7 !important;
+}
+
 @media only screen and (max-width: 500px) {
   #to-do-list {
     height: 72vh !important;
