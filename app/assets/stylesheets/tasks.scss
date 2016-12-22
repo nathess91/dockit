@@ -6,12 +6,6 @@
   margin-right: 10px !important;
 }
 
-// #icons a:hover {
-//   border: 1px solid black;
-//   // padding: 20px;
-//   // margin: 0;
-// }
-
 #assigned-icon, #pending-icon, #inprogress-icon, #notsold-icon, #completed-icon, #closed-icon {
   padding: 1em;
 }
@@ -20,4 +14,21 @@
 #inprogress-icon:hover, #notsold-icon:hover,
 #completed-icon:hover, #closed-icon:hover {
   border: 1px solid black;
+}
+
+#to-do-list {
+  padding-top: 0px;
+  height: 39em;
+}
+
+#list-area {
+  height: 28.3em;
+}
+
+#admin-new-message {
+  margin-top: 1.9vh;
+}
+
+.folder {
+  text-align: center;
 }

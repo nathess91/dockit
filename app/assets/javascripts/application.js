@@ -88,6 +88,18 @@ $(document).on('turbolinks:load', function () {
   cancel: 'Cancel'
   });
 
+  $(".question").mouseenter(function() {
+    $(this).css("cursor", "pointer");
+  });
+
+  $(".question").mouseleave(function() {
+    $(this).css("cursor", "normal");
+  });
+
+  $(".question").click(function() {
+    $("#question-notice").show();
+  });
+
 });
 
 
@@ -121,4 +133,18 @@ $(document).on('turbolinks:load', function() {
       }
     });
   }
+});
+
+$(document).on('turbolinks:ready', function() {
+  $(".question").mouseenter(function() {
+    $(this).css("cursor", "pointer");
+  });
+
+  $(".question").mouseleave(function() {
+    $(this).css("cursor", "normal");
+  });
+
+  $(".question").click(function() {
+    $("#question-notice").show();
+  });
 });

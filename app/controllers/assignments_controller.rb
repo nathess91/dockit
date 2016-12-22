@@ -38,10 +38,11 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
 
     if params[:assignment][:assignment_stage] == "closed"
-      render :partial => "partials/checklist"
+      flash[:error] = "Sorry. You need to mark all the necessary items as completed before you can mark this as closed."
+    # if params[:assignment][:assignment_stage] == "closed" &&
     elsif @assignment.update_attributes(assignment_params) && params[:assignment][:assignment_stage] != "closed"
       flash[:success] = "Assignment updated successfully"
-      
+
       # redirect to appropriate tab based on stage
       if params[:assignment][:assignment_stage] == "assigned"
         redirect_to "/assignments#1"

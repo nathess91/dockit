@@ -22,15 +22,6 @@
    font-size: 4em !important;
  }
 
- #to-do-list {
-   padding-top: 0px;
-   height: 60vh;
- }
-
- #list-area {
-   height: 45.5vh;
- }
-
  #navbar-brand {
    font-size: 2em !important;
  }
@@ -47,13 +38,6 @@
   text-transform: uppercase !important;
 }
 
-#admin-new-message {
-  margin-top: 1.9vh;
-}
-
-.folder {
-  text-align: center;
-}
 
 .new-assignment-note-pencil {
   padding: 0 !important;

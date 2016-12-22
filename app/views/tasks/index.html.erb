@@ -1,17 +1,32 @@
 <div class="container">
 <br>
 <h5 class="pull-right"><%= Time.now.strftime("%A, %B %d, %Y") %></h5>
+<br>
 <h1 class="dock-it-font"><%= greet %> <%= current_user.first_name %></h1>
 <br>
 <br>
-
-  <div id="to-do-list" class="well col-xs-12 col-md-6 pull-left">
+<div class="col-xs-12 col-md-6 pull-left">
+<div id="question-notice" style="display:none" class="alert alert-info">
+  <a href="#" class="close" aria-label="close">&times;</a>
+  <b>NOTICE: </b>This task was created automatically. It will no longer appear on this list once the required information has been filled in.
+</div>
+  <div id="to-do-list" class="well">
     <h3>To-Do List</h3>
+    <br>
     <ul id="list-area" class="list-group">
+      <% if current_user %>
+        <% current_user.assignments.where(original_insp_date: nil).each do |assignment| %>
+          <li class="task list-group-item">
+            <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
+            Set <%= assignment.name %> appointment
+            <span class="glyphicon glyphicon-question-sign pull-right question"></span>
+        <% end %>
+      <% end %>
+
       <% if @tasks.count == 0 %>
-        <h5>No tasks...</h5>
+        <h5>No user tasks...</h5>
       <% else %>
-        <% @tasks.take(8).each do |task| %>
+        <% @tasks.take(7).each do |task| %>
           <li class="task list-group-item">
             <% unless !task.is_high_priority == true %>
               <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
@@ -31,7 +46,7 @@
       <button type="button" id="view-tasks" class="btn btn-default pull-left" data-toggle="modal" data-target="#view-tasks-modal">View All Tasks</button>
       <%= link_to "New Task", new_task_path, :id => 'new-task', class: "btn btn-primary pull-right", "data-toggle" => "modal", 'data-target' => '#new-task-modal' %>
   </div>
-
+</div>
     <!-- ASSIGNMENT ICONS -->
     <div style="padding-top:0px;" class="container well col-xs-12 col-md-5 pull-right">
       <h3>Assignments</h3>
