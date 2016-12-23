@@ -52,7 +52,8 @@
 
 @media only screen and (max-width: 500px) {
   #to-do-list {
-    height: 72vh !important;
+    height: 75.5vh !important;
+    width: 100%;
   }
   #list-area {
     height: 53vh;

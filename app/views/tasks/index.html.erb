@@ -1,11 +1,17 @@
 <div class="container">
+
+
+  <label class="custom-file-upload">
+    <input id="test" type="file" onchange="loadImageFile(this)" />
+    Change Background
+    </label>
 <br>
 <h5 class="pull-right"><%= Time.now.strftime("%A, %B %d, %Y") %></h5>
 <br>
 <h1 class="dock-it-font"><%= greet %> <%= current_user.first_name %></h1>
 <br>
 <br>
-<div class="col-xs-12 col-md-6 pull-left">
+<div class="col-xs-12 col-sm-12 col-md-6 pull-left">
 <div id="question-notice" style="display:none" class="alert alert-info">
   <a href="#" class="close" aria-label="close">&times;</a>
   <b>NOTICE: </b>This task was created automatically. It will no longer appear on this list once the required information has been filled in.
@@ -122,9 +128,9 @@
       <% if current_user.admin? %>
         <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="60vw" style="margin-left:3.2vw; margin-top:1.5vh;">
       <% else %>
-        <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="80vw" style="margin-left:2.5vw; margin-top:1.5vh;">
+        <img id="paper-plane" class="center-block" src="http://i.imgur.com/yIf8tzQ.png" width="80vw" style="margin-top:2.3vh">
       <% end %>
-      <br>
+
       <br>
       <% if current_user.admin? %>
       <span style="">
@@ -138,6 +144,29 @@
     </div>
   </div>
 </div>
+
+<script>
+$(switchBackground);
+   var oFReader = new FileReader(),
+       rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+
+   oFReader.onload = function(oFREvent) {
+       localStorage.setItem('b', oFREvent.target.result);
+       switchBackground();
+   };
+
+   function switchBackground() {
+     $('body').css('background-image', "url(" + localStorage.getItem('b') + ')');
+     $('body').css('background-size', "cover");
+   }
+
+   function loadImageFile(testEl) {
+     if (! testEl.files.length) { return; }
+     var oFile = testEl.files[0];
+     if (!rFilter.test(oFile.type)) { alert("You must select a valid image file!"); return; }
+     oFReader.readAsDataURL(oFile);
+   }
+</script>
 
 <!-- NEW TASK MODAL -->
 <%= render "partials/new_task_modal" %>
