@@ -30,6 +30,16 @@
                 <%= f.select :loss_category, Assignment.loss_categories.map { |key, value| [key.humanize, key] }, required: true, :prompt => "---", :include_blank => true %>
               </div>
 
+              <!-- IS ON XA? -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="is-on-xa">Is this assignment on XactAnalysis?</label>
+                <br>
+                <%= f.radio_button :is_on_xa, true, :value => true%>
+                <%= f.label :is_on_xa, "Yes", value: true %>
+                <%= f.radio_button :is_on_xa, false, :value => false, style: "margin-left:10px;" %>
+                <%= f.label :is_on_xa, "No", value: false %>
+              </div>
+
               <!-- HIDDEN FIELDS -->
               <%= f.hidden_field :assignment_stage, :value => 'assigned' %>
               <!-- <%= f.hidden_field :job_number, :value => 'Add job number' %>
@@ -38,7 +48,6 @@
               <%= f.hidden_field :abatement_status, :value => 'Add abatement status' %>
               <%= f.hidden_field :claim_number, :value => 'Add claim number' %>
               <%= f.hidden_field :estimate_status, :value => 'Add estimate status' %>
-              <%= f.hidden_field :is_on_xa, :value => false %>
               <%= f.hidden_field :estimate_total, :value => 0 %>
               <%= f.hidden_field :actual_start_date, :value => 'Add date' %>
               <%= f.hidden_field :is_contract_signed, :value => false %>
@@ -92,6 +101,15 @@
                 <%= f.select :loss_category, Assignment.loss_categories.map { |key, value| [key.humanize, key] }, required: true, :prompt => "---", :include_blank => true  %>
               </div>
 
+              <!-- IS ON XA? -->
+              <div style="margin-bottom: 25px" class="col-xs-12">
+                <label for="is-on-xa">Is this assignment on XactAnalysis?</label>
+                <br>
+                <%= f.radio_button :is_on_xa, true, :value => true%>
+                <%= f.label :is_on_xa, "Yes", value: true %>
+                <%= f.radio_button :is_on_xa, false, :value => false, style: "margin-left:10px;" %>
+                <%= f.label :is_on_xa, "No", value: false %>
+              </div>
 
               <!-- INSURANCE COMPANY NAME -->
               <div style="margin-bottom: 25px" class="col-xs-12">
