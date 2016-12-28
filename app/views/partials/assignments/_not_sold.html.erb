@@ -64,7 +64,7 @@
               <% end %>
           </div>
           <!-- MAIN INFO -->
-          <div class="col-md-3">
+          <div class="col-md-2">
             <!-- DATE ASSIGNED -->
               <p><b>Date Assigned:</b>
               <% if assignment.date_assigned.present? %>
@@ -95,7 +95,7 @@
 
 
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <!-- PRIMARY CONTACT -->
               <% if assignment.contact_role.present? %>
                   <b><%= assignment.contact_role.capitalize %></b>
@@ -229,7 +229,7 @@
             <!-- END CLAIM INFO COLLAPSE -->
 
             <!-- CONTACT INFO COLLAPSE -->
-            <div class="col-md-3">
+            <div class="col-md-2">
                   <p class="mb-0">
                     <a href="#contact-info" data-toggle="collapse">
                       <b>Contacts</b>
@@ -272,7 +272,7 @@
             <!-- END CONTACT INFO COLLAPSE -->
 
             <!-- WORKFLOW STATUS COLLAPSE -->
-            <div class="col-md-3">
+            <div class="col-md-2">
                   <p class="mb-0">
                     <a href="#workflow-status" data-toggle="collapse">
                       <b>Workflow Status</b>
@@ -312,7 +312,7 @@
             <!-- END WORKFLOW STATUS COLLAPSE -->
 
             <!-- NOT SOLD COLLAPSE -->
-            <div class="col-md-3">
+            <div class="col-md-2">
                   <p class="mb-0">
                     <a href="#not-sold" data-toggle="collapse">
                       <b>Not Sold</b>
