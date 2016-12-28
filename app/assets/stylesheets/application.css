@@ -50,6 +50,12 @@
   color: #337ab7 !important;
 }
 
+.XA {
+  width: 1.5em;
+  padding-top: 0.5em;
+  margin-left: 0.9em;
+}
+
 @media only screen and (max-width: 500px) {
   #to-do-list {
     height: 75.5vh !important;

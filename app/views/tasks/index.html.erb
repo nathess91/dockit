@@ -24,8 +24,16 @@
         <% current_user.assignments.where(original_insp_date: nil).each do |assignment| %>
           <li class="task list-group-item">
             <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
-            Set <%= assignment.name %> appointment
+            Set <b><%= assignment.name %></b> appointment
             <span class="glyphicon glyphicon-question-sign pull-right question"></span>
+          </li>
+        <% end %>
+        <% current_user.assignments.where(original_insp_date: Date.today.beginning_of_day..Date.today.end_of_day).each do |assignment| %>
+        <li class="task list-group-item">
+          <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
+          Upload <b><%= assignment.name %></b> estimate
+          <span class="glyphicon glyphicon-question-sign pull-right question"></span>
+        </li>
         <% end %>
       <% end %>
 

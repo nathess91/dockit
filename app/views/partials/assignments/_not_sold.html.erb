@@ -29,6 +29,12 @@
             <% end %>
             <span style="font-size:20px;margin:10px;color:black;"><b><%= assignment.name.upcase %></b></span> #<%= assignment.job_number %>
           </h3>
+
+          <% unless assignment.is_on_xa == false %>
+          <space><img src="http://i.imgur.com/DUnmUy4.png" class="XA">
+          <% end %>
+
+
           <%= link_to "Edit", edit_assignment_path(assignment.id), class: "btn btn-default btn-sm pull-right" %>
 
         </div>
@@ -229,7 +235,7 @@
             <!-- END CLAIM INFO COLLAPSE -->
 
             <!-- CONTACT INFO COLLAPSE -->
-            <div class="col-md-2">
+            <div class="col-md-3">
                   <p class="mb-0">
                     <a href="#contact-info" data-toggle="collapse">
                       <b>Contacts</b>
@@ -271,48 +277,8 @@
                 </div>
             <!-- END CONTACT INFO COLLAPSE -->
 
-            <!-- WORKFLOW STATUS COLLAPSE -->
-            <div class="col-md-2">
-                  <p class="mb-0">
-                    <a href="#workflow-status" data-toggle="collapse">
-                      <b>Workflow Status</b>
-                    </a>
-                  </p>
-                  <div id="workflow-status" class="collapse">
-                    <!-- TARGET START DATE -->
-                    <% if assignment.target_start_date.present? %>
-                    <p><b>Target Start Date</b>
-                      <%= assignment.target_start_date.strftime("%m.%d.%y") %>
-                    <% end %>
-                    </p>
-                    <!-- TARGET END DATE -->
-                    <% if assignment.target_end_date.present? %>
-                    <p><b>Target End Date</b>
-                      <%= assignment.date_assigned.strftime("%m.%d.%y") %>
-                    <% end %>
-                    </p>
-
-                    <!-- ACTUAL START DATE -->
-                    <% if assignment.actual_start_date.present? %>
-                    <p><b>Actual Start Date</b>
-                      <%= assignment.actual_start_date.strftime("%m.%d.%y") %>
-                    <% end %>
-                    </p>
-
-                    <!-- ACTUAL END DATE -->
-                    <% if assignment.actual_end_date.present? %>
-                    <p><b>Actual End Date</b>
-                      <%= assignment.actual_end_date.strftime("%m.%d.%y") %>
-                    <% end %>
-                    </p>
-
-
-                  </div>
-                </div>
-            <!-- END WORKFLOW STATUS COLLAPSE -->
-
             <!-- NOT SOLD COLLAPSE -->
-            <div class="col-md-2">
+            <div class="col-md-3">
                   <p class="mb-0">
                     <a href="#not-sold" data-toggle="collapse">
                       <b>Not Sold</b>
