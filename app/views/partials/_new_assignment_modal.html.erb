@@ -255,8 +255,8 @@
                 <!-- ASSIGNMENT CONTACT BUTTON COLLAPSE -->
                 <div class="row">
                   <div class="col-xs-12">
-                    <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseContact1" aria-expanded="false" aria-controls="collapseContact1">
-                      Add Primary Contact
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseContact1" aria-expanded="false" aria-controls="collapseContact1">
+                      <i class="fa fa-user-plus" aria-hidden="true"></i> Add Primary Contact
                     </button>
                     <br>
                     <br>
@@ -272,7 +272,7 @@
                     </div>
 
                     <div style="margin-bottom: 25px" class="col-xs-12">
-                      <label for="contact-role">Contact Title *</label>
+                      <label for="contact-role">Contact Title</label>
                       <br>
                       <%= f.select :contact_role, Assignment.contact_roles.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true, required: true  %>
                     </div>
