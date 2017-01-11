@@ -70,4 +70,13 @@
   #bulletin {
 
   }
+  .navbar-toggle {
+    float: none !important;
+    margin-left: 15px !important;
+  }
+
+  .navbar-brand {
+    float: none !important;
+    line-height: 0 !important;
+  }
 }
