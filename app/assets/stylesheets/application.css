@@ -64,11 +64,8 @@
   #list-area {
     height: 53vh;
   }
-  #resources {
-
-  }
   #bulletin {
-
+    width: 100%;
   }
   .navbar-toggle {
     float: none !important;
