@@ -56,6 +56,16 @@
   margin-left: 0.9em;
 }
 
+/*.btn-primary {
+  background-color: #b5985a !important;
+  border-color: #b5985a !important;
+}
+
+.btn-primary:hover {
+  background-color: #a48a51 !important;
+  border-color: #a48a51 !important;
+}*/
+
 @media only screen and (max-width: 500px) {
   #to-do-list {
     /*height: 75.5vh !important;*/
