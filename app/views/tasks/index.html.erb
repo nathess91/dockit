@@ -5,8 +5,9 @@
     Change Background
   </label>
 <br>
+<br>
   <h1 class="dock-it-font"><%= greet %> <%= current_user.first_name %></h1>
-
+<br>
 <br>
 <div class="">
 <!-- TO DO LIST -->
@@ -16,7 +17,7 @@
     <b>NOTICE: </b>This task was created automatically. It will no longer appear on this list once the required information has been filled in.
   </div>
     <div id="to-do-list" class="well">
-      <h3>To-Do List</h3>
+      <h3 class="text-center">To-Do List</h3>
       <br>
       <ul id="list-area" class="list-group">
         <% if current_user %>
@@ -70,7 +71,7 @@
     <!-- ASSIGNMENT ICONS -->
     <div class="row">
       <div style="padding-top:0px;" class="well">
-        <h3>Assignments</h3>
+        <h3 class="text-center">Assignments</h3>
         <br>
         <div class="row clearfix center-block">
           <div id="assigned-icon" class="folder col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -126,7 +127,7 @@
 <!-- RESOURCES -->
 <div class="row">
     <div id="resources" style="padding-top:0px;" class="well col-xs-12 col-sm-12 col-md-6 col-lg-6 pull-left">
-        <h3>Resources</h3>
+        <h3 class="text-center">Resources</h3>
         <br>
         <a href="https://apps.xactware.com/apps/xnportal/welcome.jsp">XactAnalysis</a>
         <br>
@@ -144,7 +145,7 @@
 
     <!-- BULLETIN -->
     <div id="bulletin" style="padding-top:0px;color:inherit;" class="well col-xs-12 col-sm-12 col-md-5 col-lg-5 pull-right">
-      <h3>Bulletin Board</h3>
+      <h3 class="text-center">Bulletin Board</h3>
       <% if current_user.admin? %>
         <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="60vw" style="margin-left:3.2vw; margin-top:1.5vh;">
       <% else %>

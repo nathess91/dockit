@@ -58,11 +58,11 @@
 
 @media only screen and (max-width: 500px) {
   #to-do-list {
-    height: 75.5vh !important;
-    width: 100%;
+    /*height: 75.5vh !important;*/
+    height: 80vh !important;
   }
   #list-area {
-    height: 53vh;
+    height: 58vh;
   }
   #bulletin {
     width: 100%;
