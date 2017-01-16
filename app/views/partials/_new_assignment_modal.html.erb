@@ -10,34 +10,42 @@
       <div class="modal-body">
         <%= form_for (@assignment = Assignment.new), method: :post do |f| %>
 
-            <div class="row">
               <!-- ASSIGNMENT NAME -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="assignment-name">Assignment Name</label>
-                <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "Example: Lawson", required: true %>
+              <div class="row">
+                <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-6">
+                  <label for="assignment-name">Assignment Name *</label>
+                  <%= f.text_field :name, autofocus: true, class: "form-control", required: true %>
+                  <i>Example: Lawson</i>
+                </div>
               </div>
 
               <!-- DATE ASSIGNED -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="date-assigned">Date Assigned</label>
-                <%= f.date_field :date_assigned, class: "form-control", required: true %>
+              <div class="row">
+                <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-4">
+                  <label for="date-assigned">Date Assigned *</label>
+                  <%= f.date_field :date_assigned, class: "form-control", required: true %>
+                </div>
               </div>
 
               <!-- LOSS CATEGORY -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="loss-category">Loss Type</label>
-                <br>
-                <%= f.select :loss_category, Assignment.loss_categories.map { |key, value| [key.humanize, key] }, required: true, :prompt => "---", :include_blank => true %>
+              <div class="row">
+                <div style="margin-bottom: 25px" class="col-xs-12">
+                  <label for="loss-category">Loss Type *</label>
+                  <br>
+                  <%= f.select :loss_category, Assignment.loss_categories.map { |key, value| [key.humanize, key] }, required: true, :prompt => "---", :include_blank => true %>
+                </div>
               </div>
 
               <!-- IS ON XA? -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="is-on-xa">Is this assignment on XactAnalysis?</label>
-                <br>
-                <%= f.radio_button :is_on_xa, true, :value => true%>
-                <%= f.label :is_on_xa, "Yes", value: true %>
-                <%= f.radio_button :is_on_xa, false, :value => false, style: "margin-left:10px;" %>
-                <%= f.label :is_on_xa, "No", value: false %>
+              <div class="row">
+                <div style="margin-bottom: 25px" class="col-xs-12">
+                  <label for="is-on-xa">On XactAnalysis?</label>
+                  <br>
+                  <%= f.radio_button :is_on_xa, true, :value => true%>
+                  <%= f.label :is_on_xa, "Yes", value: true %>
+                  <%= f.radio_button :is_on_xa, false, :value => false, style: "margin-left:10px;" %>
+                  <%= f.label :is_on_xa, "No", value: false %>
+                </div>
               </div>
 
               <!-- HIDDEN FIELDS -->
@@ -54,10 +62,7 @@
               <%= f.hidden_field :address, :value => 'Add address' %>
               <%= f.hidden_field :year_built, :value => 0000 %> -->
 
-
-            </div>
-
-                <br>
+            
             <%= f.submit "Create New Assignment", class: "btn btn-success btn-block"  %>
 
           <% end %>
