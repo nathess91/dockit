@@ -19,29 +19,29 @@
                 <%= f.collection_select(:assignment_id, Assignment.all.order(name: :asc), :id, :name, :prompt => "---", :include_blank => true) %>
               </div>
 
+              <!-- CONTACT NAME -->
+              <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-6">
+                <label for="contact-name">Name *</label>
+                <br>
+                <%= f.text_field :name, class: "form-control", required: true %>
+              </div>
+
               <!-- CONTACT TYPE -->
               <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="contact-type">Contact Type</label>
+                <label for="contact-type">Contact Type *</label>
                 <br>
                 <%= f.select :role, AssignmentContact.roles.map { |key, value| [key.humanize, key] }, required: true, :prompt => "---", :include_blank => true %>
               </div>
 
-              <!-- CONTACT NAME -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="contact-name">Name</label>
-                <br>
-                <%= f.text_field :name, class: "form-control" %>
-              </div>
-
               <!-- CONTACT PHONE -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
+              <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-4">
                 <label for="contact-phone">Phone Number</label>
                 <br>
-                <%= f.text_field :phone, class: "form-control" %>
+                <%= f.text_field :phone, class: "form-control", placeholder: "(___) ___-____" %>
               </div>
 
               <!-- CONTACT EMAIL  -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
+              <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-6">
                 <label for="contact-email">Email</label>
                 <br>
                 <%= f.text_field :email, class: "form-control" %>
