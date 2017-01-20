@@ -10,19 +10,30 @@
       <div class="modal-body">
         <%= form_for (@task = Task.new), method: :post do |f| %>
 
-              <label for="text">Task</label>
-              <%= f.text_area :text, class: "form-control", placeholder: "Write something here...", style: "resize:none;", autofocus: true %>
-              <br>
-              <label for="is-high-priority">Priority</label>
-                <br>
-                <%= f.radio_button :is_high_priority, true, :value => true%>
-                <%= f.label :is_high_priority, "High", value: true %>
-                <%= f.radio_button :is_high_priority, false, :value => false, style: "margin-left:10px;" %>
-                <%= f.label :is_high_priority, "Low", value: false %>
-                <br>
-                <br>
-              <label for="date-due">Date Due</label>
-                <%= f.date_field :date_due, class: "form-control" %>
+            <div class="row">
+              <div style="margin-bottom: 25px" class="col-xs-12 col-sm-12 col-lg-12">
+                <label for="text">Task</label>
+                <%= f.text_area :text, class: "form-control", placeholder: "Write something here...", style: "resize:none;", autofocus: true %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div style="margin-bottom: 25px" class="col-xs-12 col-sm-12 col-lg-12">
+                <label for="is-high-priority">Priority</label>
+                  <br>
+                  <%= f.radio_button :is_high_priority, true, :value => true%>
+                  <%= f.label :is_high_priority, "High", value: true %>
+                  <%= f.radio_button :is_high_priority, false, :value => false, style: "margin-left:10px;" %>
+                  <%= f.label :is_high_priority, "Low", value: false %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div style="margin-bottom: 25px" class="col-xs-6 col-sm-6 col-lg-4">
+                <label for="date-due">Date Due</label>
+                <%= f.date_field :date_due, class: "form-control col-lg-4" %>
+              </div>
+            </div>
 
                 <br>
             <%= f.submit "Create New Task", class: "btn btn-success btn-block"  %>
