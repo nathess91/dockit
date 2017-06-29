@@ -6,186 +6,279 @@
     </span>
   <% end %>
   <br>
-        <%= form_for @assignment do |f| %>
+    <%= form_for @assignment do |f| %>
 
+
+      <!-- MAIN -->
+      <div class="row">
+
+        <h3 class="section-header">Main Information</h3><br>
+
+          <!-- ASSIGNMENT NAME -->
+          <div class="row">
+            <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-3">
+              <label for="assignment-name">Assignment Name</label>
+              <%= f.text_field :name, class: "form-control" %>
+            </div>
+          </div>
+
+          <!-- LOSS CATEGORY -->
+          <div class="row">
+            <div style="margin-bottom: 25px" class="col-xs-6 col-lg-3">
+              <label for="loss-category">Loss Type</label>
+              <br>
+              <%= f.select :loss_category, Assignment.loss_categories.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true %>
+            </div>
+          </div>
+
+          <!-- IS ON XA? -->
+          <div class="row">
+            <div style="margin-bottom: 25px" class="col-xs-12">
+              <label for="is-on-xa">On XactAnalysis?</label>
+              <br>
+              <%= f.radio_button :is_on_xa, true, :value => true%>
+              <%= f.label :is_on_xa, "Yes", value: true %>
+              <%= f.radio_button :is_on_xa, false, :value => false, style: "margin-left:10px;" %>
+              <%= f.label :is_on_xa, "No", value: false %>
+            </div>
+          </div>
+
+            <!-- ASSIGNMENT STAGE -->
             <div class="row">
-              <!-- ASSIGNMENT NAME -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="assignment-name">Assignment Name</label>
-                <%= f.text_field :name, class: "form-control input-lg", placeholder: "Example: Lawson" %>
-              </div>
-
-              <!-- ASSIGNMENT STAGE -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
+              <div style="margin-bottom: 25px" class="col-xs-6 col-lg-3">
                 <label for="loss-category">Assignment Stage</label>
                 <br>
                 <%= f.select :assignment_stage, Assignment.assignment_stages.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true %>
               </div>
+            </div>
 
-              <!-- DATE ASSIGNED -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
+            <!-- JOB NUMBER -->
+            <div class="row">
+              <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-3">
+                <label for="job-number">Job Number</label>
+                <%= f.text_field :job_number, class: "form-control" %>
+              </div>
+            </div>
+
+            <!-- DATE ASSIGNED -->
+            <div class="row">
+              <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-2">
                 <label for="date-assigned">Date Assigned</label>
                 <%= f.date_field :date_assigned, class: "form-control" %>
               </div>
+            </div>
 
-              <!-- ORIGINAL INSPECTION DATE -->
+            <!-- ORIGINAL INSPECTION DATE -->
+            <div class="row">
               <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="original-insp-date">Original Inspection Date</label>
+                <label for="original-insp-date">Original Inspection Date - Time</label>
                 <br>
                 <%= f.datetime_select :original_insp_date, class: "form-control", order: [:month, :day, :year], :include_blank => true %>
               </div>
+            </div>
 
-              <!-- RETURN INSPECTION DATE -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="return-insp-date">Return Inspection Date</label>
-                <br>
-                <%= f.datetime_select :return_insp_date, class: "form-control", order: [:month, :day, :year], :include_blank => true %>
-              </div>
-
-              <!-- LOSS CATEGORY -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="loss-category">Loss Type</label>
-                <br>
-                <%= f.select :loss_category, Assignment.loss_categories.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true %>
-              </div>
-
-              <!-- JOB NUMBER -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="job-number">Job Number</label>
-                <%= f.text_field :job_number, class: "form-control", placeholder: "Example: EBCA-101-4-16-R" %>
-              </div>
-
-              <!-- LOSS DESCRIPTION -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
+            <!-- LOSS DESCRIPTION -->
+            <div class="row">
+              <div style="margin-bottom: 25px" class="col-xs-8">
                 <label for="loss-description">Loss Description</label>
                 <%= f.text_area :loss_description, class: "form-control", placeholder: "Example: Supply line behind toilet leaked due to wear and tear", style: "resize:none;" %>
               </div>
-
-              <!-- MITIGATION STATUS -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="mitigation-status">Mitigation Status</label>
-                <%= f.text_area :mitigation_status, class: "form-control", placeholder: "Example: ServPro is completing the mitigation. David is the project manager, his number is (555) 555-5555", style: "resize:none;" %>
-              </div>
-
-              <!-- ABATEMENT STATUS -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="abatement-status">Abatement Status</label>
-                <%= f.text_area :abatement_status, class: "form-control", placeholder: "Example: ERI gave us a bid and they can likely start on Monday", style: "resize:none;" %>
-              </div>
-
-              <!-- CLAIM NUMBER -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="claim-number">Claim Number</label>
-                <%= f.text_field :claim_number, class: "form-control", placeholder: "Example: 1001-16-548" %>
-              </div>
-
-              <!-- ADDRESS -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="address">Site Address</label>
-                <%= f.text_area :address, class: "form-control", placeholder: "Example: 123 Fake Street Fresno, CA", style: "resize:none;" %>
-              </div>
-
-              <!-- YEAR BUILT -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="year-built">Year Built</label>
-                <%= f.text_field :year_built, class: "form-control", placeholder: "Example: 1975" %>
-              </div>
-
-              <!-- PRIMARY CONTACT -->
-              <label class="col-xs-12" for="primary-contact">Primary Contact</label>
-              <br>
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <%= f.text_field :contact_name, class: "form-control" %>
-              </div>
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <%= f.phone_field :contact_phone, class: "form-control" %>
-              </div>
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <%= f.email_field :contact_email, class: "form-control" %>
-              </div>
-
-              <!-- ESTIMATE STATUS? -->
-
-              <!-- TARGET START DATE -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="target-start-date">Target Start Date</label>
-                <%= f.date_field :target_start_date, class: "form-control" %>
-              </div>
-
-              <!-- TARGET END DATE -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="target-end-date">Target End Date</label>
-                <%= f.date_field :target_end_date, class: "form-control" %>
-              </div>
-
-              <!-- ACTUAL START DATE -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="actual-start-date">Actual Start Date</label>
-                <%= f.date_field :actual_start_date, class: "form-control" %>
-              </div>
-
-              <!-- ACTUAL END DATE -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="actual-end-date">Actual End Date</label>
-                <%= f.date_field :actual_end_date, class: "form-control" %>
-              </div>
-
-              <!-- IS ON XA? -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="is-on-xa">On XactAnalysis?</label>
-                <br>
-                <%= f.radio_button :is_on_xa, true, :value => true%>
-                <%= f.label :is_on_xa, "Yes", value: true %>
-                <%= f.radio_button :is_on_xa, false, :value => false, style: "margin-left:10px;" %>
-                <%= f.label :is_on_xa, "No", value: false %>
-              </div>
-
-              <!-- ESTIMATOR EXPERIENCE -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="estimator-experience">Estimator Experience</label>
-                <br>
-                <%= f.select :estimator_experience, Assignment.estimator_experiences.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true %>
-              </div>
-
-              <!-- ESTIMATE TOTAL -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="estimate-total">Estimate Total</label>
-                <%= f.number_field :estimate_total, class: "form-control", placeholder: "$" %>
-              </div>
-
-              <!-- IS CONTRACT SIGNED? -->
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="is-contract-signed">Contract Signed?</label>
-                <br>
-                <%= f.radio_button :is_contract_signed, true, :value => true%>
-                <%= f.label :is_contract_signed, "Yes", value: true %>
-                <%= f.radio_button :is_contract_signed, false, :value => false, style: "margin-left:10px;" %>
-                <%= f.label :is_contract_signed, "No", value: false %>
-              </div>
-
-              <!-- LOST INFO -->
-              <p class="col-xs-12"><b>If the assignment was lost, please elaborate on the details:</b></p>
-
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="lost-sales-related">Sales-Related</label>
-                <br>
-                <%= f.select :lost_sales_related, Assignment.lost_sales_relateds.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true %>
-              </div>
-
-              <div style="margin-bottom: 25px" class="col-xs-12">
-                <label for="lost-other">Other</label>
-                <br>
-                <%= f.select :estimator_experience, Assignment.lost_others.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true %>
-              </div>
-
-
             </div>
 
-                <br>
-            <%= f.submit "Update Assignment", class: "btn btn-success"  %>
 
-          <% end %>
+            <hr>
+      </div>
 
+      <!-- PRIMARY CONTACT -->
+      <div class="row">
+        <h3 class="section-header">Primary Contact</h3>
+        <br>
+
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-12 col-lg-3">
+            <label for="contact-name">Contact Name</label>
+            <%= f.text_field :contact_name, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-12">
+            <label for="contact-name">Contact Title</label>
+            <br>
+            <%= f.select :contact_role, [ :homeowner, :tenant ], :prompt => "---", class: "form-control", :include_blank => true %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-12 col-lg-2">
+            <label for="contact-name">Contact Phone</label>
+            <%= f.phone_field :contact_phone, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-12 col-lg-3">
+            <label for="contact-name">Contact Email</label>
+            <%= f.email_field :contact_email, class: "form-control" %>
+          </div>
+        </div>
+<hr>
+      </div>
+
+      <!-- PRE-RECON -->
+      <div class="row">
+        <h3 class="section-header">Pre-Recon Information</h3>
+        <br>
+        <!-- YEAR BUILT -->
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-1">
+            <label for="year-built">Year Built</label>
+            <%= f.text_field :year_built, class: "form-control", placeholder: "Example: 1975" %>
+          </div>
+        </div>
+
+        <!-- RETURN INSPECTION DATE -->
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-12">
+            <label for="return-insp-date">Return Inspection Date - Time</label>
+            <br>
+            <%= f.datetime_select :return_insp_date, class: "form-control", order: [:month, :day, :year], :include_blank => true %>
+          </div>
+        </div>
+
+        <!-- MITIGATION STATUS -->
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-8">
+            <label for="mitigation-status">Mitigation Status</label>
+            <%= f.text_area :mitigation_status, class: "form-control", placeholder: "Example: ServPro is completing the mitigation. David is the project manager, his number is (555) 555-5555", style: "resize:none;" %>
+          </div>
+        </div>
+
+        <!-- ABATEMENT STATUS -->
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-8">
+            <label for="abatement-status">Abatement Status</label>
+            <%= f.text_area :abatement_status, class: "form-control", placeholder: "Example: ERI gave us a bid and they can likely start on Monday", style: "resize:none;" %>
+          </div>
+        </div>
+        <hr>
+      </div>
+
+      <!-- CLAIM -->
+      <div class="row">
+        <h3 class="section-header">Claim Information</h3>
+        <br>
+
+        <!-- CLAIM NUMBER -->
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-2">
+            <label for="claim-number">Claim Number</label>
+            <%= f.text_field :claim_number, class: "form-control" %>
+            <% unless @assignment.claim_number == nil %>
+            <i>Example: 1001-16-548</i>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- ESTIMATE TOTAL -->
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-2">
+            <label for="estimate-total">Estimate Total</label>
+            <%= f.number_field :estimate_total, class: "form-control", placeholder: "$" %>
+          </div>
+        </div>
+
+        <!-- ADDRESS -->
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-4">
+            <label for="address">Site Address</label>
+            <%= f.text_area :address, class: "form-control", placeholder: "Example: 123 Fake Street Fresno, CA", style: "resize:none;" %>
+          </div>
+        </div>
+
+  <hr>
+      </div>
+
+      <!-- WORKFLOW -->
+      <div class="row">
+        <h3 class="section-header">Workflow Status</h3>
+        <br>
+        <!-- TARGET START DATE -->
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-2">
+            <label for="target-start-date">Target Start Date</label>
+            <%= f.date_field :target_start_date, class: "form-control" %>
+          </div>
+        </div>
+
+        <!-- TARGET END DATE -->
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-2">
+            <label for="target-end-date">Target End Date</label>
+            <%= f.date_field :target_end_date, class: "form-control" %>
+          </div>
+        </div>
+
+        <!-- ACTUAL START DATE -->
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-2">
+            <label for="actual-start-date">Actual Start Date</label>
+            <%= f.date_field :actual_start_date, class: "form-control" %>
+          </div>
+        </div>
+
+        <!-- ACTUAL END DATE -->
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-8 col-sm-8 col-lg-2">
+            <label for="actual-end-date">Actual End Date</label>
+            <%= f.date_field :actual_end_date, class: "form-control" %>
+          </div>
+        </div>
+<hr>
+      </div>
+
+      <!-- NOT SOLD -->
+      <div class="row">
+        <h3 class="section-header">Not Sold Information</h3>
+        <br>
+
+        <!-- ESTIMATOR EXPERIENCE -->
+        <div class="row">
+          <div style="margin-bottom: 25px" class="col-xs-4 col-lg-2">
+            <label for="estimator-experience">Estimator Experience</label>
+            <br>
+            <%= f.select :estimator_experience, Assignment.estimator_experiences.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true %>
+          </div>
+        </div>
+
+        <!-- LOST INFO -->
+        <div class="row">
+        <p class="col-xs-12"><b>If the assignment was lost, please elaborate on the details:</b></p>
+
+        <div style="margin-bottom: 25px" class="col-xs-4 col-lg-2">
+          <label for="lost-sales-related">Sales-Related</label>
           <br>
+          <%= f.select :lost_sales_related, Assignment.lost_sales_relateds.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true %>
+        </div>
+
+        <div style="margin-bottom: 25px" class="col-xs-4 col-lg-2">
+          <label for="lost-other">Other</label>
           <br>
+          <%= f.select :lost_other, Assignment.lost_others.map { |key, value| [key.humanize, key] }, :prompt => "---", :include_blank => true %>
+        </div>
+      </div>
+    </div>
+
+
+<br>  
+    <div class="row">
+
+        <%= f.submit "Update Assignment", class: "btn btn-success"  %>
+
+    </div>
+
+    <% end %>
+
+    <br>
+    <br>
 </div>
