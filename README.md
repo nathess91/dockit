@@ -2,7 +2,7 @@
 
 **DockIt** is a CRM created for the reconstruction and remodeling industry. Its primary function is to organize an estimator's assignments and any associated required tasks as they move through the full reconstruction cycle.
 
-###Focus on Sales
+### Focus on Sales
 
 After realizing that their company's current technological applications nurtured all employees except the primary salespeople for the company, my client sought the creation of a CRM that would address these downfalls. **DockIt's** ultimate goal is to provide estimators with all tools necessary to enhance customer service levels, adhere to program requirements, and improve sales. **DockIt** also has built-in features that encourage sales management and performance review.
 
