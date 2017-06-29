@@ -17,4 +17,6 @@ tmp/cache/**
 .DS_Store
 .DS_Store?
 
-db/development.sqlite
+log/development.log
+
+db/development.sqlite3

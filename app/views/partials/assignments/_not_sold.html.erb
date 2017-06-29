@@ -3,6 +3,7 @@
     <h5>No assignments...</h5>
   <% else %>
     <% @assignments.where(assignment_stage: 'not_sold').each do |assignment| %>
+    <%= render partial: "partials/new_assignment_note_on_assignment", locals: { assignment: assignment } %>
       <div class="panel panel-info">
         <div class="panel-heading clearfix">
           <h3 class="panel-title pull-left" style="margin-top:0.4em;">
@@ -28,6 +29,12 @@
             <% end %>
             <span style="font-size:20px;margin:10px;color:black;"><b><%= assignment.name.upcase %></b></span> #<%= assignment.job_number %>
           </h3>
+
+          <% unless assignment.is_on_xa == false %>
+          <space><img src="http://i.imgur.com/DUnmUy4.png" class="XA">
+          <% end %>
+
+
           <%= link_to "Edit", edit_assignment_path(assignment.id), class: "btn btn-default btn-sm pull-right" %>
 
         </div>
@@ -37,6 +44,7 @@
           <!-- ASSIGNMENT NOTES -->
           <div class="row">
           <div class="col-md-6">
+            <button class="new-assignment-note-pencil glyphicon glyphicon-pencil btn btn-default btn-md" data-toggle="modal" data-target="#new-assignment-note-modal-<%= assignment.id %>"></button>
             <% notes = get_assignment_notes(assignment.id) %>
               <% if notes.count == 0 %>
 
@@ -62,7 +70,7 @@
               <% end %>
           </div>
           <!-- MAIN INFO -->
-          <div class="col-md-3">
+          <div class="col-md-2">
             <!-- DATE ASSIGNED -->
               <p><b>Date Assigned:</b>
               <% if assignment.date_assigned.present? %>
@@ -93,7 +101,7 @@
 
 
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <!-- PRIMARY CONTACT -->
               <% if assignment.contact_role.present? %>
                   <b><%= assignment.contact_role.capitalize %></b>

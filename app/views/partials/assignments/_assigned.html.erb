@@ -3,7 +3,18 @@
     <h5>No assignments...</h5>
   <% else %>
     <% @assignments.where(assignment_stage: 'assigned').each do |assignment| %>
-      <div class="panel panel-info">
+      <%= render partial: "partials/new_assignment_note_on_assignment", locals: { assignment: assignment } %>
+
+      <!-- BEGIN ASSIGNMENT CARD -->
+      <% if assignment.original_insp_date.present? %>
+        <% if assignment.original_insp_date.strftime("%a, %d %b %Y") == Date.today.strftime("%a, %d %b %Y") %>
+          <div class="panel panel-danger">
+        <% else %>
+          <div class="panel panel-info">
+        <% end %>
+        <% else %>
+        <div class="panel panel-info">
+      <% end %>
         <div class="panel-heading clearfix">
           <h3 class="panel-title pull-left" style="margin-top:0.4em;">
             <% if assignment.loss_category == 'water' %>
@@ -37,6 +48,7 @@
           <!-- ASSIGNMENT NOTES -->
           <div class="row">
           <div class="col-md-6">
+            <button class="new-assignment-note-pencil glyphicon glyphicon-pencil btn btn-default btn-md" data-toggle="modal" data-target="#new-assignment-note-modal-<%= assignment.id %>"></button>
             <% notes = get_assignment_notes(assignment.id) %>
               <% if notes.count == 0 %>
 
@@ -44,7 +56,6 @@
               <% else %>
 
                 <!-- MOST RECENT ASSIGNMENT_NOTE -->
-
                 <b><%= notes.last.created_at.localtime.strftime("%m.%d.%y") %></b>
                 <%= notes.last.text %>
 
@@ -72,7 +83,7 @@
 
               <!-- ORIGINAL INSPECTION DATE -->
               <% if assignment.original_insp_date.present? %>
-                <h5 class="mb-0"><b>Original Inspection</b>
+                <h5 class="mb-0"><b>Original Inspection Date:</b>
                 </h5>
                   <a href="#original-inspection-date" data-toggle="collapse">
                     <span class="glyphicon glyphicon-calendar"></span> <%= assignment.original_insp_date.strftime("%m.%d.%y") %>
@@ -100,6 +111,7 @@
                 <br>
                 <% else %>
                 <b>No Primary Contact</b>
+                <br>
               <% end %>
 
                 <% if assignment.contact_name.present? %>
@@ -265,5 +277,7 @@
         </div>
 
       </div> <!-- END ASSIGNMENT CARD -->
+
+
       <% end %>
   <% end %>

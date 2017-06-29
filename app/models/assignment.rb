@@ -11,4 +11,5 @@ class Assignment < ApplicationRecord
   enum lost_other: [:below_deductible, :not_covered, :other]
   enum contact_role: [:homeowner, :project_manager, :adjuster, :reconstruction_pm, :tenant]
   enum company_category: [:mitigation, :abatement, :insurance, :contents, :cleaning, :mold_remediation, :referred_by]
+
 end

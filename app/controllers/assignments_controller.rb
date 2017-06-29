@@ -37,13 +37,30 @@ class AssignmentsController < ApplicationController
   def update
     @assignment = Assignment.find(params[:id])
 
-    if @assignment.update_attributes(assignment_params)
+    if params[:assignment][:assignment_stage] == "closed"
+      flash[:error] = "Sorry. You need to mark all the necessary items as completed before you can mark this as closed."
+    # if params[:assignment][:assignment_stage] == "closed" &&
+    elsif @assignment.update_attributes(assignment_params) && params[:assignment][:assignment_stage] != "closed"
       flash[:success] = "Assignment updated successfully"
-      redirect_to '/assignments'
+
+      # redirect to appropriate tab based on stage
+      if params[:assignment][:assignment_stage] == "assigned"
+        redirect_to "/assignments#1"
+      elsif params[:assignment][:assignment_stage] == "approved"
+        redirect_to "/assignments#2"
+      elsif params[:assignment][:assignment_stage] == "in_progress"
+        redirect_to "/assignments#3"
+      elsif params[:assignment][:assignment_stage] == "not_sold"
+        redirect_to "/assignments#4"
+      elsif params[:assignment][:assignment_stage] == "completed"
+        redirect_to "/assignments#5"
+      end
+
     else
       flash[:error] = @assignment.errors.full_messages.join(". ")
       redirect_to :back
     end
+
   end
 
   def destroy

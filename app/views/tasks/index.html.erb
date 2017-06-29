@@ -1,75 +1,133 @@
 <div class="container">
-<br>
-<h5 class="pull-right"><%= Time.now.strftime("%A, %B %d, %Y") %></h5>
-<h1 class="dock-it-font"><%= greet %> <%= current_user.first_name %></h1>
-<br>
-<br>
 
-  <div style="padding-top:0px;" class="well col-xs-12 col-md-6 pull-left">
-    <h3>To-Do List</h3>
-    <ul class="list-group">
-      <% if @tasks.count == 0 %>
-        <h5>No tasks...</h5>
-      <% else %>
-        <% @tasks.take(8).each do |task| %>
-          <li class="task list-group-item">
-            <% unless !task.is_high_priority == true %>
-              <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
-            <% end %>
-
-            <%= task.text %>
-
-            <%= link_to task_path(task.id), data: {confirm: "'" + task.text + "'" + " is complete"}, method: :delete  do %>
-              <span class="pull-left btn btn-default btn-md" style="margin-right:5px; padding:8px;">
-              </span>
-            <% end %>
-        <% end %>
-          </li>
-      </ul>
-      <button type="button" id="view-tasks" class="btn btn-default pull-left" data-toggle="modal" data-target="#view-tasks-modal">View All Tasks</button>
-      <% end %>
-      <%= link_to "New Task", new_task_path, :id => 'new-task', class: "btn btn-primary pull-right", "data-toggle" => "modal", 'data-target' => '#new-task-modal' %>
+  <label class="custom-file-upload pull-right">
+    <input id="test" type="file" onchange="if (loadImageFile(this)){loadImageFile(this)}" />
+    Change Background
+  </label>
+<br>
+<br>
+  <h1><%= greet %> <%= current_user.first_name %></h1>
+<br>
+<br>
+<div class="">
+<!-- TO DO LIST -->
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pull-left">
+  <div id="question-notice" style="display:none" class="alert alert-info">
+    <a href="#" class="close" aria-label="close">&times;</a>
+    <b>NOTICE: </b>This task was created automatically. It will no longer appear on this list once the required information has been filled in.
   </div>
+    <div id="to-do-list" class="well">
+      <h3 class="text-center">To-Do List</h3>
+      <br>
+      <ul id="list-area" class="list-group">
+        <% if current_user %>
+          <% current_user.assignments.where(original_insp_date: nil).each do |assignment| %>
+            <li class="task list-group-item">
+              <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
+              Set <b><%= assignment.name %></b> appointment
+              <span class="glyphicon glyphicon-question-sign pull-right question" onclick="$('#question-notice').show();"></span>
+            </li>
+          <% end %>
+          <% current_user.assignments.where(original_insp_date: Date.today.beginning_of_day..Date.today.end_of_day).each do |assignment| %>
+          <li class="task list-group-item">
+            <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
+            Upload <b><%= assignment.name %></b> estimate
+            <span class="glyphicon glyphicon-question-sign pull-right question" onclick="$('#question-notice').show();"></span>
+          </li>
+          <% end %>
+        <% end %>
+
+        <% if @tasks.count == 0 %>
+          <h5>No user tasks...</h5>
+        <% else %>
+          <% @tasks.take(6).each do |task| %>
+            <li class="task list-group-item">
+              <% unless !task.is_high_priority == true %>
+                <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
+              <% end %>
+
+              <%= task.text %>
+
+              <%= link_to task_path(task.id), data: {confirm: "'" + task.text + "'" + " is complete"}, method: :delete  do %>
+                <span class="pull-left btn btn-default btn-md" style="margin-right:5px; padding:8px;">
+                </span>
+              <% end %>
+            </li>
+            <% end %>
+        </ul>
+        <% end %>
+
+        <% unless @tasks.count <= 6 %>
+        <button type="button" id="view-tasks" class="btn btn-default pull-left" data-toggle="modal" data-target="#view-tasks-modal">View More</button>
+        <% end %>
+        <%= link_to "New Task", new_task_path, :id => 'new-task', class: "btn btn-primary pull-right", "data-toggle" => "modal", 'data-target' => '#new-task-modal' %>
+    </div>
+  </div>
+  </div>
+<!-- END TO DO LIST -->
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pull-right">
 
     <!-- ASSIGNMENT ICONS -->
-    <div style="padding-top:0px;" class="container well col-xs-12 col-md-5 pull-right" id="icons">
-      <h3>Assignments</h3>
-      <br>
-      <div class="row" style="margin-left:2vw;">
-        <div id="assigned-icon" class="col-xs-4 col-md-4 clearfix">
-          <a href="/assignments#1"><img src="http://i.imgur.com/UC8sFM9.png" width="60em"></a>
+    <div class="row">
+      <div style="padding-top:0px;" class="well">
+        <h3 class="text-center">Assignments</h3>
+        <br>
+        <div class="row clearfix center-block">
+          <div id="assigned-icon" class="folder col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <a href="/assignments#1"><img src="http://i.imgur.com/UC8sFM9.png" width="60em">
+            <br>
+            <p>Current</p>
+            </a>
+          </div>
+
+          <div id="pending-icon" class="folder col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <a href="/assignments#2"><img src="http://i.imgur.com/t3O1FM5.png" width="60em">
+            <br>
+            <p>Pending</p>
+            </a>
+          </div>
+
+          <div id="inprogress-icon" class="folder col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <a href="/assignments#3"><img src="http://i.imgur.com/7na1sgB.png" width="60em">
+            <br>
+            <p>Jobs In Progress</p>
+            </a>
+          </div>
         </div>
 
-        <div id="pending-icon" class="col-xs-4 col-md-4 clearfix">
-          <a href="/assignments#2"><img src="http://i.imgur.com/t3O1FM5.png" width="60em"></a>
+
+        <div class="row clearfix center-block">
+          <div id="notsold-icon" class="folder col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <a href="/assignments#4"><img src="http://i.imgur.com/2OVnspZ.png" width="60em">
+            <br>
+            <p>Not Sold</p>
+            </a>
+          </div>
+
+          <div id="completed-icon" class="folder col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <a href="/assignments#5"><img src="http://i.imgur.com/ohrPQas.png" width="60em">
+            <br>
+            <p>Completed Jobs</p>
+            </a>
+          </div>
+
+          <div id="closed-icon" class="folder col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <a href="/assignments#6"><img src="http://i.imgur.com/EkNxtiy.png" width="60em">
+            <br>
+            <p>Closed Jobs</p>
+            </a>
+          </div>
         </div>
 
-        <div id="inprogress-icon" class="col-xs-4 col-md-4 clearfix">
-          <a href="/assignments#3"><img src="http://i.imgur.com/7na1sgB.png" width="60em"></a>
-        </div>
       </div>
-      <br>
-
-      <div class="row" style="margin-left:2vw;">
-        <div id="notsold-icon" class="col-xs-4 col-md-4 clearfix">
-          <a href="/assignments#4"><img src="http://i.imgur.com/2OVnspZ.png" width="60em"></a>
-        </div>
-
-        <div id="completed-icon" class="col-xs-4 col-md-4 clearfix">
-          <a href="/assignments#5"><img src="http://i.imgur.com/ohrPQas.png" width="60em"></a>
-        </div>
-
-        <div id="closed-icon" class="col-xs-4 col-md-4 clearfix">
-          <a href="/assignments#6"><img src="http://i.imgur.com/EkNxtiy.png" width="60em"></a>
-        </div>
-      </div>
-
-    </div>
+  </div>
+    <!-- END ASSIGNMENT ICONS -->
 
 <!-- RESOURCES -->
-<div class="row pull-right" style="margin-right:2px;">
-    <div style="padding-top:0px; width:250px;" class="well col-xs-12 col-sm-3 pull-left">
-        <h3>Resources</h3>
+<div class="row">
+    <div id="resources" style="padding-top:0px;" class="well col-xs-12 col-sm-12 col-md-6 col-lg-6 pull-left">
+        <h3 class="text-center">Resources</h3>
         <br>
         <a href="https://apps.xactware.com/apps/xnportal/welcome.jsp">XactAnalysis</a>
         <br>
@@ -83,14 +141,17 @@
         <br>
         <br>
     </div>
-    <div style="padding-top:0px; width:201px; margin-left:20px; color:inherit;" class="well col-xs-12 col-sm-6 pull-right">
-      <h3>Bulletin Board</h3>
+    <!-- END RESOURCES -->
+
+    <!-- BULLETIN -->
+    <div id="bulletin" style="padding-top:0px;color:inherit;" class="well col-xs-12 col-sm-12 col-md-5 col-lg-5 pull-right">
+      <h3 class="text-center">Bulletin Board</h3>
       <% if current_user.admin? %>
-        <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="60vw" style="margin-left:3.2vw; margin-top:1.5vh;">
+        <img id="paper-plane" class="shake center-block" src="http://i.imgur.com/yIf8tzQ.png" width="60vw">
       <% else %>
-        <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="80vw" style="margin-left:2.5vw; margin-top:1.5vh;">
+        <img id="paper-plane" class="center-block" src="http://i.imgur.com/yIf8tzQ.png" width="80vw" style="margin-top:2.3vh">
       <% end %>
-      <br>
+
       <br>
       <% if current_user.admin? %>
       <span style="">
@@ -102,8 +163,35 @@
         <%= link_to "View Messages", posts_path, class: "btn btn-primary", 'data-toggle' => 'modal', 'data-target' => '#view-posts-modal', style: "width:100%" %>
       <% end %>
     </div>
+    <!-- END BULLETIN -->
+
+  </div>
 </div>
+
 </div>
+
+<script>
+$(switchBackground);
+   var oFReader = new FileReader(),
+       rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+
+   oFReader.onload = function(oFREvent) {
+       localStorage.setItem('b', oFREvent.target.result);
+       switchBackground();
+   };
+
+   function switchBackground() {
+     $('body').css('background-image', "url(" + localStorage.getItem('b') + ')');
+     $('body').css('background-size', "cover");
+   }
+
+   function loadImageFile(testEl) {
+     if (! testEl.files.length) { return; }
+     var oFile = testEl.files[0];
+     if (!rFilter.test(oFile.type)) { alert("You must select a valid image file!"); return; }
+     oFReader.readAsDataURL(oFile);
+   }
+</script>
 
 <!-- NEW TASK MODAL -->
 <%= render "partials/new_task_modal" %>

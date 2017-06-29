@@ -3,6 +3,8 @@
     <h5>No assignments...</h5>
   <% else %>
     <% @assignments.where(assignment_stage: 'closed').each do |assignment| %>
+    <%= render partial: "partials/new_assignment_note_on_assignment", locals: { assignment: assignment } %>
+
       <div class="panel panel-info">
         <div class="panel-heading clearfix">
           <h3 class="panel-title pull-left" style="margin-top:0.4em;">
@@ -37,6 +39,7 @@
           <!-- ASSIGNMENT NOTES -->
           <div class="row">
           <div class="col-md-6">
+            <button class="new-assignment-note-pencil glyphicon glyphicon-pencil btn btn-default btn-md" data-toggle="modal" data-target="#new-assignment-note-modal-<%= assignment.id %>"></button>
             <% notes = get_assignment_notes(assignment.id) %>
               <% if notes.count == 0 %>
 
@@ -138,7 +141,7 @@
 
             <hr>
             <div class="row" style="margin-top:-5;padding-top:-5;">
-            <div class="col-md-4">
+            <div class="col-md-3">
               <!-- PRE-RECON INFO COLLAPSE -->
                     <p class="mb-0">
                       <a href="#prerecon-info" data-toggle="collapse">
@@ -189,7 +192,7 @@
           </div>
 
             <!-- CLAIM INFO COLLAPSE -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <p class="mb-0">
                     <a href="#claim-info" data-toggle="collapse">
                       <b>Claim</b>
@@ -220,7 +223,7 @@
             <!-- END CLAIM INFO COLLAPSE -->
 
             <!-- CONTACT INFO COLLAPSE -->
-            <div class="col-md-4">
+            <div class="col-md-3">
                   <p class="mb-0">
                     <a href="#contact-info" data-toggle="collapse">
                       <b>Contacts</b>
@@ -261,6 +264,55 @@
                   </div>
                 </div>
             <!-- END CONTACT INFO COLLAPSE -->
+
+            <!-- WORKFLOW STATUS COLLAPSE -->
+            <div class="col-md-3">
+                  <p class="mb-0">
+                    <a href="#workflow-status" data-toggle="collapse">
+                      <b>Workflow Status</b>
+                    </a>
+                  </p>
+                  <div id="workflow-status" class="collapse">
+                    <!-- TARGET START DATE -->
+                    <p><b>Target Start Date:</b>
+                    <% if assignment.target_start_date.present? %>
+                      <%= assignment.target_start_date.strftime("%m.%d.%y") %>
+                    <% else %>
+                      <div class="alert alert-warning">
+                        <p><b>NOTICE:</b> Set target start date</p>
+                      </div>
+                    <% end %>
+                    </p>
+                    <!-- TARGET END DATE -->
+                    <p><b>Target End Date:</b>
+                    <% if assignment.target_end_date.present? %>
+                      <%= assignment.date_assigned.strftime("%m.%d.%y") %>
+                    <% else %>
+                      <div class="alert alert-warning">
+                        <p><b>NOTICE:</b> Set target end date</p>
+                      </div>
+                    <% end %>
+                    </p>
+
+                    <!-- ACTUAL START DATE -->
+                    <% if assignment.actual_start_date.present? %>
+                    <p><b>Actual Start Date:</b>
+                      <%= assignment.actual_start_date.strftime("%m.%d.%y") %>
+                    <% end %>
+                    </p>
+
+                    <!-- ACTUAL END DATE -->
+                    <% if assignment.actual_end_date.present? %>
+                    <p><b>Actual End Date:</b>
+                      <%= assignment.actual_end_date.strftime("%m.%d.%y") %>
+                    <% end %>
+                    </p>
+
+
+                  </div>
+                </div>
+            <!-- END WORKFLOW STATUS COLLAPSE -->
+
           </div>
         </div>
 

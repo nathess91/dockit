@@ -1,8 +1,8 @@
 <div class="container">
   <% if current_user.admin? %>
-    <h1 class="dock-it-font">All Assignments</h1>
+    <h1>All Assignments</h1>
   <% else %>
-    <h1 class="dock-it-font"><%= current_user.first_name %>'s Assignments</h1>
+    <h1><%= current_user.first_name %>'s Assignments</h1>
   <% end %>
 
 <br>

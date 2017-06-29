@@ -21,6 +21,8 @@
                     <small>-- <i><%= post.user.first_name %> <%= post.user.last_name %> at <%= post.created_at.localtime.strftime("%l:%M %P") %></i></small>
                   </div>
                   <div class="panel-body">
+                    <i><%= post.created_at.localtime.strftime("%m.%d.%y") %></i>
+                    <br>
                     <%= post.content %>
                   </div>
                 </div>
@@ -28,6 +30,7 @@
                 <div class="panel panel-primary">
                   <div class="panel-heading">
                     <h3 class="panel-title">Subject: <%= post.title %></h3>
+                    <small>-- <i><%= post.user.first_name %> <%= post.user.last_name %> at <%= post.created_at.localtime.strftime("%l:%M %P") %></i></small>
                   </div>
                   <div class="panel-body">
                     <i><%= post.created_at.localtime.strftime("%m.%d.%y") %></i>
