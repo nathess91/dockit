@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-    devise_scope :user do
+  devise_scope :user do
        get "signup", to: "devise/registrations#new"
        get "login", to: "devise/sessions#new"
        get "logout", to: "devise/sessions#destroy"
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     unauthenticated do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
-end
+  end
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',

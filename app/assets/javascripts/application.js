@@ -17,93 +17,30 @@
 //= require data-confirm-modal
 //= require bootstrap-select
 
-$(document).on('turbolinks:load', function () {
+var collapseContent = {
+  'original-inspection-date' : '#original-inspection-date',
+  'return-inspection-date' : 'return-inspection-date',
+  'claim-info' : '#claim-info',
+  'contact-info' : '#contact-info',
+  'prerecon-info' : '#prerecon-info',
+  'loss-details' : '#loss-details',
+  'allNotes' : '#allNotes',
+  'workflow-status' : '#workflow-status',
+  'not-sold' : '#not-sold'
+}
 
-  $("div[id^='original-inspection-date']").attr('id', function(i) {
-    return "original-inspection-date" + ++i;
-  });
-  $("a[href^='#original-inspection-date']").attr('href', function(i) {
-    return "#original-inspection-date" + ++i;
-  });
+function incrementCollapse() {
+  for (key in collapseContent) {
+    $("div[id^='" + key + "']").attr('id', function(i) {
+      return key + ++i;
+    });
+    $("a[href^='" + collapseContent[key] + "']").attr('href', function(i) {
+      return collapseContent[key] + ++i;
+    });
+  }
+}
 
-  $("div[id^='return-inspection-date']").attr('id', function(i) {
-    return "return-inspection-date" + ++i;
-  });
-  $("a[href^='#return-inspection-date']").attr('href', function(i) {
-    return "#return-inspection-date" + ++i;
-  });
-
-  $("div[id^='claim-info']").attr('id', function(i) {
-    return "claim-info" + ++i;
-  });
-  $("a[href^='#claim-info']").attr('href', function(i) {
-    return "#claim-info" + ++i;
-  });
-
-  $("div[id^='contact-info']").attr('id', function(i) {
-    return "contact-info" + ++i;
-  });
-  $("a[href^='#contact-info']").attr('href', function(i) {
-    return "#contact-info" + ++i;
-  });
-
-  $("div[id^='prerecon-info']").attr('id', function(i) {
-    return "prerecon-info" + ++i;
-  });
-  $("a[href^='#prerecon-info']").attr('href', function(i) {
-    return "#prerecon-info" + ++i;
-  });
-
-  $("div[id^='loss-details']").attr('id', function(i) {
-    return "loss-details" + ++i;
-  });
-  $("a[href^='#loss-details']").attr('href', function(i) {
-    return "#loss-details" + ++i;
-  });
-
-  $("div[id^='allNotes']").attr('id', function(i) {
-    return "allNotes" + ++i;
-  });
-  $("a[href^='#allNotes']").attr('href', function(i) {
-    return "#allNotes" + ++i;
-  });
-
-  $("div[id^='workflow-status']").attr('id', function(i) {
-    return "workflow-status" + ++i;
-  });
-  $("a[href^='#workflow-status']").attr('href', function(i) {
-    return "#workflow-status" + ++i;
-  });
-
-  $("div[id^='not-sold']").attr('id', function(i) {
-    return "not-sold" + ++i;
-  });
-  $("a[href^='#not-sold']").attr('href', function(i) {
-    return "#not-sold" + ++i;
-  });
-
-  dataConfirmModal.setDefaults({
-  title: 'DockIt',
-  commit: 'Confirm',
-  cancel: 'Cancel'
-  });
-
-  $(".question").mouseenter(function() {
-    $(this).css("cursor", "pointer");
-  });
-
-  $(".question").mouseleave(function() {
-    $(this).css("cursor", "normal");
-  });
-
-  $(".question").click(function() {
-    $("#question-notice").show();
-  });
-
-});
-
-
-$(document).on('turbolinks:load', function() {
+function navigateToTab() {
   //grabs the hash tag from the url
   var hash = window.location.hash;
   //checks whether or not the hash tag is set
@@ -112,6 +49,7 @@ $(document).on('turbolinks:load', function() {
     $('#tabs li').each(function() {
       $(this).removeClass('active');
     });
+
     $('#myTabContent div').each(function() {
       $(this).removeClass('in active');
     });
@@ -125,26 +63,20 @@ $(document).on('turbolinks:load', function() {
     });
 
     $('#myTabContent div').each(function() {
-
       link = $(this).attr('id');
       if ('#'+link == hash) {
-
         $(this).addClass('in active');
       }
     });
   }
-});
+}
 
-$(document).on('turbolinks:ready', function() {
-  $(".question").mouseenter(function() {
-    $(this).css("cursor", "pointer");
-  });
-
-  $(".question").mouseleave(function() {
-    $(this).css("cursor", "normal");
-  });
-
-  $(".question").click(function() {
-    $("#question-notice").show();
+$(document).on('turbolinks:load', function () {
+  incrementCollapse();
+  navigateToTab();
+  dataConfirmModal.setDefaults({
+  title: 'DockIt',
+  commit: 'Confirm',
+  cancel: 'Cancel'
   });
 });

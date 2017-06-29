@@ -1,12 +1,12 @@
 <div class="container">
 
   <label class="custom-file-upload pull-right">
-    <input id="test" type="file" onchange="loadImageFile(this)" />
+    <input id="test" type="file" onchange="if (loadImageFile(this)){loadImageFile(this)}" />
     Change Background
   </label>
 <br>
 <br>
-  <h1 class="dock-it-font"><%= greet %> <%= current_user.first_name %></h1>
+  <h1><%= greet %> <%= current_user.first_name %></h1>
 <br>
 <br>
 <div class="">
@@ -25,14 +25,14 @@
             <li class="task list-group-item">
               <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
               Set <b><%= assignment.name %></b> appointment
-              <span class="glyphicon glyphicon-question-sign pull-right question"></span>
+              <span class="glyphicon glyphicon-question-sign pull-right question" onclick="$('#question-notice').show();"></span>
             </li>
           <% end %>
           <% current_user.assignments.where(original_insp_date: Date.today.beginning_of_day..Date.today.end_of_day).each do |assignment| %>
           <li class="task list-group-item">
             <span style="background-color:#d9534f;" class="important badge pull-left">!</span>
             Upload <b><%= assignment.name %></b> estimate
-            <span class="glyphicon glyphicon-question-sign pull-right question"></span>
+            <span class="glyphicon glyphicon-question-sign pull-right question" onclick="$('#question-notice').show();"></span>
           </li>
           <% end %>
         <% end %>
@@ -147,7 +147,7 @@
     <div id="bulletin" style="padding-top:0px;color:inherit;" class="well col-xs-12 col-sm-12 col-md-5 col-lg-5 pull-right">
       <h3 class="text-center">Bulletin Board</h3>
       <% if current_user.admin? %>
-        <img id="paper-plane" class="shake" src="http://i.imgur.com/yIf8tzQ.png" width="60vw" style="margin-left:3.2vw; margin-top:1.5vh;">
+        <img id="paper-plane" class="shake center-block" src="http://i.imgur.com/yIf8tzQ.png" width="60vw">
       <% else %>
         <img id="paper-plane" class="center-block" src="http://i.imgur.com/yIf8tzQ.png" width="80vw" style="margin-top:2.3vh">
       <% end %>
