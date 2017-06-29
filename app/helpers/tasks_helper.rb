@@ -8,11 +8,11 @@ module TasksHelper
     eight_pm = Time.now.change(:hour => 20 ).to_i
 
     if midnight.upto(noon).include?(current_time)
-      p "Good morning,"
+      p "Good Morning,"
     elsif noon.upto(five_pm).include?(current_time)
-      p  "Good afternoon,"
+      p  "Good Afternoon,"
     elsif five_pm.upto(midnight + 1.day).include?(current_time)
-      p "Good evening,"
+      p "Good Evening,"
     end
 
   end
