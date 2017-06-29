@@ -11,14 +11,14 @@ After realizing that their company's current technological applications nurtured
 
 The main dock features **4** essential organizing tools that can be used to ensure job responsibilities are taken care of in a timely manner. 
 
-<img src="http://i.imgur.com/4gZaPF1.png" width="600">
+<img src="http://i.imgur.com/KySCTod.png" width="600">
 
 
-###To-Do List
+### To-Do List
 
 Task items can be added in freely, marked as high priority or not, and created with specific due dates. High priority items are seen as such with a distinct red exclamation mark to the left, and these items are forced to the top of the list. An item must be marked as complete before it can be deleted.
 
-###Assignments
+### Assignments
 
 The user is linked to all of their organized assignments in this area. 
 Linked folder options include: 
@@ -32,17 +32,17 @@ Linked folder options include:
 
 All assignment data is created via user input, and new assignments are added by clicking New Assignment in the top left corner and selecting either Quick Add (pending most details) or Full Form (with full details). Regardless of the entry type, all assignments can be edited at any time to reflect the most up-to-date information.
 
-###Resources
+### Resources
 
 These are the client's five most frequently used links. The links route easily to corresponding log-in pages. Some automatic to-do list items require actions on these external sites.
 
-###Bulletin Board
+### Bulletin Board
 
 The bulletin board was created considering the client's difficulty having important company-wide messages read by employees. This is a particularly valuable feature for managers who want to ensure that everyone is on the same page.
 
-##Assignments 
+## Assignments 
 
-<img src="http://i.imgur.com/cgMiqT8.png" width="600">
+<img src="http://i.imgur.com/p8oCpEb.png" width="600">
 
 Estimators can organize current assignments with all relevant details regarding the claim, pre-reconstructon work, different contacts involved, site information, customer contact notes, etc. The assignment will move through different stages in the sales or job process depending on what events occur within the assignment. 
 
@@ -61,7 +61,7 @@ A new field, "Workflow Status," appears on the "Jobs in Progress" page and allow
 * Bootstrap
 * SQLite 3
 
-##User Stories
+## User Stories
 
 * All users can log in with username and password
 * All users can create and delete tasks
@@ -81,6 +81,6 @@ A new field, "Workflow Status," appears on the "Jobs in Progress" page and allow
 
 <img src="http://i.imgur.com/QNpLoij.png" width="600">
 
-##Links
+## Links
 
 * [Trello](https://trello.com/b/sYV46w82/dockit)
